@@ -1,14 +1,39 @@
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
-  gap: 28px;
-  align-items: center;
-  padding-top: 18px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.98fr);
+  gap: 30px;
+  align-items: start;
+  padding-top: 22px;
 }
 
 .heroCopy {
   display: grid;
-  gap: 24px;
+  gap: 20px;
+  align-content: start;
+  padding-top: 12px;
+}
+
+.heroCopy :global(.section-title) {
+  max-width: min(100%, 11.2ch);
+}
+
+.heroCopy :global(.section-copy) {
+  max-width: 34ch;
+  font-size: 1.04rem;
+}
+
+.heroRu .heroCopy :global(.section-title) {
+  max-width: min(100%, 13.8ch);
+  font-size: clamp(2rem, 3.9vw, 3.95rem);
+  line-height: 1.03;
+}
+
+.heroRu .heroCopy :global(.section-copy) {
+  max-width: 40ch;
+}
+
+.contentRu .sectionText {
+  max-width: 44ch;
 }
 
 .heroActions {
@@ -17,38 +42,52 @@
 }
 
 .cta {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 56px;
-  padding: 0 24px;
+  min-height: 60px;
+  padding: 0 28px;
   border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
   background: linear-gradient(135deg, var(--accent-mint), var(--accent-sky) 48%, var(--accent-sun));
   color: #0b1220;
-  font-weight: 700;
-  box-shadow: 0 18px 34px rgba(135, 230, 214, 0.18);
+  font-weight: 800;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 18px 34px rgba(135, 230, 214, 0.2);
+}
+
+.cta::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), transparent 50%);
+  pointer-events: none;
 }
 
 .cta:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 .heroStats {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
 }
 
 .stat {
   display: inline-flex;
   align-items: center;
-  min-height: 42px;
-  padding: 0 15px;
+  min-height: 40px;
+  padding: 0 14px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.03);
   color: var(--text-muted);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
 }
 
 .visualCard,
@@ -67,8 +106,8 @@
 
 .visualCard {
   display: grid;
-  gap: 26px;
-  padding: 28px;
+  gap: 24px;
+  padding: 30px;
 }
 
 .visualCard::before {
@@ -84,7 +123,7 @@
 
 .visualTrack {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 78px minmax(0, 0.96fr);
+  grid-template-columns: minmax(0, 1fr) 64px minmax(0, 0.96fr);
   gap: 16px;
   align-items: center;
 }
@@ -93,14 +132,14 @@
 .visualOutput {
   display: grid;
   gap: 10px;
-  min-height: 166px;
-  padding: 22px;
+  min-height: 156px;
+  padding: 24px;
   border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 24px;
+  border-radius: 28px;
 }
 
 .visualInput {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.055);
 }
 
 .visualInput p,
@@ -110,13 +149,13 @@
 
 .visualInput p {
   max-width: 18ch;
-  font-size: 1.06rem;
-  line-height: 1.5;
+  font-size: 1.02rem;
+  line-height: 1.58;
 }
 
 .visualLabel {
   color: var(--text-soft);
-  font-size: 0.86rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -156,28 +195,36 @@
 }
 
 .visualOutput strong {
-  max-width: 11ch;
+  max-width: 9ch;
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
-  line-height: 1;
+  font-size: clamp(1.4rem, 3.8vw, 1.8rem);
+  line-height: 0.96;
   letter-spacing: -0.04em;
+}
+
+.heroRu .visualOutput strong {
+  max-width: 7ch;
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  line-height: 1;
 }
 
 .outputGrid {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px 10px;
   padding: 0;
   margin: 0;
   list-style: none;
 }
 
 .outputPill {
-  padding: 11px 15px;
+  padding: 10px 14px;
+  max-width: 100%;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.04);
   color: var(--text-muted);
+  font-size: 0.93rem;
 }
 
 .outputPill:nth-child(3n) {
@@ -190,56 +237,59 @@
 
 .contentGrid {
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
-  gap: 24px;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 22px;
   align-items: start;
 }
 
 .flowCard,
 .packCard,
 .creditsCard {
-  padding: 28px;
+  padding: 30px;
 }
 
 .sectionLabel {
   display: inline-flex;
   margin-bottom: 12px;
   color: var(--text);
-  font-family: var(--font-display);
-  font-size: 1.38rem;
-  letter-spacing: -0.03em;
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .sectionText {
   margin: 0;
   color: var(--text-muted);
-  line-height: 1.7;
+  max-width: 40ch;
+  line-height: 1.68;
 }
 
 .steps {
   display: grid;
-  gap: 18px;
-  margin-top: 28px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 22px;
 }
 
 .step {
   display: grid;
-  grid-template-columns: 56px minmax(0, 1fr);
-  gap: 16px;
+  gap: 14px;
   align-items: start;
   padding: 18px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.03);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+    rgba(255, 255, 255, 0.02);
 }
 
 .stepNumber {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
-  border-radius: 18px;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04)),
     rgba(145, 183, 255, 0.12);
@@ -258,65 +308,69 @@
 }
 
 .stepCopy h2 {
-  font-size: 1.05rem;
+  font-size: 0.99rem;
 }
 
 .stepCopy p {
   color: var(--text-muted);
-  line-height: 1.65;
+  font-size: 0.94rem;
+  line-height: 1.62;
 }
 
 .sideStack {
   display: grid;
-  gap: 24px;
+  gap: 22px;
 }
 
 .includedList {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   padding: 0;
-  margin: 24px 0 0;
+  margin: 18px 0 0;
   list-style: none;
 }
 
 .includedList li {
-  padding: 14px 14px 14px 16px;
+  padding: 11px 14px;
+  max-width: 100%;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
+  border-radius: 999px;
   background: rgba(255, 255, 255, 0.04);
   color: var(--text-muted);
+  font-size: 0.92rem;
 }
 
 .creditsCard {
   background:
-    radial-gradient(circle at 80% 20%, rgba(255, 171, 122, 0.16), transparent 32%),
+    radial-gradient(circle at 80% 18%, rgba(255, 171, 122, 0.18), transparent 32%),
     radial-gradient(circle at 18% 18%, rgba(135, 230, 214, 0.16), transparent 28%),
+    radial-gradient(circle at 55% 78%, rgba(145, 183, 255, 0.14), transparent 34%),
     rgba(13, 20, 33, 0.8);
 }
 
 .creditsHeader {
   display: grid;
-  gap: 8px;
+  gap: 10px;
 }
 
 .creditsTitle {
   margin: 0;
-  font-family: var(--font-display);
-  font-size: 1.38rem;
-  letter-spacing: -0.03em;
+  font-size: 1.06rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .creditsBadge {
   display: inline-flex;
   align-items: center;
   width: fit-content;
-  min-height: 34px;
-  padding: 0 12px;
+  min-height: 36px;
+  padding: 0 13px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.09);
   color: var(--text);
-  font-size: 0.86rem;
+  font-size: 0.88rem;
 }
 
 .creditsMini,
@@ -333,12 +387,16 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
-  margin-top: 24px;
+  margin-top: 26px;
 }
 
 .creditsNumbers div {
   display: grid;
   gap: 6px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .creditsNumbers span {
@@ -353,10 +411,14 @@
   letter-spacing: -0.05em;
 }
 
+.creditsNumbers div:first-child strong {
+  font-size: clamp(2.5rem, 6vw, 3.7rem);
+}
+
 .creditsBar {
   margin-top: 20px;
   width: 100%;
-  height: 12px;
+  height: 14px;
   padding: 2px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.08);
@@ -367,22 +429,28 @@
   height: 100%;
   border-radius: inherit;
   background: linear-gradient(90deg, var(--accent-mint), var(--accent-sky), var(--accent-sun));
+  box-shadow: 0 0 20px rgba(145, 183, 255, 0.22);
 }
 
 .creditsText {
-  margin-top: 20px;
+  margin-top: 18px;
   color: var(--text-muted);
-  line-height: 1.7;
+  line-height: 1.62;
 }
 
 .creditsMeta {
   margin-top: 10px;
   color: var(--text);
+  font-size: 0.95rem;
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1120px) {
   .hero,
   .contentGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .steps {
     grid-template-columns: 1fr;
   }
 }
@@ -398,6 +466,11 @@
   .creditsCard {
     padding: 22px;
     border-radius: 26px;
+  }
+
+  .heroCopy :global(.section-title),
+  .heroRu .heroCopy :global(.section-title) {
+    max-width: 100%;
   }
 
   .visualTrack {
@@ -425,10 +498,6 @@
   .visualBeam::after {
     top: auto;
     bottom: 14px;
-  }
-
-  .includedList {
-    grid-template-columns: 1fr;
   }
 
   .creditsNumbers {

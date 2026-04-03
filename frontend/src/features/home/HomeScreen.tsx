@@ -14,10 +14,11 @@ export function HomeScreen({ locale }: HomeScreenProps) {
   const copy = getCopy(locale);
   const studioHref = getLocalizedPath(locale, "/studio");
   const packsLeft = Math.floor(creditBalance / fullPackCost);
+  const isRussian = locale === "ru";
 
   return (
     <SiteFrame locale={locale} page="home">
-      <section className={`${styles.hero} container`}>
+      <section className={`${styles.hero} ${isRussian ? styles.heroRu : ""} container`}>
         <div className={styles.heroCopy}>
           <span className="eyebrow">{copy.home.badge}</span>
           <h1 className="section-title">{copy.home.title}</h1>
@@ -59,7 +60,7 @@ export function HomeScreen({ locale }: HomeScreenProps) {
         </div>
       </section>
 
-      <section className={`${styles.contentGrid} container`}>
+      <section className={`${styles.contentGrid} ${isRussian ? styles.contentRu : ""} container`}>
         <article className={styles.flowCard}>
           <span className={styles.sectionLabel}>{copy.home.flowTitle}</span>
           <p className={styles.sectionText}>{copy.home.flowText}</p>

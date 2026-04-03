@@ -14,7 +14,7 @@ type SiteFrameProps = {
 
 export function SiteFrame({ locale, page, children }: SiteFrameProps) {
   return (
-    <div className={styles.frame}>
+    <div className={styles.frame} data-locale={locale} data-page={page} lang={locale}>
       <div className={styles.glow} aria-hidden="true" />
       <Header locale={locale} page={page} />
       <main className={styles.main}>{children}</main>
@@ -22,4 +22,3 @@ export function SiteFrame({ locale, page, children }: SiteFrameProps) {
     </div>
   );
 }
-

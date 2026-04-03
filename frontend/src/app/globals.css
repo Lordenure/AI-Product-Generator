@@ -1,6 +1,6 @@
 :root {
   --bg: #08111f;
-  --bg-soft: #101a2b;
+  --bg-soft: #121d30;
   --surface: rgba(15, 23, 37, 0.78);
   --surface-strong: rgba(22, 31, 49, 0.92);
   --surface-soft: rgba(255, 255, 255, 0.05);
@@ -12,6 +12,7 @@
   --accent-sky: #91b7ff;
   --accent-mint: #87e6d6;
   --accent-sun: #ffab7a;
+  --accent-rose: #ff9dc6;
   --accent-glow: rgba(145, 183, 255, 0.28);
   --shadow-lg: 0 28px 80px rgba(1, 6, 17, 0.34);
   --shadow-md: 0 14px 34px rgba(1, 6, 17, 0.28);
@@ -39,9 +40,10 @@ body {
   color: var(--text);
   background:
     radial-gradient(circle at top left, rgba(135, 230, 214, 0.18), transparent 30%),
-    radial-gradient(circle at 85% 10%, rgba(255, 171, 122, 0.2), transparent 25%),
+    radial-gradient(circle at 85% 10%, rgba(255, 171, 122, 0.18), transparent 25%),
+    radial-gradient(circle at 16% 56%, rgba(255, 157, 198, 0.08), transparent 18%),
     radial-gradient(circle at 50% 100%, rgba(145, 183, 255, 0.14), transparent 35%),
-    linear-gradient(180deg, #09111f 0%, #091321 42%, #07101b 100%);
+    linear-gradient(180deg, #09111f 0%, #0a1525 42%, #07101b 100%);
   font-family: var(--font-sans);
 }
 
@@ -109,10 +111,11 @@ img {
   padding: 10px 14px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.06);
   color: var(--text-muted);
   font-size: 0.88rem;
   letter-spacing: 0.01em;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .eyebrow::before {
@@ -127,16 +130,21 @@ img {
 .section-title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 4.6rem);
-  line-height: 0.98;
+  font-size: clamp(2rem, 4.8vw, 4.4rem);
+  line-height: 1;
   letter-spacing: -0.04em;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  max-inline-size: 100%;
 }
 
 .section-copy {
   margin: 0;
   color: var(--text-muted);
-  line-height: 1.7;
+  line-height: 1.68;
   font-size: 1.02rem;
+  text-wrap: pretty;
+  max-inline-size: 100%;
 }
 
 @media (max-width: 720px) {

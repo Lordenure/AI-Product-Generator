@@ -3,12 +3,6 @@ import type { Locale } from "@/lib/i18n";
 export type StudioOption = {
   id: string;
   label: string;
-  previewLabel: string;
-};
-
-export type PreviewSection = {
-  title: string;
-  sample: string;
 };
 
 type CommonCopy = {
@@ -61,23 +55,21 @@ type StudioCopy = {
   createLoading: string;
   createReady: string;
   createHint: string;
+  createLoadingNote: string;
+  createReadyNote: string;
+  packListTitle: string;
+  packList: string[];
   creditsTitle: string;
   creditsLeftLabel: string;
   packsLeftLabel: string;
   fullPackCostLabel: string;
   fullPackCostValue: string;
+  creditCompactNote: string;
+  creditMini: string;
+  creditMeta: string;
   creditNote: string;
-  previewTitle: string;
-  previewText: string;
-  previewStatusIdle: string;
-  previewStatusLoading: string;
-  previewStatusReady: string;
-  previewContext: string;
-  previewMeta: string;
-  sampleProductFallback: string;
   languages: StudioOption[];
   platforms: StudioOption[];
-  previewSections: PreviewSection[];
 };
 
 export type SiteCopy = {
@@ -92,26 +84,26 @@ export const fullPackCost = 12;
 export const siteCopy: Record<Locale, SiteCopy> = {
   en: {
     common: {
-      brandLine: "Ready pack in one step",
+      brandLine: "One product. Full pack.",
       home: "Home",
       studio: "Studio",
-      openStudio: "Open studio",
-      backHome: "Back home",
+      openStudio: "Try studio",
+      backHome: "Home",
       language: "Language",
       footerLine: "One product in. A full pack out.",
-      footerNote: "Made for fast starts, not heavy setup."
+      footerNote: "Made to feel easy from the first try."
     },
     home: {
-      badge: "One product. Ready pack.",
-      title: "Drop in one product and get everything you need to sell it.",
+      badge: "One product in. Full pack out.",
+      title: "Add one product. Get the whole pack.",
       subtitle:
-        "TradeAI turns one product into ready texts, replies, FAQs, ads, and banner directions in one calm step.",
-      cta: "Try the studio",
-      heroStats: ["10 ready parts", "1 calm step", "12 credits"],
+        "Titles, benefits, replies, FAQ, ads, and more land together in one easy go.",
+      cta: "Try it now",
+      heroStats: ["10 ready parts", "1 click", "12 credits"],
       visualInputLabel: "Your product",
       visualInputValue: "GlowCup - insulated bottle with a tea infuser",
       visualOutputLabel: "Full pack",
-      visualOutputNote: "Ready to shape, edit, and use",
+      visualOutputNote: "Everything lands together",
       outputs: [
         "Title",
         "Benefits",
@@ -124,26 +116,24 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         "Ads",
         "Banner ideas"
       ],
-      flowTitle: "Simple in, rich out",
-      flowText:
-        "You add one product. TradeAI lays out the full pack so it already feels ready instead of half-done.",
+      flowTitle: "Just three easy steps",
+      flowText: "Drop in the product, pick the target, and let the full pack arrive all at once.",
       flowSteps: [
         {
           title: "Add the product",
-          text: "Name it and drop in the key details."
+          text: "A name and a few details are enough."
         },
         {
           title: "Pick the target",
-          text: "Choose the language and where the pack will be used."
+          text: "Choose the language and where it should go."
         },
         {
           title: "Get the whole pack",
-          text: "Everything arrives together, not as tiny separate pieces."
+          text: "It all lands together in one go."
         }
       ],
-      includedTitle: "What shows up in the pack",
-      includedText:
-        "Clear product text, versions for different selling places, helpful replies, and quick ad ideas without the busywork.",
+      includedTitle: "Inside the pack",
+      includedText: "The useful pieces you usually need anyway, already laid out for you.",
       includedList: [
         "Product title",
         "Short benefits",
@@ -156,120 +146,78 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         "Ad texts",
         "Banner ideas"
       ],
-      creditsTitle: "One action, one credit cost",
+      creditsTitle: "One click. One full pack.",
       creditsLeftLabel: "Credits left",
       packsLeftLabel: "Packs left",
-      creditsText:
-        "A full pack costs 12 credits. That one action gives you the whole set, not tiny charges for each part.",
-      creditsBadge: "12 credits / full pack",
-      creditsMeta: "84 credits left means 7 full packs ready to go.",
-      creditsMini: "Use one credit action, get the whole pack."
+      creditsText: "12 credits gives you the whole pack in one go.",
+      creditsBadge: "12 credits",
+      creditsMeta: "84 credits are waiting right now.",
+      creditsMini: "No tiny extra charges."
     },
     studio: {
-      badge: "Calm creation space",
-      title: "Turn one product into a ready content pack.",
-      subtitle:
-        "Keep it light: add the product, choose the language, choose where it will be used, and create everything in one click.",
-      inputLabel: "Add your product",
+      badge: "Easy little studio",
+      title: "Drop in one product and make the full pack.",
+      subtitle: "No heavy setup. Add the product and hit create.",
+      inputLabel: "Your product",
       inputPlaceholder:
         "Luma Pet Brush\nGentle silicone brush for cats and dogs.\nHelps lift loose fur and is easy to wash.",
-      targetLanguageLabel: "Pack language",
-      platformLabel: "Where will you use it?",
-      helperNote:
-        "One full pack includes title, benefits, description, SEO, translations, FAQ, replies, ads, and banner ideas.",
-      createButton: "Create full pack",
-      createLoading: "Creating pack...",
+      targetLanguageLabel: "Language",
+      platformLabel: "Where will it live?",
+      helperNote: "The full pack lands together: title, description, replies, FAQ, ads, and more.",
+      createButton: "Make full pack",
+      createLoading: "Making pack...",
       createReady: "Pack ready",
-      createHint: "One click creates the whole set.",
+      createHint: "One click and the whole set comes together.",
+      createLoadingNote: "Lining up the whole pack for you.",
+      createReadyNote: "Nice. The full pack is ready to shape and use.",
+      packListTitle: "Inside the pack",
+      packList: ["Title", "Benefits", "Description", "SEO", "Translations", "Shop versions", "Replies", "FAQ", "Ads", "Banner ideas"],
       creditsTitle: "Credits",
-      creditsLeftLabel: "Credits left",
-      packsLeftLabel: "Packs left",
-      fullPackCostLabel: "Full pack cost",
+      creditsLeftLabel: "Credits",
+      packsLeftLabel: "Full packs",
+      fullPackCostLabel: "Per pack",
       fullPackCostValue: "12 credits",
-      creditNote: "No separate charges for each piece.",
-      previewTitle: "Preview the full pack",
-      previewText: "This is the shape of the result you get in one action.",
-      previewStatusIdle: "Preview",
-      previewStatusLoading: "Warming up",
-      previewStatusReady: "Ready",
-      previewContext: "Made for {platform} in {language}",
-      previewMeta: "10 ready parts in one pack",
-      sampleProductFallback: "Your product",
+      creditCompactNote: "Ready to spend on the next pack.",
+      creditMini: "One launch gives you the whole set.",
+      creditMeta: "Enough for {packs} full packs.",
+      creditNote: "No tiny add-ons or separate little charges.",
       languages: [
-        { id: "en", label: "English", previewLabel: "English" },
-        { id: "ru", label: "Russian", previewLabel: "Russian" },
-        { id: "de", label: "German", previewLabel: "German" },
-        { id: "es", label: "Spanish", previewLabel: "Spanish" }
+        { id: "en", label: "English" },
+        { id: "ru", label: "Russian" },
+        { id: "de", label: "German" },
+        { id: "es", label: "Spanish" }
       ],
       platforms: [
-        { id: "site", label: "Website", previewLabel: "Website" },
-        { id: "amazon", label: "Amazon", previewLabel: "Amazon" },
-        { id: "wildberries", label: "Wildberries", previewLabel: "Wildberries" },
-        { id: "ozon", label: "Ozon", previewLabel: "Ozon" },
-        { id: "instagram", label: "Instagram", previewLabel: "Instagram" }
-      ],
-      previewSections: [
-        {
-          title: "Title",
-          sample: "GlowCup Tea Bottle | Warm sips without the spill"
-        },
-        {
-          title: "Benefits",
-          sample: "Keeps tea hot, strains loose leaves, and feels easy to carry."
-        },
-        {
-          title: "Description",
-          sample: "A slim insulated bottle with a built-in infuser for tea, fruit, and quick everyday refills."
-        },
-        {
-          title: "SEO version",
-          sample: "Tea infuser bottle, insulated tea tumbler, leak-safe tea flask."
-        },
-        {
-          title: "Platform version",
-          sample: "Tuned for skimming, fast comparison, and a quick buy decision."
-        },
-        {
-          title: "Review reply",
-          sample: "Thank you. We are so glad the bottle made your morning tea easier."
-        },
-        {
-          title: "FAQ",
-          sample: "Can I use fruit or coffee too? Yes, the filter lifts out for quick rinsing."
-        },
-        {
-          title: "Ads",
-          sample: "Steep, sip, and go. Your tea bottle for calm mornings."
-        },
-        {
-          title: "Banner idea",
-          sample: "Soft sunrise light, warm steam, and a close-up of the infuser drop."
-        }
+        { id: "site", label: "Website" },
+        { id: "amazon", label: "Amazon" },
+        { id: "wildberries", label: "Wildberries" },
+        { id: "ozon", label: "Ozon" },
+        { id: "instagram", label: "Instagram" }
       ]
     }
   },
   ru: {
     common: {
-      brandLine: "Готовый пак за один шаг",
+      brandLine: "Один товар. Полный пак.",
       home: "Главная",
       studio: "Студия",
-      openStudio: "Открыть студию",
-      backHome: "На главную",
+      openStudio: "Попробовать",
+      backHome: "Главная",
       language: "Язык",
       footerLine: "Один товар внутри. Полный пак на выходе.",
-      footerNote: "Для быстрого старта, без тяжёлой настройки."
+      footerNote: "Сделано так, чтобы было легко с первой попытки."
     },
     home: {
-      badge: "Один товар. Готовый пак.",
-      title: "Добавьте один товар и сразу получите всё, что нужно для продажи.",
+      badge: "Один товар внутрь. Полный пак на выходе.",
+      title: "Добавьте один товар. Остальное уже соберётся.",
       subtitle:
-        "TradeAI превращает один товар в готовые тексты, ответы, FAQ, объявления и идеи для баннеров за один спокойный шаг.",
-      cta: "Попробовать студию",
-      heroStats: ["10 готовых частей", "1 спокойный шаг", "12 кредитов"],
+        "Заголовок, преимущества, ответы, FAQ, объявления и ещё немного полезного приходят сразу.",
+      cta: "Попробовать",
+      heroStats: ["10 готовых частей", "1 клик", "12 кредитов"],
       visualInputLabel: "Ваш товар",
       visualInputValue: "GlowCup - термобутылка с заварником для чая",
       visualOutputLabel: "Полный пак",
-      visualOutputNote: "Уже приятно редактировать и использовать",
+      visualOutputNote: "Всё приходит сразу",
       outputs: [
         "Заголовок",
         "Преимущества",
@@ -282,26 +230,24 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         "Объявления",
         "Идеи для баннеров"
       ],
-      flowTitle: "Просто на входе, богато на выходе",
-      flowText:
-        "Вы добавляете один товар. TradeAI сразу раскладывает результат как готовый набор, а не как сырой черновик.",
+      flowTitle: "Всего три шага",
+      flowText: "Добавьте товар, выберите цель и получите весь пак сразу.",
       flowSteps: [
         {
           title: "Добавьте товар",
-          text: "Название и пара важных деталей уже достаточно."
+          text: "Названия и пары деталей уже хватит."
         },
         {
           title: "Выберите цель",
-          text: "Укажите язык и место, где этот пак будет жить."
+          text: "Язык и площадка задаются в пару кликов."
         },
         {
           title: "Получите весь пак",
-          text: "Всё приходит сразу, а не кусочками по отдельности."
+          text: "Ничего не дробится на мелкие части."
         }
       ],
-      includedTitle: "Что входит в пак",
-      includedText:
-        "Понятные тексты, версии под разные площадки, ответы покупателям и быстрые идеи для рекламы без лишней рутины.",
+      includedTitle: "Что внутри",
+      includedText: "Полезные части, которые обычно всё равно нужны, уже лежат рядом.",
       includedList: [
         "Заголовок товара",
         "Короткие преимущества",
@@ -314,95 +260,64 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         "Рекламные тексты",
         "Идеи для баннеров"
       ],
-      creditsTitle: "Одно действие, одна цена",
+      creditsTitle: "Один клик. Один полный пак.",
       creditsLeftLabel: "Кредитов осталось",
       packsLeftLabel: "Полных паков",
-      creditsText:
-        "Полный пак стоит 12 кредитов. За это одно действие вы получаете весь набор, а не мелкие списания за каждую часть.",
-      creditsBadge: "12 кредитов / полный пак",
-      creditsMeta: "84 кредита хватит на 7 полных паков.",
-      creditsMini: "Один кредитный шаг, и весь пак уже здесь."
+      creditsText: "12 кредитов и весь набор уже у вас.",
+      creditsBadge: "12 кредитов",
+      creditsMeta: "84 кредита уже ждут.",
+      creditsMini: "Без мелких списаний."
     },
     studio: {
-      badge: "Спокойное место для создания",
-      title: "Превратите один товар в готовый контент-пак.",
-      subtitle:
-        "Всё просто: добавьте товар, выберите язык, выберите площадку и соберите всё одним кликом.",
-      inputLabel: "Добавьте свой товар",
+      badge: "Тихая студия для старта",
+      title: "Добавьте товар и соберите полный пак.",
+      subtitle: "Без тяжёлой настройки. Просто вставьте товар и нажмите создать.",
+      inputLabel: "Ваш товар",
       inputPlaceholder:
         "Luma Pet Brush\nМягкая силиконовая щётка для кошек и собак.\nПомогает убрать лишнюю шерсть и легко моется.",
-      targetLanguageLabel: "Язык пака",
-      platformLabel: "Где будете использовать?",
-      helperNote:
-        "Один полный пак включает заголовок, преимущества, описание, SEO, переводы, FAQ, ответы, объявления и идеи для баннеров.",
-      createButton: "Создать полный пак",
+      targetLanguageLabel: "Язык",
+      platformLabel: "Где он будет жить?",
+      helperNote: "Полный пак приходит сразу: заголовок, описание, ответы, FAQ, объявления и ещё немного полезного.",
+      createButton: "Собрать полный пак",
       createLoading: "Собираем пак...",
       createReady: "Пак готов",
-      createHint: "Один клик собирает весь набор.",
+      createHint: "Один клик, и всё собирается вместе.",
+      createLoadingNote: "Собираем весь пак для вас.",
+      createReadyNote: "Готово. Пак уже приятно брать и использовать.",
+      packListTitle: "Что внутри",
+      packList: [
+        "Заголовок",
+        "Преимущества",
+        "Описание",
+        "SEO",
+        "Переводы",
+        "Версии для площадок",
+        "Ответы",
+        "FAQ",
+        "Объявления",
+        "Баннеры"
+      ],
       creditsTitle: "Кредиты",
-      creditsLeftLabel: "Осталось",
+      creditsLeftLabel: "Кредитов",
       packsLeftLabel: "Полных паков",
-      fullPackCostLabel: "Полный пак стоит",
+      fullPackCostLabel: "За один пак",
       fullPackCostValue: "12 кредитов",
-      creditNote: "Без отдельных списаний за каждую часть.",
-      previewTitle: "Предпросмотр полного пака",
-      previewText: "Вот форма результата, который вы получаете за одно действие.",
-      previewStatusIdle: "Предпросмотр",
-      previewStatusLoading: "Собираем",
-      previewStatusReady: "Готово",
-      previewContext: "Сделано для {platform} на {language}",
-      previewMeta: "10 готовых частей в одном паке",
-      sampleProductFallback: "Ваш товар",
+      creditCompactNote: "Готово к следующему полному паку.",
+      creditMini: "Один запуск даёт весь набор сразу.",
+      creditMeta: "Хватит на {packs} полных паков.",
+      creditNote: "Без мелких доплат и дробных списаний.",
       languages: [
-        { id: "en", label: "Английский", previewLabel: "английском" },
-        { id: "ru", label: "Русский", previewLabel: "русском" },
-        { id: "de", label: "Немецкий", previewLabel: "немецком" },
-        { id: "es", label: "Испанский", previewLabel: "испанском" }
+        { id: "en", label: "Английский" },
+        { id: "ru", label: "Русский" },
+        { id: "de", label: "Немецкий" },
+        { id: "es", label: "Испанский" }
       ],
       platforms: [
-        { id: "site", label: "Сайт", previewLabel: "сайта" },
-        { id: "amazon", label: "Amazon", previewLabel: "Amazon" },
-        { id: "wildberries", label: "Wildberries", previewLabel: "Wildberries" },
-        { id: "ozon", label: "Ozon", previewLabel: "Ozon" },
-        { id: "instagram", label: "Instagram", previewLabel: "Instagram" }
-      ],
-      previewSections: [
-        {
-          title: "Заголовок",
-          sample: "GlowCup Tea Bottle | Тёплый чай без проливов"
-        },
-        {
-          title: "Преимущества",
-          sample: "Держит тепло, заваривает листовой чай и удобно лежит в руке."
-        },
-        {
-          title: "Описание",
-          sample: "Тонкая термобутылка со встроенным заварником для чая, фруктов и спокойных ежедневных поездок."
-        },
-        {
-          title: "SEO",
-          sample: "бутылка для чая с заварником, термобутылка для чая, герметичный чайный термос"
-        },
-        {
-          title: "Версия для площадки",
-          sample: "Подстроена под быстрое чтение, сравнение и лёгкое решение о покупке."
-        },
-        {
-          title: "Ответ на отзыв",
-          sample: "Спасибо. Очень рады, что бутылка сделала ваше утреннее чаепитие удобнее."
-        },
-        {
-          title: "FAQ",
-          sample: "Можно ли заваривать фрукты или кофе? Да, фильтр легко вынимается и быстро моется."
-        },
-        {
-          title: "Объявления",
-          sample: "Заварите, сделайте глоток и идите дальше. Бутылка для спокойных утр."
-        },
-        {
-          title: "Идея для баннера",
-          sample: "Мягкий свет рассвета, тёплый пар и крупный план опускающегося фильтра."
-        }
+        { id: "site", label: "Сайт" },
+        { id: "amazon", label: "Amazon" },
+        { id: "wildberries", label: "Wildberries" },
+        { id: "ozon", label: "Ozon" },
+        { id: "instagram", label: "Instagram" }
       ]
     }
   }

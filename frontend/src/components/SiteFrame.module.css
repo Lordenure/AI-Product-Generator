@@ -5,6 +5,15 @@
   min-height: 100vh;
 }
 
+.frame[data-locale="ru"] :global(.section-title) {
+  font-size: clamp(1.92rem, 4.1vw, 3.95rem);
+  line-height: 1.03;
+}
+
+.frame[data-locale="ru"] :global(.section-copy) {
+  max-width: 40rem;
+}
+
 .glow {
   position: absolute;
   top: 88px;
@@ -24,12 +33,12 @@
 .main {
   display: flex;
   flex-direction: column;
-  gap: 96px;
+  gap: 88px;
   flex: 1;
 }
 
 @media (max-width: 720px) {
   .main {
-    gap: 72px;
+    gap: 64px;
   }
 }
