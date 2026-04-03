@@ -1,0 +1,60 @@
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.mark {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.22), transparent 35%),
+    linear-gradient(135deg, rgba(135, 230, 214, 0.92), rgba(145, 183, 255, 0.92) 48%, rgba(255, 171, 122, 0.92));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 14px 28px rgba(135, 230, 214, 0.18);
+}
+
+.mark::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 13px;
+}
+
+.mark::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 11px;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 2px solid rgba(6, 10, 18, 0.2);
+}
+
+.text {
+  display: grid;
+  gap: 1px;
+}
+
+.wordmark {
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+}
+
+.tagline {
+  color: var(--text-soft);
+  font-size: 0.78rem;
+}
+
+@media (max-width: 720px) {
+  .tagline {
+    display: none;
+  }
+}
+

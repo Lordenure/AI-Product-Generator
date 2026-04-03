@@ -1,0 +1,35 @@
+.frame {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.glow {
+  position: absolute;
+  top: 88px;
+  left: 50%;
+  width: min(62vw, 820px);
+  height: 360px;
+  background:
+    radial-gradient(circle at 18% 28%, rgba(135, 230, 214, 0.16), transparent 40%),
+    radial-gradient(circle at 82% 20%, rgba(255, 171, 122, 0.14), transparent 36%),
+    radial-gradient(circle at 54% 80%, rgba(145, 183, 255, 0.12), transparent 38%);
+  transform: translateX(-50%);
+  pointer-events: none;
+  filter: blur(28px);
+  z-index: -1;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 96px;
+  flex: 1;
+}
+
+@media (max-width: 720px) {
+  .main {
+    gap: 72px;
+  }
+}

@@ -1,0 +1,346 @@
+.intro {
+  display: grid;
+  gap: 24px;
+  padding-top: 16px;
+}
+
+.introCopy {
+  display: grid;
+  gap: 18px;
+  max-width: 760px;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.composer,
+.creditsCard,
+.previewCard {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+    rgba(11, 17, 29, 0.76);
+  box-shadow: var(--shadow-lg);
+}
+
+.composer {
+  display: grid;
+  gap: 22px;
+  padding: 28px;
+}
+
+.composer::before,
+.creditsCard::before,
+.previewCard::before {
+  content: "";
+  position: absolute;
+  inset: auto auto -80px -40px;
+  width: 180px;
+  height: 180px;
+  border-radius: 999px;
+  background: rgba(145, 183, 255, 0.12);
+  filter: blur(12px);
+  pointer-events: none;
+}
+
+.block {
+  display: grid;
+  gap: 12px;
+}
+
+.blockLabel,
+.cardLabel {
+  color: var(--text-soft);
+  font-size: 0.86rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 208px;
+  padding: 20px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 26px;
+  resize: vertical;
+  outline: none;
+  color: var(--text);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.03)),
+    rgba(7, 12, 22, 0.72);
+  line-height: 1.7;
+}
+
+.textarea:focus {
+  border-color: rgba(145, 183, 255, 0.4);
+  box-shadow: 0 0 0 4px rgba(145, 183, 255, 0.1);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chip {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.chip:hover {
+  color: var(--text);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.chipActive {
+  color: #08111f;
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--accent-mint), var(--accent-sky) 55%, var(--accent-sun));
+}
+
+.createButton {
+  min-height: 58px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent-mint), var(--accent-sky) 48%, var(--accent-sun));
+  color: #09111d;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 18px 34px rgba(135, 230, 214, 0.18);
+}
+
+.createButton:hover {
+  transform: translateY(-1px);
+}
+
+.helper,
+.createHint,
+.previewText,
+.creditNote {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.createHint {
+  color: var(--text);
+}
+
+.sidebar {
+  display: grid;
+  gap: 24px;
+}
+
+.creditsCard,
+.previewCard {
+  padding: 28px;
+}
+
+.creditsCard {
+  background:
+    radial-gradient(circle at 84% 18%, rgba(255, 171, 122, 0.14), transparent 30%),
+    radial-gradient(circle at 20% 24%, rgba(135, 230, 214, 0.14), transparent 32%),
+    rgba(13, 20, 33, 0.8);
+}
+
+.creditsTop,
+.previewHead,
+.previewMeta {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.creditsTop h2,
+.previewHead h2 {
+  margin: 8px 0 0;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.costPill,
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.balanceRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.balanceRow div {
+  display: grid;
+  gap: 8px;
+}
+
+.balanceRow span {
+  color: var(--text-soft);
+  font-size: 0.9rem;
+}
+
+.balanceRow strong {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.balanceBar {
+  margin-top: 20px;
+  width: 100%;
+  height: 12px;
+  padding: 2px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.balanceBar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent-mint), var(--accent-sky), var(--accent-sun));
+}
+
+.creditNote {
+  margin-top: 16px;
+}
+
+.previewCard {
+  background:
+    radial-gradient(circle at 82% 18%, rgba(145, 183, 255, 0.16), transparent 30%),
+    rgba(11, 17, 29, 0.82);
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.previewLoading {
+  border-color: rgba(145, 183, 255, 0.26);
+  box-shadow:
+    0 28px 80px rgba(1, 6, 17, 0.34),
+    0 0 0 1px rgba(145, 183, 255, 0.1),
+    0 0 40px rgba(145, 183, 255, 0.12);
+}
+
+.previewReady {
+  border-color: rgba(135, 230, 214, 0.26);
+  box-shadow:
+    0 28px 80px rgba(1, 6, 17, 0.34),
+    0 0 0 1px rgba(135, 230, 214, 0.1),
+    0 0 42px rgba(135, 230, 214, 0.12);
+  transform: translateY(-2px);
+}
+
+.previewHead {
+  align-items: center;
+}
+
+.previewText {
+  margin-top: 14px;
+}
+
+.previewMeta {
+  margin-top: 18px;
+  flex-wrap: wrap;
+  color: var(--text);
+  gap: 10px;
+}
+
+.previewMeta span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.previewList {
+  display: grid;
+  gap: 12px;
+  padding: 0;
+  margin: 22px 0 0;
+  list-style: none;
+}
+
+.previewItem {
+  padding: 16px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.previewItem span,
+.previewItem p {
+  margin: 0;
+}
+
+.previewItem span {
+  display: inline-flex;
+  margin-bottom: 8px;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.previewItem p {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+@media (max-width: 1080px) {
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .composer,
+  .creditsCard,
+  .previewCard {
+    padding: 22px;
+    border-radius: 26px;
+  }
+
+  .balanceRow {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .creditsTop,
+  .previewHead {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
