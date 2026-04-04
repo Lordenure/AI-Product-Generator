@@ -1,18 +1,48 @@
 .switcher {
-  display: grid;
+  justify-self: start;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
   gap: 8px;
+  min-height: 34px;
+  padding: 0 11px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.chevron {
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid rgba(255, 255, 255, 0.68);
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.68);
+  transform: rotate(45deg) translateY(-1px);
+}
+
+.menu {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  background: rgba(10, 16, 28, 0.96);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(16px);
 }
 
 .option {
-  display: flex;
+  position: relative;
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  min-height: 30px;
-  padding: 0 11px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.035);
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
   color: var(--text-muted);
   transition:
     border-color 0.2s ease,
@@ -21,26 +51,19 @@
 }
 
 .option:hover {
-  color: var(--text);
-  border-color: rgba(255, 255, 255, 0.14);
   background: rgba(255, 255, 255, 0.06);
 }
 
 .optionActive {
-  color: var(--text);
-  border-color: rgba(145, 183, 255, 0.18);
   background:
     linear-gradient(180deg, rgba(145, 183, 255, 0.12), rgba(145, 183, 255, 0.05)),
     rgba(255, 255, 255, 0.04);
 }
 
-.optionLabel {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-
 .activeDot {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
   width: 8px;
   height: 8px;
   border-radius: 999px;

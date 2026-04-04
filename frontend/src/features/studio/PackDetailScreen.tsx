@@ -1,11 +1,15 @@
+"use client";
+
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 import { getCopy } from "@/content/copy";
-import { getPackById } from "@/content/packs";
 import { getLocalizedPath, type Locale } from "@/lib/i18n";
 
+import { PackDeleteControl } from "./PackDeleteControl";
 import { StudioAppShell } from "./StudioAppShell";
+import { useStudioState } from "./StudioStateProvider";
 import styles from "./PackDetailScreen.module.css";
 
 type PackDetailScreenProps = {
@@ -15,10 +19,22 @@ type PackDetailScreenProps = {
 
 export function PackDetailScreen({ locale, packId }: PackDetailScreenProps) {
   const copy = getCopy(locale);
-  const pack = getPackById(locale, packId);
+  const router = useRouter();
+  const { getPack, deletePack } = useStudioState(locale);
+  const pack = getPack(packId);
+
+  useEffect(() => {
+    if (!pack) {
+      router.replace(getLocalizedPath(locale, "/studio"));
+    }
+  }, [locale, pack, router]);
 
   if (!pack) {
-    notFound();
+    return (
+      <StudioAppShell locale={locale} activeNav="packs">
+        <section className={styles.panel} />
+      </StudioAppShell>
+    );
   }
 
   return (
@@ -28,7 +44,18 @@ export function PackDetailScreen({ locale, packId }: PackDetailScreenProps) {
           <Link href={getLocalizedPath(locale, "/studio")} className={styles.backLink}>
             {copy.studio.detailBack}
           </Link>
-          <span className={`${styles.status} ${styles[`status${pack.status}`]}`.trim()}>{pack.statusLabel}</span>
+
+          <div className={styles.topActions}>
+            <PackDeleteControl
+              locale={locale}
+              variant="detail"
+              onDelete={() => {
+                deletePack(pack.id);
+                router.replace(getLocalizedPath(locale, "/studio"));
+              }}
+            />
+            <span className={`${styles.status} ${styles[`status${pack.status}`]}`.trim()}>{pack.statusLabel}</span>
+          </div>
         </div>
 
         <article className={styles.summaryCard}>

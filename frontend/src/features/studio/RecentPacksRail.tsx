@@ -1,8 +1,10 @@
+"use client";
+
 import { getCopy } from "@/content/copy";
-import { getPackLibrary } from "@/content/packs";
 import type { Locale } from "@/lib/i18n";
 
 import { PackCard } from "./PackCard";
+import { useStudioState } from "./StudioStateProvider";
 import styles from "./RecentPacksRail.module.css";
 
 type RecentPacksRailProps = {
@@ -12,7 +14,7 @@ type RecentPacksRailProps = {
 
 export function RecentPacksRail({ locale, activePackId }: RecentPacksRailProps) {
   const copy = getCopy(locale);
-  const packs = getPackLibrary(locale);
+  const { packs, deletePack } = useStudioState(locale);
 
   return (
     <aside id="packs" className={styles.rail} aria-labelledby="recent-packs-title">
@@ -26,13 +28,22 @@ export function RecentPacksRail({ locale, activePackId }: RecentPacksRailProps) 
       </div>
 
       <div className={styles.scrollArea}>
-        <ul className={styles.list}>
-          {packs.map((pack) => (
-            <li key={pack.id}>
-              <PackCard locale={locale} pack={pack} isActive={pack.id === activePackId} />
-            </li>
-          ))}
-        </ul>
+        {packs.length > 0 ? (
+          <ul className={styles.list}>
+            {packs.map((pack) => (
+              <li key={pack.id}>
+                <PackCard
+                  locale={locale}
+                  pack={pack}
+                  isActive={pack.id === activePackId}
+                  onDelete={() => deletePack(pack.id)}
+                />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className={styles.empty}>{copy.studio.packsEmpty}</div>
+        )}
       </div>
     </aside>
   );

@@ -1,18 +1,22 @@
+"use client";
+
 import Link from "next/link";
 
 import { getCopy } from "@/content/copy";
 import type { PackRecord } from "@/content/packs";
 import { getLocalizedPath, type Locale } from "@/lib/i18n";
 
+import { PackDeleteControl } from "./PackDeleteControl";
 import styles from "./PackCard.module.css";
 
 type PackCardProps = {
   locale: Locale;
   pack: PackRecord;
   isActive?: boolean;
+  onDelete: () => void;
 };
 
-export function PackCard({ locale, pack, isActive = false }: PackCardProps) {
+export function PackCard({ locale, pack, isActive = false, onDelete }: PackCardProps) {
   const copy = getCopy(locale);
   const href = getLocalizedPath(locale, `/studio/packs/${pack.id}`);
   const initials = pack.productName
@@ -22,19 +26,23 @@ export function PackCard({ locale, pack, isActive = false }: PackCardProps) {
     .join("");
 
   return (
-    <Link href={href} className={`${styles.card} ${isActive ? styles.cardActive : ""}`.trim()}>
-      <div className={styles.head}>
-        <div className={`${styles.thumb} ${styles[`thumb${pack.artTone}`]}`.trim()} aria-hidden="true">
-          <span>{initials}</span>
+    <article className={`${styles.card} ${isActive ? styles.cardActive : ""}`.trim()}>
+      <div className={styles.cardTop}>
+        <div className={styles.head}>
+          <div className={`${styles.thumb} ${styles[`thumb${pack.artTone}`]}`.trim()} aria-hidden="true">
+            <span>{initials}</span>
+          </div>
+
+          <div className={styles.copy}>
+            <div className={styles.titleRow}>
+              <h3 className={styles.title}>{pack.productName}</h3>
+              <span className={`${styles.status} ${styles[`status${pack.status}`]}`.trim()}>{pack.statusLabel}</span>
+            </div>
+            <p className={styles.summary}>{pack.summary}</p>
+          </div>
         </div>
 
-        <div className={styles.copy}>
-          <div className={styles.titleRow}>
-            <h3 className={styles.title}>{pack.productName}</h3>
-            <span className={`${styles.status} ${styles[`status${pack.status}`]}`.trim()}>{pack.statusLabel}</span>
-          </div>
-          <p className={styles.summary}>{pack.summary}</p>
-        </div>
+        <PackDeleteControl locale={locale} onDelete={onDelete} />
       </div>
 
       <div className={styles.meta}>
@@ -52,11 +60,11 @@ export function PackCard({ locale, pack, isActive = false }: PackCardProps) {
           ))}
         </div>
 
-        <span className={styles.action}>
+        <Link href={href} className={styles.action}>
           {copy.studio.openPack}
           <span className={styles.arrow} aria-hidden="true" />
-        </span>
+        </Link>
       </div>
-    </Link>
+    </article>
   );
 }

@@ -16,14 +16,6 @@ type CommonCopy = {
   footerNote: string;
 };
 
-type HomePlanCopy = {
-  name: string;
-  price: string;
-  audience: string;
-  credits: string;
-  note: string;
-};
-
 type HomeCopy = {
   badge: string;
   title: string;
@@ -43,7 +35,6 @@ type HomeCopy = {
   includedList: string[];
   plansTitle: string;
   plansText: string;
-  plans: HomePlanCopy[];
 };
 
 type StudioCopy = {
@@ -53,7 +44,6 @@ type StudioCopy = {
   sidebarUpgradeLabel: string;
   sidebarProfileRole: string;
   sidebarProfileName: string;
-  sidebarLanguageLabel: string;
   createEyebrow: string;
   createTitle: string;
   createText: string;
@@ -72,9 +62,17 @@ type StudioCopy = {
   createHint: string;
   createLoadingNote: string;
   createReadyNote: string;
+  createNameError: string;
+  createLimitError: string;
   packsTitle: string;
   packsText: string;
+  packsEmpty: string;
   openPack: string;
+  deleteLabel: string;
+  deleteTitle: string;
+  deleteText: string;
+  deleteCancel: string;
+  deleteConfirm: string;
   detailBack: string;
   detailLabel: string;
   detailText: string;
@@ -161,30 +159,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         "Banner ideas"
       ],
       plansTitle: "Plans",
-      plansText: "Start free, then move up when you want more packs ready to go.",
-      plans: [
-        {
-          name: "Free",
-          price: "$0",
-          audience: "For a first try",
-          credits: "24 credits / 2 packs",
-          note: "A simple start with a small library."
-        },
-        {
-          name: "Plus",
-          price: "$24/mo",
-          audience: "For regular launches",
-          credits: "180 credits / 15 packs",
-          note: "More languages and more saved packs."
-        },
-        {
-          name: "Pro",
-          price: "$59/mo",
-          audience: "For daily use",
-          credits: "480 credits / 40 packs",
-          note: "Priority speed and the full library kept ready."
-        }
-      ]
+      plansText: "Pick the one that feels right and keep creating."
     },
     studio: {
       sidebarHomeLabel: "Home",
@@ -193,7 +168,6 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       sidebarUpgradeLabel: "Upgrade",
       sidebarProfileRole: "Creator",
       sidebarProfileName: "Lordenure",
-      sidebarLanguageLabel: "Language",
       createEyebrow: "Create",
       createTitle: "New full pack",
       createText: "Add a product and click once.",
@@ -206,15 +180,23 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       benefitsHint: "Optional",
       targetLanguageLabel: "Language",
       platformLabel: "Use on",
-      createButton: "Create full pack",
+      createButton: "✨ Create full pack",
       createLoading: "Creating pack...",
       createReady: "Pack ready",
       createHint: "One click for the full pack.",
       createLoadingNote: "Making the full pack.",
       createReadyNote: "Pack ready to open.",
+      createNameError: "Add a product name first.",
+      createLimitError: "Your pack list is full. Delete one or upgrade.",
       packsTitle: "Latest packs",
       packsText: "Open any pack.",
+      packsEmpty: "Your new packs land here.",
       openPack: "Open pack",
+      deleteLabel: "Delete",
+      deleteTitle: "Delete this pack?",
+      deleteText: "This will remove it from your studio.",
+      deleteCancel: "Cancel",
+      deleteConfirm: "Delete",
       detailBack: "Back to studio",
       detailLabel: "Full pack",
       detailText: "Everything for this product is ready here.",
@@ -302,30 +284,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         "Идеи для баннеров"
       ],
       plansTitle: "Тарифы",
-      plansText: "Можно начать бесплатно, а потом взять больше паков, когда они нужны чаще.",
-      plans: [
-        {
-          name: "Free",
-          price: "$0",
-          audience: "Для первого знакомства",
-          credits: "24 кредита / 2 пака",
-          note: "Простой старт и маленькая библиотека."
-        },
-        {
-          name: "Plus",
-          price: "$24 / мес",
-          audience: "Для регулярных запусков",
-          credits: "180 кредитов / 15 паков",
-          note: "Больше языков и больше сохранённых паков."
-        },
-        {
-          name: "Pro",
-          price: "$59 / мес",
-          audience: "Для ежедневной работы",
-          credits: "480 кредитов / 40 паков",
-          note: "Приоритетная скорость и вся библиотека под рукой."
-        }
-      ]
+      plansText: "Выберите спокойный старт или больше места для новых паков."
     },
     studio: {
       sidebarHomeLabel: "Главная",
@@ -334,7 +293,6 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       sidebarUpgradeLabel: "Улучшить",
       sidebarProfileRole: "Создатель",
       sidebarProfileName: "Lordenure",
-      sidebarLanguageLabel: "Язык",
       createEyebrow: "Создать",
       createTitle: "Новый полный пак",
       createText: "Добавьте товар и нажмите один раз.",
@@ -347,15 +305,23 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       benefitsHint: "Необязательно",
       targetLanguageLabel: "Язык",
       platformLabel: "Где использовать",
-      createButton: "Собрать полный пак",
+      createButton: "✨ Собрать полный пак",
       createLoading: "Собираем пак...",
       createReady: "Пак готов",
       createHint: "Один клик на весь пак.",
       createLoadingNote: "Собираем полный пак.",
       createReadyNote: "Пак можно открыть.",
+      createNameError: "Сначала добавьте название товара.",
+      createLimitError: "Список паков заполнен. Удалите один или улучшите план.",
       packsTitle: "Последние паки",
       packsText: "Откройте любой пак.",
+      packsEmpty: "Новые паки появятся здесь.",
       openPack: "Открыть пак",
+      deleteLabel: "Удалить",
+      deleteTitle: "Удалить этот пак?",
+      deleteText: "Он исчезнет из вашей студии.",
+      deleteCancel: "Отмена",
+      deleteConfirm: "Удалить",
       detailBack: "Назад в студию",
       detailLabel: "Полный пак",
       detailText: "Все материалы по этому товару уже собраны здесь.",

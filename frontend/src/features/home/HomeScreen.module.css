@@ -364,16 +364,15 @@
 }
 
 .pricingText,
-.planAudience,
-.planCredits,
-.planNote {
+.planLine,
+.planDetail,
+.planDetailStrong {
   margin: 0;
 }
 
 .pricingText,
-.planAudience,
-.planCredits,
-.planNote {
+.planLine,
+.planDetail {
   color: var(--text-muted);
   line-height: 1.6;
 }
@@ -415,7 +414,7 @@
   line-height: 1.25;
 }
 
-.planAudience {
+.planLine {
   color: var(--text-soft);
   font-size: 0.88rem;
 }
@@ -432,13 +431,19 @@
   font-weight: 700;
 }
 
-.planCredits {
+.planDetails {
+  display: grid;
+  gap: 6px;
+}
+
+.planDetailStrong {
   color: var(--text);
   font-size: 0.92rem;
   font-weight: 700;
+  line-height: 1.55;
 }
 
-.planNote {
+.planDetail {
   font-size: 0.9rem;
 }
 

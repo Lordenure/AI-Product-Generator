@@ -32,7 +32,6 @@ export function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
       <summary className={styles.trigger} aria-label={copy.common.language}>
         <span className={styles.current}>
           <Flag code={currentOption.flag} />
-          <span>{currentOption.label}</span>
         </span>
         <span className={styles.chevron} aria-hidden="true" />
       </summary>
@@ -45,11 +44,10 @@ export function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
               key={option.locale}
               href={getHref(option.locale)}
               className={`${styles.option} ${isActive ? styles.optionActive : ""}`.trim()}
+              aria-label={option.label}
+              title={option.label}
             >
-              <span className={styles.optionLabel}>
-                <Flag code={option.flag} />
-                <span>{option.label}</span>
-              </span>
+              <Flag code={option.flag} />
               {isActive ? <span className={styles.activeDot} aria-hidden="true" /> : null}
             </Link>
           );

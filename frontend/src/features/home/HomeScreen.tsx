@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { getCopy } from "@/content/copy";
+import { getPlanCards } from "@/content/plans";
 import { SiteFrame } from "@/components/SiteFrame";
 import { getLocalizedPath, type Locale } from "@/lib/i18n";
 
@@ -12,6 +13,7 @@ type HomeScreenProps = {
 
 export function HomeScreen({ locale }: HomeScreenProps) {
   const copy = getCopy(locale);
+  const plans = getPlanCards(locale);
   const studioHref = getLocalizedPath(locale, "/studio");
   const isRussian = locale === "ru";
 
@@ -95,18 +97,21 @@ export function HomeScreen({ locale }: HomeScreenProps) {
         </div>
 
         <div className={styles.pricingGrid}>
-          {copy.home.plans.map((plan) => (
+          {plans.map((plan) => (
             <article key={plan.name} className={styles.plan}>
               <div className={styles.planTop}>
                 <div className={styles.planNameWrap}>
                   <h3 className={styles.planName}>{plan.name}</h3>
-                  <p className={styles.planAudience}>{plan.audience}</p>
+                  <p className={styles.planLine}>{plan.line}</p>
                 </div>
                 <span className={styles.planPrice}>{plan.price}</span>
               </div>
 
-              <p className={styles.planCredits}>{plan.credits}</p>
-              <p className={styles.planNote}>{plan.note}</p>
+              <div className={styles.planDetails}>
+                <p className={styles.planDetailStrong}>{plan.credits}</p>
+                <p className={styles.planDetail}>{plan.storage}</p>
+                <p className={styles.planDetail}>{plan.model}</p>
+              </div>
             </article>
           ))}
         </div>

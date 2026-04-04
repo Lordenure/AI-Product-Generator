@@ -1,0 +1,147 @@
+.root {
+  position: relative;
+}
+
+.rootCard {
+  justify-self: end;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 32px;
+  padding: 0 11px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.045);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.button:hover {
+  color: var(--text);
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.buttonCard {
+  width: 32px;
+  padding: 0;
+}
+
+.buttonDetail {
+  min-height: 36px;
+  padding-inline: 12px;
+}
+
+.icon {
+  position: relative;
+  width: 12px;
+  height: 12px;
+}
+
+.icon::before,
+.icon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.icon::before {
+  top: 2px;
+  width: 10px;
+  height: 7px;
+  border: 1.5px solid currentColor;
+  border-top: 0;
+}
+
+.icon::after {
+  top: 0;
+  width: 8px;
+  height: 2px;
+  background: currentColor;
+  box-shadow: 0 8px 0 0 transparent;
+}
+
+.confirm {
+  display: grid;
+  gap: 10px;
+  width: min(260px, calc(100vw - 40px));
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  background: rgba(10, 16, 28, 0.97);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(16px);
+}
+
+.title,
+.text {
+  margin: 0;
+}
+
+.title {
+  color: var(--text);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.text {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.cancel,
+.delete {
+  min-height: 32px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 0.83rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.cancel {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-muted);
+}
+
+.delete {
+  border: 1px solid rgba(255, 171, 122, 0.18);
+  background: rgba(255, 171, 122, 0.12);
+  color: var(--accent-sun);
+}
+
+.cancel:hover,
+.delete:hover {
+  transform: translateY(-1px);
+}
+
+@media (max-width: 860px) {
+  .confirm {
+    width: min(240px, calc(100vw - 32px));
+  }
+}

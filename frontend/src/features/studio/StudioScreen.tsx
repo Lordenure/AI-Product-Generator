@@ -1,24 +1,26 @@
 "use client";
 
-import { startTransition, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { getCopy } from "@/content/copy";
 import type { Locale } from "@/lib/i18n";
 
 import { StudioAppShell } from "./StudioAppShell";
+import { useStudioState } from "./StudioStateProvider";
 import styles from "./StudioScreen.module.css";
 
 type StudioScreenProps = {
   locale: Locale;
 };
 
-type StudioStatus = "idle" | "loading" | "ready";
+type StudioStatus = "idle" | "loading" | "ready" | "name-error" | "limit-error";
 
 export function StudioScreen({ locale }: StudioScreenProps) {
   const copy = getCopy(locale);
-  const [productName, setProductName] = useState(copy.studio.productNamePlaceholder);
-  const [description, setDescription] = useState(copy.studio.descriptionPlaceholder);
-  const [benefits, setBenefits] = useState(copy.studio.benefitsPlaceholder);
+  const { createPack, isStorageFull } = useStudioState(locale);
+  const [productName, setProductName] = useState("");
+  const [description, setDescription] = useState("");
+  const [benefits, setBenefits] = useState("");
   const [language, setLanguage] = useState(copy.studio.languages[0]?.id ?? "en");
   const [platform, setPlatform] = useState(copy.studio.platforms[0]?.id ?? "site");
   const [status, setStatus] = useState<StudioStatus>("idle");
@@ -28,6 +30,10 @@ export function StudioScreen({ locale }: StudioScreenProps) {
       ? copy.studio.createLoadingNote
       : status === "ready"
         ? copy.studio.createReadyNote
+        : status === "name-error"
+          ? copy.studio.createNameError
+          : status === "limit-error"
+            ? copy.studio.createLimitError
         : copy.studio.createHint;
 
   useEffect(() => {
@@ -37,6 +43,12 @@ export function StudioScreen({ locale }: StudioScreenProps) {
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (!isStorageFull && status === "limit-error") {
+      setStatus("idle");
+    }
+  }, [isStorageFull, status]);
 
   function resetReadyState() {
     if (timeoutRef.current) {
@@ -52,11 +64,32 @@ export function StudioScreen({ locale }: StudioScreenProps) {
       window.clearTimeout(timeoutRef.current);
     }
 
+    if (!productName.trim()) {
+      setStatus("name-error");
+      return;
+    }
+
+    if (isStorageFull) {
+      setStatus("limit-error");
+      return;
+    }
+
     setStatus("loading");
     timeoutRef.current = window.setTimeout(() => {
-      startTransition(() => {
-        setStatus("ready");
+      const result = createPack({
+        productName,
+        description,
+        benefits,
+        languageId: language,
+        platformId: platform
       });
+
+      if (!result.ok) {
+        setStatus(result.reason === "missing_name" ? "name-error" : "limit-error");
+        return;
+      }
+
+      setStatus("ready");
     }, 900);
   }
 
@@ -78,7 +111,7 @@ export function StudioScreen({ locale }: StudioScreenProps) {
               id="product-name"
               name="productName"
               type="text"
-              //value={productName}
+              value={productName}
               onChange={(event) => {
                 resetReadyState();
                 setProductName(event.target.value);
@@ -96,7 +129,7 @@ export function StudioScreen({ locale }: StudioScreenProps) {
               <textarea
                 id="product-description"
                 name="description"
-                //value={description}
+                value={description}
                 onChange={(event) => {
                   resetReadyState();
                   setDescription(event.target.value);
@@ -116,7 +149,7 @@ export function StudioScreen({ locale }: StudioScreenProps) {
               <textarea
                 id="product-benefits"
                 name="benefits"
-                //value={benefits}
+                value={benefits}
                 onChange={(event) => {
                   resetReadyState();
                   setBenefits(event.target.value);
@@ -176,6 +209,7 @@ export function StudioScreen({ locale }: StudioScreenProps) {
           <div className={styles.actionArea}>
             <button
               type="button"
+              disabled={status === "loading"}
               className={`${styles.createButton} ${
                 status === "loading" ? styles.createButtonLoading : status === "ready" ? styles.createButtonReady : ""
               }`.trim()}
@@ -190,7 +224,13 @@ export function StudioScreen({ locale }: StudioScreenProps) {
 
             <p
               className={`${styles.createNote} ${
-                status === "loading" ? styles.createNoteLoading : status === "ready" ? styles.createNoteReady : ""
+                status === "loading"
+                  ? styles.createNoteLoading
+                  : status === "ready"
+                    ? styles.createNoteReady
+                    : status === "name-error" || status === "limit-error"
+                      ? styles.createNoteError
+                      : ""
               }`.trim()}
             >
               {statusNote}

@@ -14,9 +14,9 @@
 .trigger {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  min-width: 132px;
-  padding: 11px 14px;
+  gap: 8px;
+  min-width: 0;
+  padding: 10px 12px;
   border: 1px solid var(--line);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.05);
@@ -30,17 +30,14 @@
   display: none;
 }
 
-.current,
-.optionLabel {
+.current {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
 }
 
 .chevron {
-  width: 8px;
-  height: 8px;
-  margin-left: auto;
+  width: 7px;
+  height: 7px;
   border-right: 1.5px solid rgba(255, 255, 255, 0.72);
   border-bottom: 1.5px solid rgba(255, 255, 255, 0.72);
   transform: rotate(45deg) translateY(-1px);
@@ -50,10 +47,13 @@
   position: absolute;
   top: calc(100% + 12px);
   right: 0;
-  min-width: 180px;
-  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  min-width: 0;
+  padding: 8px;
   border: 1px solid var(--line);
-  border-radius: 20px;
+  border-radius: 18px;
   background: rgba(12, 18, 30, 0.94);
   box-shadow: var(--shadow-md);
   backdrop-filter: blur(18px);
@@ -61,11 +61,12 @@
 }
 
 .option {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 12px 14px;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
   border-radius: 14px;
   color: var(--text-muted);
   transition:
@@ -84,6 +85,9 @@
 }
 
 .activeDot {
+  position: absolute;
+  right: 7px;
+  bottom: 7px;
   width: 8px;
   height: 8px;
   border-radius: 999px;
@@ -93,12 +97,10 @@
 
 @media (max-width: 720px) {
   .trigger {
-    min-width: 0;
-    padding-inline: 12px;
+    padding-inline: 10px;
   }
 
   .menu {
     width: max-content;
-    min-width: 168px;
   }
 }
