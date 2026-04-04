@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { creditBalance, fullPackCost, getCopy } from "@/content/copy";
+import { getCopy } from "@/content/copy";
 import { SiteFrame } from "@/components/SiteFrame";
 import { getLocalizedPath, type Locale } from "@/lib/i18n";
 
@@ -13,7 +13,6 @@ type HomeScreenProps = {
 export function HomeScreen({ locale }: HomeScreenProps) {
   const copy = getCopy(locale);
   const studioHref = getLocalizedPath(locale, "/studio");
-  const packsLeft = Math.floor(creditBalance / fullPackCost);
   const isRussian = locale === "ru";
 
   return (
@@ -78,42 +77,38 @@ export function HomeScreen({ locale }: HomeScreenProps) {
           </div>
         </article>
 
-        <div className={styles.sideStack}>
-          <article className={styles.packCard}>
-            <span className={styles.sectionLabel}>{copy.home.includedTitle}</span>
-            <p className={styles.sectionText}>{copy.home.includedText}</p>
-            <ul className={styles.includedList}>
-              {copy.home.includedList.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </article>
+        <article className={styles.packCard}>
+          <span className={styles.sectionLabel}>{copy.home.includedTitle}</span>
+          <p className={styles.sectionText}>{copy.home.includedText}</p>
+          <ul className={styles.includedList}>
+            {copy.home.includedList.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </article>
+      </section>
 
-          <article className={styles.creditsCard}>
-            <div className={styles.creditsHeader}>
-              <h2 className={styles.creditsTitle}>{copy.home.creditsTitle}</h2>
-              <span className={styles.creditsBadge}>{copy.home.creditsBadge}</span>
-              <p className={styles.creditsMini}>{copy.home.creditsMini}</p>
-            </div>
+      <section className={`${styles.pricingSection} container`}>
+        <div className={styles.pricingIntro}>
+          <h2 className={styles.pricingTitle}>{copy.home.plansTitle}</h2>
+          <p className={styles.pricingText}>{copy.home.plansText}</p>
+        </div>
 
-            <div className={styles.creditsNumbers}>
-              <div>
-                <span>{copy.home.creditsLeftLabel}</span>
-                <strong>{creditBalance}</strong>
+        <div className={styles.pricingGrid}>
+          {copy.home.plans.map((plan) => (
+            <article key={plan.name} className={styles.plan}>
+              <div className={styles.planTop}>
+                <div className={styles.planNameWrap}>
+                  <h3 className={styles.planName}>{plan.name}</h3>
+                  <p className={styles.planAudience}>{plan.audience}</p>
+                </div>
+                <span className={styles.planPrice}>{plan.price}</span>
               </div>
-              <div>
-                <span>{copy.home.packsLeftLabel}</span>
-                <strong>{packsLeft}</strong>
-              </div>
-            </div>
 
-            <div className={styles.creditsBar}>
-              <span style={{ width: `${(packsLeft / 10) * 100}%` }} />
-            </div>
-
-            <p className={styles.creditsText}>{copy.home.creditsText}</p>
-            <p className={styles.creditsMeta}>{copy.home.creditsMeta}</p>
-          </article>
+              <p className={styles.planCredits}>{plan.credits}</p>
+              <p className={styles.planNote}>{plan.note}</p>
+            </article>
+          ))}
         </div>
       </section>
     </SiteFrame>

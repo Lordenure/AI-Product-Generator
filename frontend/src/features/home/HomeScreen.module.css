@@ -93,7 +93,7 @@
 .visualCard,
 .flowCard,
 .packCard,
-.creditsCard {
+.pricingSection {
   position: relative;
   overflow: hidden;
   border: 1px solid var(--line);
@@ -237,14 +237,14 @@
 
 .contentGrid {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
   gap: 22px;
   align-items: start;
 }
 
 .flowCard,
 .packCard,
-.creditsCard {
+.pricingSection {
   padding: 30px;
 }
 
@@ -317,11 +317,6 @@
   line-height: 1.62;
 }
 
-.sideStack {
-  display: grid;
-  gap: 22px;
-}
-
 .includedList {
   display: flex;
   flex-wrap: wrap;
@@ -341,112 +336,119 @@
   font-size: 0.92rem;
 }
 
-.creditsCard {
+.pricingSection {
+  display: grid;
+  gap: 20px;
+  margin-top: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
   background:
-    radial-gradient(circle at 80% 18%, rgba(255, 171, 122, 0.18), transparent 32%),
-    radial-gradient(circle at 18% 18%, rgba(135, 230, 214, 0.16), transparent 28%),
-    radial-gradient(circle at 55% 78%, rgba(145, 183, 255, 0.14), transparent 34%),
+    radial-gradient(circle at 82% 18%, rgba(255, 171, 122, 0.18), transparent 32%),
+    radial-gradient(circle at 18% 16%, rgba(135, 230, 214, 0.14), transparent 28%),
+    radial-gradient(circle at 56% 80%, rgba(145, 183, 255, 0.12), transparent 34%),
     rgba(13, 20, 33, 0.8);
+  box-shadow: var(--shadow-lg);
 }
 
-.creditsHeader {
+.pricingIntro {
   display: grid;
   gap: 10px;
+  max-width: 38rem;
 }
 
-.creditsTitle {
+.pricingTitle {
   margin: 0;
   font-size: 1.06rem;
   font-weight: 700;
   letter-spacing: -0.01em;
 }
 
-.creditsBadge {
-  display: inline-flex;
-  align-items: center;
-  width: fit-content;
-  min-height: 36px;
-  padding: 0 13px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.09);
-  color: var(--text);
-  font-size: 0.88rem;
-}
-
-.creditsMini,
-.creditsText,
-.creditsMeta {
+.pricingText,
+.planAudience,
+.planCredits,
+.planNote {
   margin: 0;
 }
 
-.creditsMini {
-  color: var(--text-soft);
+.pricingText,
+.planAudience,
+.planCredits,
+.planNote {
+  color: var(--text-muted);
+  line-height: 1.6;
 }
 
-.creditsNumbers {
+.pricingGrid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-  margin-top: 26px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
 }
 
-.creditsNumbers div {
+.plan {
   display: grid;
-  gap: 6px;
-  padding: 14px 16px;
+  gap: 10px;
+  padding: 18px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 22px;
-  background: rgba(255, 255, 255, 0.04);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.025)),
+    rgba(255, 255, 255, 0.02);
 }
 
-.creditsNumbers span {
+.planTop {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.planNameWrap {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.planName {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.planAudience {
   color: var(--text-soft);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
 }
 
-.creditsNumbers strong {
-  font-family: var(--font-display);
-  font-size: clamp(2.1rem, 5vw, 3.1rem);
-  line-height: 1;
-  letter-spacing: -0.05em;
-}
-
-.creditsNumbers div:first-child strong {
-  font-size: clamp(2.5rem, 6vw, 3.7rem);
-}
-
-.creditsBar {
-  margin-top: 20px;
-  width: 100%;
-  height: 14px;
-  padding: 2px;
+.planPrice {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 11px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.08);
-}
-
-.creditsBar span {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, var(--accent-mint), var(--accent-sky), var(--accent-sun));
-  box-shadow: 0 0 20px rgba(145, 183, 255, 0.22);
-}
-
-.creditsText {
-  margin-top: 18px;
-  color: var(--text-muted);
-  line-height: 1.62;
-}
-
-.creditsMeta {
-  margin-top: 10px;
   color: var(--text);
-  font-size: 0.95rem;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.planCredits {
+  color: var(--text);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.planNote {
+  font-size: 0.9rem;
 }
 
 @media (max-width: 1120px) {
   .hero,
   .contentGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .pricingGrid {
     grid-template-columns: 1fr;
   }
 
@@ -463,7 +465,7 @@
   .visualCard,
   .flowCard,
   .packCard,
-  .creditsCard {
+  .pricingSection {
     padding: 22px;
     border-radius: 26px;
   }
@@ -498,9 +500,5 @@
   .visualBeam::after {
     top: auto;
     bottom: 14px;
-  }
-
-  .creditsNumbers {
-    grid-template-columns: 1fr 1fr;
   }
 }

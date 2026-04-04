@@ -2,7 +2,7 @@ export const locales = ["en", "ru"] as const;
 
 export type Locale = (typeof locales)[number];
 
-export function getLocalizedPath(locale: Locale, path: "/" | "/studio"): string {
+export function getLocalizedPath(locale: Locale, path: string): string {
   if (locale === "ru") {
     return path === "/" ? "/ru" : `/ru${path}`;
   }
@@ -35,4 +35,3 @@ function normalizeEnglishPath(pathname: string): string {
 
   return pathname;
 }
-

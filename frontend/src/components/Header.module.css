@@ -20,6 +20,10 @@
   backdrop-filter: blur(18px);
 }
 
+.shellApp {
+  gap: 16px;
+}
+
 .actions {
   display: flex;
   align-items: center;
@@ -50,6 +54,48 @@
   transform: translateY(-1px);
 }
 
+.creditPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 46px;
+  padding: 0 14px 0 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 12% 30%, rgba(135, 230, 214, 0.1), transparent 28%),
+    rgba(255, 255, 255, 0.05);
+}
+
+.creditIcon {
+  width: 28px;
+  height: 28px;
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.24), transparent 34%),
+    linear-gradient(135deg, var(--accent-mint), var(--accent-sky) 55%, var(--accent-sun));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24);
+}
+
+.creditText {
+  display: grid;
+  gap: 3px;
+  line-height: 1.12;
+  min-width: 0;
+}
+
+.creditText strong {
+  font-size: 0.93rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.creditText span {
+  color: var(--text-soft);
+  font-size: 0.8rem;
+  text-wrap: pretty;
+}
+
 @media (max-width: 720px) {
   .shell {
     align-items: flex-start;
@@ -60,9 +106,19 @@
   .actions {
     width: 100%;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
 
   .link {
     flex: 1;
+  }
+
+  .creditPill {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .creditText span {
+    white-space: normal;
   }
 }

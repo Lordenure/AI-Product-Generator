@@ -16,6 +16,14 @@ type CommonCopy = {
   footerNote: string;
 };
 
+type HomePlanCopy = {
+  name: string;
+  price: string;
+  audience: string;
+  credits: string;
+  note: string;
+};
+
 type HomeCopy = {
   badge: string;
   title: string;
@@ -33,41 +41,47 @@ type HomeCopy = {
   includedTitle: string;
   includedText: string;
   includedList: string[];
-  creditsTitle: string;
-  creditsLeftLabel: string;
-  packsLeftLabel: string;
-  creditsText: string;
-  creditsBadge: string;
-  creditsMeta: string;
-  creditsMini: string;
+  plansTitle: string;
+  plansText: string;
+  plans: HomePlanCopy[];
 };
 
 type StudioCopy = {
-  badge: string;
-  title: string;
-  subtitle: string;
-  inputLabel: string;
-  inputPlaceholder: string;
+  sidebarHomeLabel: string;
+  sidebarCreateLabel: string;
+  sidebarPacksLabel: string;
+  sidebarUpgradeLabel: string;
+  sidebarProfileRole: string;
+  sidebarProfileName: string;
+  sidebarLanguageLabel: string;
+  createEyebrow: string;
+  createTitle: string;
+  createText: string;
+  productNameLabel: string;
+  productNamePlaceholder: string;
+  descriptionLabel: string;
+  descriptionPlaceholder: string;
+  benefitsLabel: string;
+  benefitsPlaceholder: string;
+  benefitsHint: string;
   targetLanguageLabel: string;
   platformLabel: string;
-  helperNote: string;
   createButton: string;
   createLoading: string;
   createReady: string;
   createHint: string;
   createLoadingNote: string;
   createReadyNote: string;
-  packListTitle: string;
-  packList: string[];
+  packsTitle: string;
+  packsText: string;
+  openPack: string;
+  detailBack: string;
+  detailLabel: string;
+  detailText: string;
   creditsTitle: string;
   creditsLeftLabel: string;
   packsLeftLabel: string;
-  fullPackCostLabel: string;
   fullPackCostValue: string;
-  creditCompactNote: string;
-  creditMini: string;
-  creditMeta: string;
-  creditNote: string;
   languages: StudioOption[];
   platforms: StudioOption[];
 };
@@ -117,7 +131,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         "Banner ideas"
       ],
       flowTitle: "Just three easy steps",
-      flowText: "Drop in the product, pick the target, and let the full pack arrive all at once.",
+      flowText: "Add the product, pick the target, and get the full pack.",
       flowSteps: [
         {
           title: "Add the product",
@@ -133,7 +147,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         }
       ],
       includedTitle: "Inside the pack",
-      includedText: "The useful pieces you usually need anyway, already laid out for you.",
+      includedText: "The pieces you usually need, ready together.",
       includedList: [
         "Product title",
         "Short benefits",
@@ -146,41 +160,68 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         "Ad texts",
         "Banner ideas"
       ],
-      creditsTitle: "One click. One full pack.",
-      creditsLeftLabel: "Credits left",
-      packsLeftLabel: "Packs left",
-      creditsText: "12 credits gives you the whole pack in one go.",
-      creditsBadge: "12 credits",
-      creditsMeta: "84 credits are waiting right now.",
-      creditsMini: "No tiny extra charges."
+      plansTitle: "Plans",
+      plansText: "Start free, then move up when you want more packs ready to go.",
+      plans: [
+        {
+          name: "Free",
+          price: "$0",
+          audience: "For a first try",
+          credits: "24 credits / 2 packs",
+          note: "A simple start with a small library."
+        },
+        {
+          name: "Plus",
+          price: "$24/mo",
+          audience: "For regular launches",
+          credits: "180 credits / 15 packs",
+          note: "More languages and more saved packs."
+        },
+        {
+          name: "Pro",
+          price: "$59/mo",
+          audience: "For daily use",
+          credits: "480 credits / 40 packs",
+          note: "Priority speed and the full library kept ready."
+        }
+      ]
     },
     studio: {
-      badge: "Easy little studio",
-      title: "Drop in one product and make the full pack.",
-      subtitle: "No heavy setup. Add the product and hit create.",
-      inputLabel: "Your product",
-      inputPlaceholder:
-        "Luma Pet Brush\nGentle silicone brush for cats and dogs.\nHelps lift loose fur and is easy to wash.",
+      sidebarHomeLabel: "Home",
+      sidebarCreateLabel: "Create",
+      sidebarPacksLabel: "Packs",
+      sidebarUpgradeLabel: "Upgrade",
+      sidebarProfileRole: "Creator",
+      sidebarProfileName: "Lordenure",
+      sidebarLanguageLabel: "Language",
+      createEyebrow: "Create",
+      createTitle: "New full pack",
+      createText: "Add a product and click once.",
+      productNameLabel: "Product name",
+      productNamePlaceholder: "Example: GlowCup",
+      descriptionLabel: "Short description",
+      descriptionPlaceholder: "Example: Insulated bottle with a tea infuser and a leak-safe lid.",
+      benefitsLabel: "Key benefits",
+      benefitsPlaceholder: "Example: Keeps tea hot, easy to carry, easy to clean",
+      benefitsHint: "Optional",
       targetLanguageLabel: "Language",
-      platformLabel: "Where will it live?",
-      helperNote: "The full pack lands together: title, description, replies, FAQ, ads, and more.",
-      createButton: "Make full pack",
-      createLoading: "Making pack...",
+      platformLabel: "Use on",
+      createButton: "Create full pack",
+      createLoading: "Creating pack...",
       createReady: "Pack ready",
-      createHint: "One click and the whole set comes together.",
-      createLoadingNote: "Lining up the whole pack for you.",
-      createReadyNote: "Nice. The full pack is ready to shape and use.",
-      packListTitle: "Inside the pack",
-      packList: ["Title", "Benefits", "Description", "SEO", "Translations", "Shop versions", "Replies", "FAQ", "Ads", "Banner ideas"],
+      createHint: "One click for the full pack.",
+      createLoadingNote: "Making the full pack.",
+      createReadyNote: "Pack ready to open.",
+      packsTitle: "Latest packs",
+      packsText: "Open any pack.",
+      openPack: "Open pack",
+      detailBack: "Back to studio",
+      detailLabel: "Full pack",
+      detailText: "Everything for this product is ready here.",
       creditsTitle: "Credits",
-      creditsLeftLabel: "Credits",
-      packsLeftLabel: "Full packs",
-      fullPackCostLabel: "Per pack",
-      fullPackCostValue: "12 credits",
-      creditCompactNote: "Ready to spend on the next pack.",
-      creditMini: "One launch gives you the whole set.",
-      creditMeta: "Enough for {packs} full packs.",
-      creditNote: "No tiny add-ons or separate little charges.",
+      creditsLeftLabel: "credits",
+      packsLeftLabel: "packs left",
+      fullPackCostValue: "12 per pack",
       languages: [
         { id: "en", label: "English" },
         { id: "ru", label: "Russian" },
@@ -231,7 +272,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         "Идеи для баннеров"
       ],
       flowTitle: "Всего три шага",
-      flowText: "Добавьте товар, выберите цель и получите весь пак сразу.",
+      flowText: "Добавьте товар, выберите цель и получите весь пак.",
       flowSteps: [
         {
           title: "Добавьте товар",
@@ -247,7 +288,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         }
       ],
       includedTitle: "Что внутри",
-      includedText: "Полезные части, которые обычно всё равно нужны, уже лежат рядом.",
+      includedText: "Все нужные части уже собраны рядом.",
       includedList: [
         "Заголовок товара",
         "Короткие преимущества",
@@ -260,52 +301,68 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         "Рекламные тексты",
         "Идеи для баннеров"
       ],
-      creditsTitle: "Один клик. Один полный пак.",
-      creditsLeftLabel: "Кредитов осталось",
-      packsLeftLabel: "Полных паков",
-      creditsText: "12 кредитов и весь набор уже у вас.",
-      creditsBadge: "12 кредитов",
-      creditsMeta: "84 кредита уже ждут.",
-      creditsMini: "Без мелких списаний."
+      plansTitle: "Тарифы",
+      plansText: "Можно начать бесплатно, а потом взять больше паков, когда они нужны чаще.",
+      plans: [
+        {
+          name: "Free",
+          price: "$0",
+          audience: "Для первого знакомства",
+          credits: "24 кредита / 2 пака",
+          note: "Простой старт и маленькая библиотека."
+        },
+        {
+          name: "Plus",
+          price: "$24 / мес",
+          audience: "Для регулярных запусков",
+          credits: "180 кредитов / 15 паков",
+          note: "Больше языков и больше сохранённых паков."
+        },
+        {
+          name: "Pro",
+          price: "$59 / мес",
+          audience: "Для ежедневной работы",
+          credits: "480 кредитов / 40 паков",
+          note: "Приоритетная скорость и вся библиотека под рукой."
+        }
+      ]
     },
     studio: {
-      badge: "Тихая студия для старта",
-      title: "Добавьте товар и соберите полный пак.",
-      subtitle: "Без тяжёлой настройки. Просто вставьте товар и нажмите создать.",
-      inputLabel: "Ваш товар",
-      inputPlaceholder:
-        "Luma Pet Brush\nМягкая силиконовая щётка для кошек и собак.\nПомогает убрать лишнюю шерсть и легко моется.",
+      sidebarHomeLabel: "Главная",
+      sidebarCreateLabel: "Создать",
+      sidebarPacksLabel: "Паки",
+      sidebarUpgradeLabel: "Улучшить",
+      sidebarProfileRole: "Создатель",
+      sidebarProfileName: "Lordenure",
+      sidebarLanguageLabel: "Язык",
+      createEyebrow: "Создать",
+      createTitle: "Новый полный пак",
+      createText: "Добавьте товар и нажмите один раз.",
+      productNameLabel: "Название товара",
+      productNamePlaceholder: "Пример: GlowCup",
+      descriptionLabel: "Короткое описание",
+      descriptionPlaceholder: "Пример: Термобутылка с заварником для чая и крышкой без протекания.",
+      benefitsLabel: "Ключевые преимущества",
+      benefitsPlaceholder: "Пример: Держит тепло, удобно брать с собой, легко мыть",
+      benefitsHint: "Необязательно",
       targetLanguageLabel: "Язык",
-      platformLabel: "Где он будет жить?",
-      helperNote: "Полный пак приходит сразу: заголовок, описание, ответы, FAQ, объявления и ещё немного полезного.",
+      platformLabel: "Где использовать",
       createButton: "Собрать полный пак",
       createLoading: "Собираем пак...",
       createReady: "Пак готов",
-      createHint: "Один клик, и всё собирается вместе.",
-      createLoadingNote: "Собираем весь пак для вас.",
-      createReadyNote: "Готово. Пак уже приятно брать и использовать.",
-      packListTitle: "Что внутри",
-      packList: [
-        "Заголовок",
-        "Преимущества",
-        "Описание",
-        "SEO",
-        "Переводы",
-        "Версии для площадок",
-        "Ответы",
-        "FAQ",
-        "Объявления",
-        "Баннеры"
-      ],
+      createHint: "Один клик на весь пак.",
+      createLoadingNote: "Собираем полный пак.",
+      createReadyNote: "Пак можно открыть.",
+      packsTitle: "Последние паки",
+      packsText: "Откройте любой пак.",
+      openPack: "Открыть пак",
+      detailBack: "Назад в студию",
+      detailLabel: "Полный пак",
+      detailText: "Все материалы по этому товару уже собраны здесь.",
       creditsTitle: "Кредиты",
-      creditsLeftLabel: "Кредитов",
-      packsLeftLabel: "Полных паков",
-      fullPackCostLabel: "За один пак",
-      fullPackCostValue: "12 кредитов",
-      creditCompactNote: "Готово к следующему полному паку.",
-      creditMini: "Один запуск даёт весь набор сразу.",
-      creditMeta: "Хватит на {packs} полных паков.",
-      creditNote: "Без мелких доплат и дробных списаний.",
+      creditsLeftLabel: "кредитов",
+      packsLeftLabel: "паков осталось",
+      fullPackCostValue: "12 за пак",
       languages: [
         { id: "en", label: "Английский" },
         { id: "ru", label: "Русский" },

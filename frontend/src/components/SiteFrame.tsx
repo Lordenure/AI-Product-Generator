@@ -16,9 +16,9 @@ export function SiteFrame({ locale, page, children }: SiteFrameProps) {
   return (
     <div className={styles.frame} data-locale={locale} data-page={page} lang={locale}>
       <div className={styles.glow} aria-hidden="true" />
-      <Header locale={locale} page={page} />
+      {page === "home" ? <Header locale={locale} page={page} /> : null}
       <main className={styles.main}>{children}</main>
-      <Footer locale={locale} />
+      {page === "home" ? <Footer locale={locale} /> : null}
     </div>
   );
 }

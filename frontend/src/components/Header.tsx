@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { getCopy } from "@/content/copy";
+import { creditBalance, fullPackCost, getCopy } from "@/content/copy";
 import { getLocalizedPath, type Locale } from "@/lib/i18n";
 
 import { Brand } from "./Brand";
@@ -14,18 +14,32 @@ type HeaderProps = {
 
 export function Header({ locale, page }: HeaderProps) {
   const copy = getCopy(locale);
-  const actionHref = page === "home" ? getLocalizedPath(locale, "/studio") : getLocalizedPath(locale, "/");
-  const actionLabel = page === "home" ? copy.common.openStudio : copy.common.backHome;
+  const packsLeft = Math.floor(creditBalance / fullPackCost);
+  const actionHref = getLocalizedPath(locale, "/studio");
+  const actionLabel = copy.common.openStudio;
+  const brandHref = page === "studio" ? getLocalizedPath(locale, "/studio") : getLocalizedPath(locale, "/");
 
   return (
     <header className={styles.header}>
       <div className="container">
-        <div className={styles.shell}>
-          <Brand locale={locale} />
+        <div className={`${styles.shell} ${page === "studio" ? styles.shellApp : ""}`.trim()}>
+          <Brand locale={locale} href={brandHref} />
           <div className={styles.actions}>
-            <Link href={actionHref} className={styles.link}>
-              {actionLabel}
-            </Link>
+            {page === "home" ? (
+              <Link href={actionHref} className={styles.link}>
+                {actionLabel}
+              </Link>
+            ) : (
+              <div className={styles.creditPill} aria-label={copy.studio.creditsTitle}>
+                <span className={styles.creditIcon} aria-hidden="true" />
+                <span className={styles.creditText}>
+                  <strong>{creditBalance} {copy.studio.creditsLeftLabel}</strong>
+                  <span>
+                    {packsLeft} {copy.studio.packsLeftLabel} • {copy.studio.fullPackCostValue}
+                  </span>
+                </span>
+              </div>
+            )}
             <LanguageSwitcher currentLocale={locale} />
           </div>
         </div>
@@ -33,4 +47,3 @@ export function Header({ locale, page }: HeaderProps) {
     </header>
   );
 }
-

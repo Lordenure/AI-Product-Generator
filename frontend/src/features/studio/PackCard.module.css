@@ -1,0 +1,218 @@
+.card {
+  display: grid;
+  gap: 10px;
+  padding: 13px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+    rgba(255, 255, 255, 0.02);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.14);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03)),
+    rgba(255, 255, 255, 0.03);
+  box-shadow: 0 16px 32px rgba(1, 6, 17, 0.2);
+}
+
+.cardActive {
+  border-color: rgba(145, 183, 255, 0.32);
+  box-shadow:
+    inset 0 0 0 1px rgba(145, 183, 255, 0.14),
+    0 18px 38px rgba(1, 6, 17, 0.22);
+}
+
+.head {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+
+.thumb {
+  position: relative;
+  display: grid;
+  place-items: end start;
+  aspect-ratio: 1;
+  width: 52px;
+  padding: 8px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.thumb::before,
+.thumb::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  opacity: 0.9;
+}
+
+.thumb::before {
+  top: 10px;
+  right: 10px;
+  width: 26px;
+  height: 26px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.thumb::after {
+  left: -10px;
+  bottom: -12px;
+  width: 54px;
+  height: 38px;
+  background: rgba(9, 16, 28, 0.18);
+}
+
+.thumb span {
+  position: relative;
+  z-index: 1;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: rgba(8, 12, 22, 0.78);
+}
+
+.thumbsun {
+  background: linear-gradient(160deg, rgba(255, 234, 176, 0.98), rgba(255, 171, 122, 0.94) 55%, rgba(145, 183, 255, 0.92));
+}
+
+.thumbmint {
+  background: linear-gradient(160deg, rgba(187, 255, 240, 0.96), rgba(135, 230, 214, 0.94) 55%, rgba(145, 183, 255, 0.92));
+}
+
+.thumbsky {
+  background: linear-gradient(160deg, rgba(198, 218, 255, 0.98), rgba(145, 183, 255, 0.94) 52%, rgba(255, 171, 122, 0.9));
+}
+
+.thumbrose {
+  background: linear-gradient(160deg, rgba(255, 220, 235, 0.98), rgba(255, 157, 198, 0.92) 54%, rgba(135, 230, 214, 0.88));
+}
+
+.copy,
+.titleRow,
+.footer {
+  display: grid;
+}
+
+.copy {
+  gap: 5px;
+  min-width: 0;
+}
+
+.titleRow {
+  gap: 6px;
+}
+
+.title,
+.summary {
+  margin: 0;
+}
+
+.title {
+  font-size: 0.94rem;
+  line-height: 1.22;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.summary {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.42;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 24px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.statusready {
+  background: rgba(135, 230, 214, 0.14);
+  color: var(--accent-mint);
+}
+
+.statusupdated {
+  background: rgba(145, 183, 255, 0.14);
+  color: var(--accent-sky);
+}
+
+.statusdraft {
+  background: rgba(255, 171, 122, 0.14);
+  color: var(--accent-sun);
+}
+
+.meta,
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.meta span,
+.tag {
+  max-width: 100%;
+  padding: 6px 9px;
+  border-radius: 999px;
+  font-size: 0.76rem;
+}
+
+.meta span {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-soft);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.tag {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--text-muted);
+}
+
+.action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.arrow {
+  width: 8px;
+  height: 8px;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  transform: rotate(45deg);
+}
