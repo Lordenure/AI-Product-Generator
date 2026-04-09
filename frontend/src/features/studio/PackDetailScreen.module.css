@@ -1,10 +1,10 @@
 .panel {
   display: grid;
-  gap: 18px;
+  gap: 16px;
   min-height: 0;
   height: 100%;
   overflow: auto;
-  padding: 22px;
+  padding: 20px;
   border: 1px solid var(--line);
   border-radius: var(--radius-xl);
   background:
@@ -18,21 +18,20 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 .topActions {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
 .backLink,
 .utilityButton,
 .copyButton,
-.galleryButton,
 .galleryThumb,
 .secondaryToggle {
   appearance: none;
@@ -49,19 +48,18 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 38px;
-  padding: 0 14px;
+  min-height: 36px;
+  padding: 0 13px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.04);
   color: var(--text);
-  font-size: 0.9rem;
+  font-size: 0.86rem;
 }
 
 .backLink:hover,
 .utilityButton:hover,
-.copyButton:hover,
-.galleryButton:hover {
+.copyButton:hover {
   border-color: rgba(255, 255, 255, 0.14);
   background: rgba(255, 255, 255, 0.08);
   transform: translateY(-1px);
@@ -86,8 +84,8 @@
 
 .resultHero {
   display: grid;
-  gap: 12px;
-  padding: 20px;
+  gap: 10px;
+  padding: 18px;
   overflow: visible;
   background:
     radial-gradient(circle at 86% 18%, rgba(255, 171, 122, 0.15), transparent 24%),
@@ -103,8 +101,8 @@
 
 .heroContent {
   display: grid;
-  gap: 6px;
-  max-width: 44rem;
+  gap: 5px;
+  max-width: 42rem;
 }
 
 .heroGallery {
@@ -134,7 +132,7 @@
 .title {
   max-width: min(100%, 14ch);
   font-family: var(--font-display);
-  font-size: clamp(1.85rem, 3vw, 2.6rem);
+  font-size: clamp(1.72rem, 2.7vw, 2.38rem);
   line-height: 0.98;
   letter-spacing: -0.05em;
   text-wrap: balance;
@@ -143,8 +141,8 @@
 
 .summary {
   color: var(--text);
-  font-size: 0.98rem;
-  line-height: 1.55;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .text,
@@ -157,7 +155,7 @@
 }
 
 .text {
-  max-width: 32rem;
+  max-width: 31rem;
 }
 
 .meta {
@@ -166,8 +164,7 @@
   gap: 10px;
 }
 
-.meta span,
-.galleryCounter {
+.meta span {
   max-width: 100%;
   padding: 9px 11px;
   border-radius: 999px;
@@ -180,11 +177,11 @@
 .primaryGroup,
 .secondaryGroup {
   display: grid;
-  gap: 16px;
+  gap: 14px;
 }
 
 .gallerySection {
-  padding: 16px;
+  padding: 14px;
   background:
     radial-gradient(circle at 88% 18%, rgba(255, 171, 122, 0.14), transparent 24%),
     radial-gradient(circle at 12% 22%, rgba(145, 183, 255, 0.14), transparent 26%),
@@ -199,18 +196,11 @@
 .sectionHeader {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
+  justify-content: flex-start;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
-.galleryControls {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.galleryButton,
 .copyButton {
   display: inline-flex;
   align-items: center;
@@ -225,77 +215,46 @@
   font-weight: 700;
 }
 
-.galleryButton {
-  width: 32px;
-  padding: 0;
-}
-
 .galleryShell {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 126px;
-  gap: 12px;
+  grid-template-columns: minmax(0, 1fr) 116px;
+  gap: 10px;
   align-items: stretch;
 }
 
-.galleryMain {
-  display: grid;
-  gap: 10px;
-}
-
-.galleryMainTop,
-.galleryMeta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.galleryBadge,
 .galleryBadgeMuted,
-.galleryCaptionChip {
+.galleryCounter {
   display: inline-flex;
   align-items: center;
-  min-height: 30px;
-  padding: 0 11px;
+  min-height: 28px;
+  padding: 0 10px;
   border-radius: 999px;
-  font-size: 0.78rem;
+  font-size: 0.76rem;
 }
 
-.galleryBadge,
-.galleryCaptionChip {
+.galleryCounter {
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.05);
   color: var(--text);
 }
 
 .galleryBadgeMuted {
-  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.035);
   color: var(--text-soft);
-}
-
-.galleryArrow {
-  width: 8px;
-  height: 8px;
-  border-top: 1.5px solid currentColor;
-  border-right: 1.5px solid currentColor;
-  transform: rotate(45deg);
-}
-
-.galleryArrowLeft {
-  transform: rotate(-135deg);
 }
 
 .galleryFrame {
   position: relative;
   display: grid;
-  place-items: center;
-  min-height: 260px;
-  height: clamp(260px, 25vw, 320px);
-  max-height: 320px;
-  padding: 16px;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 10px;
+  min-height: 240px;
+  height: clamp(240px, 23vw, 286px);
+  max-height: 286px;
+  padding: 12px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 24px;
+  border-radius: 22px;
   background:
     radial-gradient(circle at top left, rgba(145, 183, 255, 0.14), transparent 24%),
     radial-gradient(circle at 82% 18%, rgba(255, 171, 122, 0.16), transparent 24%),
@@ -307,12 +266,31 @@
   content: "";
   position: absolute;
   inset: 12px;
-  border-radius: 20px;
+  border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.06);
   background:
     radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08), transparent 22%),
     rgba(255, 255, 255, 0.025);
   pointer-events: none;
+}
+
+.galleryFrameTop {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.galleryImageWrap {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  min-height: 0;
 }
 
 .galleryImage {
@@ -326,25 +304,22 @@
   filter: drop-shadow(0 26px 38px rgba(1, 6, 17, 0.3));
 }
 
-.galleryTitle {
-  color: var(--text);
-  font-size: 0.94rem;
-  line-height: 1.3;
-}
-
 .galleryThumbs {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 8px;
-  align-content: start;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
 }
 
 .galleryThumb {
+  flex: 1 1 0;
   display: grid;
-  gap: 6px;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 7px;
   min-width: 0;
-  padding: 7px;
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  min-height: 0;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.085);
   border-radius: 16px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02)),
@@ -375,15 +350,16 @@
 
 .galleryThumbImage {
   width: 100%;
-  height: 56px;
-  border-radius: 14px;
+  height: 100%;
+  min-height: 0;
+  border-radius: 12px;
   object-fit: cover;
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .galleryThumb span {
   min-width: 0;
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   line-height: 1.3;
 }
 
@@ -588,10 +564,54 @@
 @media (max-width: 920px) {
   .galleryShell {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .galleryThumbs {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    margin-bottom: -4px;
+    scrollbar-width: thin;
+  }
+
+  .galleryThumb {
+    flex: 0 0 118px;
+    min-height: 116px;
+  }
+
+  .galleryThumbImage {
+    height: 72px;
+  }
+}
+
+@media (max-width: 860px) {
+  .panel {
+    padding: 16px;
+    border-radius: 26px;
+  }
+
+  .title {
+    max-width: 100%;
+    font-size: clamp(1.68rem, 6.6vw, 2.1rem);
+  }
+
+  .resultHero {
+    padding: 16px;
+  }
+
+  .gallerySection {
+    padding: 13px;
+  }
+
+  .galleryFrame {
+    min-height: 220px;
+    height: clamp(220px, 58vw, 268px);
+    max-height: 268px;
+  }
+
+  .galleryThumbs {
+    gap: 8px;
   }
 
   .galleryThumbImage {
@@ -599,28 +619,36 @@
   }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 640px) {
   .panel {
-    padding: 18px;
-    border-radius: 26px;
+    gap: 14px;
   }
 
-  .title {
-    max-width: 100%;
-    font-size: clamp(1.8rem, 7vw, 2.35rem);
+  .topActions {
+    gap: 6px;
+  }
+
+  .gallerySection {
+    gap: 12px;
   }
 
   .galleryFrame {
-    min-height: 230px;
-    height: clamp(230px, 52vw, 290px);
-    max-height: 290px;
+    min-height: 204px;
+    height: clamp(204px, 64vw, 244px);
+    max-height: 244px;
   }
 
   .galleryThumbs {
-    grid-template-columns: 1fr;
+    margin-inline: -2px;
+    padding-inline: 2px;
+  }
+
+  .galleryThumb {
+    flex-basis: 108px;
+    min-height: 110px;
   }
 
   .galleryThumbImage {
-    height: 62px;
+    height: 64px;
   }
 }

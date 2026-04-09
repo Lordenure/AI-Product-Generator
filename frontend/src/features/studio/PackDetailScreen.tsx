@@ -92,16 +92,6 @@ export function PackDetailScreen({ locale, packId }: PackDetailScreenProps) {
     );
   }
 
-  function goToImage(direction: "prev" | "next") {
-    setActiveImage((current) => {
-      if (direction === "prev") {
-        return current === 0 ? galleryImages.length - 1 : current - 1;
-      }
-
-      return current === galleryImages.length - 1 ? 0 : current + 1;
-    });
-  }
-
   return (
     <StudioAppShell locale={locale} activeNav="packs" activePackId={pack.id}>
       <section className={styles.panel}>
@@ -145,61 +135,35 @@ export function PackDetailScreen({ locale, packId }: PackDetailScreenProps) {
           <section className={`${styles.gallerySection} ${styles.heroGallery}`.trim()}>
             <div className={styles.sectionHeader}>
               <span className={styles.sectionLabel}>{copy.studio.detailGalleryTitle}</span>
-
-              <div className={styles.galleryControls}>
-                <button
-                  type="button"
-                  className={styles.galleryButton}
-                  aria-label={copy.studio.galleryPreviousLabel}
-                  onClick={() => goToImage("prev")}
-                >
-                  <span className={`${styles.galleryArrow} ${styles.galleryArrowLeft}`.trim()} aria-hidden="true" />
-                </button>
-
-                <span className={styles.galleryCounter}>
-                  {activeImage + 1} / {galleryImages.length}
-                </span>
-
-                <button
-                  type="button"
-                  className={styles.galleryButton}
-                  aria-label={copy.studio.galleryNextLabel}
-                  onClick={() => goToImage("next")}
-                >
-                  <span className={styles.galleryArrow} aria-hidden="true" />
-                </button>
-              </div>
             </div>
 
             {activeGalleryImage ? (
               <div className={styles.galleryShell}>
-                <div className={styles.galleryMain}>
-                  <div className={styles.galleryMainTop}>
-                    <span className={styles.galleryBadge}>{copy.studio.detailLabel}</span>
+                <div className={styles.galleryFrame}>
+                  <div className={styles.galleryFrameTop}>
                     <span className={styles.galleryBadgeMuted}>{activeGalleryImage.label}</span>
+                    <span className={styles.galleryCounter}>
+                      {activeImage + 1} / {galleryImages.length}
+                    </span>
                   </div>
 
-                  <div className={styles.galleryFrame}>
+                  <div className={styles.galleryImageWrap}>
                     <img
                       src={activeGalleryImage.src}
                       alt={activeGalleryImage.alt}
                       className={styles.galleryImage}
                     />
                   </div>
-
-                  <div className={styles.galleryMeta}>
-                    <strong className={styles.galleryTitle}>{pack.productName}</strong>
-                    <span className={styles.galleryCaptionChip}>{pack.productName}</span>
-                  </div>
                 </div>
 
-                <div className={styles.galleryThumbs}>
+                <div className={styles.galleryThumbs} aria-label={copy.studio.detailGalleryTitle}>
                   {galleryImages.map((image, index) => (
                     <button
                       key={image.id}
                       type="button"
                       className={`${styles.galleryThumb} ${index === activeImage ? styles.galleryThumbActive : ""}`.trim()}
                       onClick={() => setActiveImage(index)}
+                      aria-pressed={index === activeImage}
                     >
                       <img src={image.src} alt="" className={styles.galleryThumbImage} aria-hidden="true" />
                       <span>{image.label}</span>
