@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { getCopy } from "@/content/copy";
-import type { PackRecord, PackSection } from "@/content/packs";
+import type { PackRecord } from "@/content/packs";
 import { getLocalizedPath, type Locale } from "@/lib/i18n";
 
 import { PackDeleteControl } from "./PackDeleteControl";
@@ -144,10 +144,7 @@ export function PackDetailScreen({ locale, packId }: PackDetailScreenProps) {
 
           <section className={`${styles.gallerySection} ${styles.heroGallery}`.trim()}>
             <div className={styles.sectionHeader}>
-              <div className={styles.sectionHeading}>
-                <span className={styles.sectionLabel}>{copy.studio.detailGalleryTitle}</span>
-                <p className={styles.sectionText}>{copy.studio.detailGalleryText}</p>
-              </div>
+              <span className={styles.sectionLabel}>{copy.studio.detailGalleryTitle}</span>
 
               <div className={styles.galleryControls}>
                 <button
@@ -175,9 +172,9 @@ export function PackDetailScreen({ locale, packId }: PackDetailScreenProps) {
             </div>
 
             {activeGalleryImage ? (
-              <>
-                <div className={styles.galleryStage}>
-                  <div className={styles.galleryStageTop}>
+              <div className={styles.galleryShell}>
+                <div className={styles.galleryMain}>
+                  <div className={styles.galleryMainTop}>
                     <span className={styles.galleryBadge}>{copy.studio.detailLabel}</span>
                     <span className={styles.galleryBadgeMuted}>{activeGalleryImage.label}</span>
                   </div>
@@ -190,11 +187,8 @@ export function PackDetailScreen({ locale, packId }: PackDetailScreenProps) {
                     />
                   </div>
 
-                  <div className={styles.galleryCaption}>
-                    <div className={styles.galleryCaptionCopy}>
-                      <strong>{activeGalleryImage.label}</strong>
-                      <p>{getGalleryCaption(locale, pack.productName, activeImage)}</p>
-                    </div>
+                  <div className={styles.galleryMeta}>
+                    <strong className={styles.galleryTitle}>{pack.productName}</strong>
                     <span className={styles.galleryCaptionChip}>{pack.productName}</span>
                   </div>
                 </div>
@@ -212,7 +206,7 @@ export function PackDetailScreen({ locale, packId }: PackDetailScreenProps) {
                     </button>
                   ))}
                 </div>
-              </>
+              </div>
             ) : null}
           </section>
 
@@ -336,26 +330,6 @@ function buildGalleryImages(locale: Locale, pack: PackRecord): GalleryImage[] {
       index
     })
   }));
-}
-
-function getGalleryCaption(locale: Locale, productName: string, index: number): string {
-  if (locale === "ru") {
-    const lines = [
-      `Главный визуал для ${productName}, который хорошо смотрится в основной карточке.`,
-      `Более живой кадр для баннеров, соцсетей и мягких промо-сцен.`,
-      `Детальный ракурс для акцента на форме, материале и важных деталях.`
-    ];
-
-    return lines[index] ?? lines[0];
-  }
-
-  const lines = [
-    `A clean hero visual for ${productName} that works well as the main listing image.`,
-    `A softer lifestyle scene for banners, social posts, and warmer product moments.`,
-    `A closer detail angle to highlight shape, finish, and the small useful touches.`
-  ];
-
-  return lines[index] ?? lines[0];
 }
 
 function buildPlaceholderImage({

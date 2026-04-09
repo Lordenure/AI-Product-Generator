@@ -1,10 +1,10 @@
 .panel {
   display: grid;
-  gap: 20px;
+  gap: 18px;
   min-height: 0;
   height: 100%;
   overflow: auto;
-  padding: 24px;
+  padding: 22px;
   border: 1px solid var(--line);
   border-radius: var(--radius-xl);
   background:
@@ -86,8 +86,8 @@
 
 .resultHero {
   display: grid;
-  gap: 16px;
-  padding: 24px;
+  gap: 12px;
+  padding: 20px;
   overflow: visible;
   background:
     radial-gradient(circle at 86% 18%, rgba(255, 171, 122, 0.15), transparent 24%),
@@ -98,17 +98,17 @@
 .heroIntro,
 .sectionHeading {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .heroContent {
   display: grid;
-  gap: 10px;
-  max-width: 48rem;
+  gap: 6px;
+  max-width: 44rem;
 }
 
 .heroGallery {
-  margin-top: 2px;
+  margin-top: 0;
 }
 
 .kicker,
@@ -134,7 +134,7 @@
 .title {
   max-width: min(100%, 14ch);
   font-family: var(--font-display);
-  font-size: clamp(2rem, 3.4vw, 2.9rem);
+  font-size: clamp(1.85rem, 3vw, 2.6rem);
   line-height: 0.98;
   letter-spacing: -0.05em;
   text-wrap: balance;
@@ -143,8 +143,8 @@
 
 .summary {
   color: var(--text);
-  font-size: 1.04rem;
-  line-height: 1.6;
+  font-size: 0.98rem;
+  line-height: 1.55;
 }
 
 .text,
@@ -157,7 +157,7 @@
 }
 
 .text {
-  max-width: 34rem;
+  max-width: 32rem;
 }
 
 .meta {
@@ -184,7 +184,7 @@
 }
 
 .gallerySection {
-  padding: 22px;
+  padding: 16px;
   background:
     radial-gradient(circle at 88% 18%, rgba(255, 171, 122, 0.14), transparent 24%),
     radial-gradient(circle at 12% 22%, rgba(145, 183, 255, 0.14), transparent 26%),
@@ -198,16 +198,16 @@
 
 .sectionHeader {
   display: flex;
-  align-items: start;
+  align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
 .galleryControls {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .galleryButton,
@@ -215,33 +215,39 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 34px;
-  padding: 0 12px;
+  min-height: 32px;
+  padding: 0 11px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.04);
   color: var(--text-muted);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 700;
 }
 
 .galleryButton {
-  width: 34px;
+  width: 32px;
   padding: 0;
 }
 
-.galleryStage {
+.galleryShell {
   display: grid;
-  grid-template-rows: auto minmax(340px, auto) auto;
-  gap: 14px;
+  grid-template-columns: minmax(0, 1fr) 126px;
+  gap: 12px;
+  align-items: stretch;
 }
 
-.galleryStageTop,
-.galleryCaption {
+.galleryMain {
+  display: grid;
+  gap: 10px;
+}
+
+.galleryMainTop,
+.galleryMeta {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
@@ -284,10 +290,10 @@
   position: relative;
   display: grid;
   place-items: center;
-  min-height: 340px;
-  height: clamp(340px, 36vw, 420px);
-  max-height: 420px;
-  padding: 20px;
+  min-height: 260px;
+  height: clamp(260px, 25vw, 320px);
+  max-height: 320px;
+  padding: 16px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 24px;
   background:
@@ -300,7 +306,7 @@
 .galleryFrame::before {
   content: "";
   position: absolute;
-  inset: 18px;
+  inset: 12px;
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.06);
   background:
@@ -320,37 +326,26 @@
   filter: drop-shadow(0 26px 38px rgba(1, 6, 17, 0.3));
 }
 
-.galleryCaptionCopy {
-  display: grid;
-  gap: 4px;
-}
-
-.galleryCaptionCopy strong {
-  font-size: 0.96rem;
+.galleryTitle {
+  color: var(--text);
+  font-size: 0.94rem;
   line-height: 1.3;
-}
-
-.galleryCaptionCopy p {
-  margin: 0;
-  max-width: 42rem;
-  color: var(--text-muted);
-  font-size: 0.92rem;
-  line-height: 1.62;
 }
 
 .galleryThumbs {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  align-content: start;
 }
 
 .galleryThumb {
   display: grid;
-  gap: 8px;
+  gap: 6px;
   min-width: 0;
-  padding: 10px;
+  padding: 7px;
   border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 18px;
+  border-radius: 16px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02)),
     rgba(8, 13, 24, 0.48);
@@ -380,7 +375,7 @@
 
 .galleryThumbImage {
   width: 100%;
-  aspect-ratio: 1.45;
+  height: 56px;
   border-radius: 14px;
   object-fit: cover;
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -388,20 +383,20 @@
 
 .galleryThumb span {
   min-width: 0;
-  font-size: 0.82rem;
-  line-height: 1.35;
+  font-size: 0.76rem;
+  line-height: 1.3;
 }
 
 .primaryStack,
 .secondaryStack {
   display: grid;
-  gap: 14px;
+  gap: 12px;
 }
 
 .primaryCard {
   display: grid;
   gap: 16px;
-  padding: 22px;
+  padding: 20px;
 }
 
 .primaryCardTitle {
@@ -492,7 +487,7 @@
   justify-content: space-between;
   gap: 14px;
   width: 100%;
-  padding: 18px 20px;
+  padding: 16px 18px;
   border: 0;
   background: transparent;
   color: var(--text);
@@ -535,7 +530,7 @@
 }
 
 .secondaryContent {
-  padding: 0 20px 20px;
+  padding: 0 18px 18px;
   border-top: 1px solid rgba(255, 255, 255, 0.07);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.01)),
@@ -591,25 +586,41 @@
 }
 
 @media (max-width: 920px) {
-  .galleryThumbs {
+  .galleryShell {
     grid-template-columns: 1fr;
+  }
+
+  .galleryThumbs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .galleryThumbImage {
+    height: 68px;
   }
 }
 
 @media (max-width: 860px) {
   .panel {
-    padding: 20px;
+    padding: 18px;
     border-radius: 26px;
   }
 
   .title {
     max-width: 100%;
-    font-size: clamp(1.95rem, 8vw, 2.55rem);
+    font-size: clamp(1.8rem, 7vw, 2.35rem);
   }
 
   .galleryFrame {
-    min-height: 260px;
-    height: clamp(260px, 60vw, 340px);
-    max-height: 340px;
+    min-height: 230px;
+    height: clamp(230px, 52vw, 290px);
+    max-height: 290px;
+  }
+
+  .galleryThumbs {
+    grid-template-columns: 1fr;
+  }
+
+  .galleryThumbImage {
+    height: 62px;
   }
 }
