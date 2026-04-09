@@ -140,86 +140,87 @@ export function PackDetailScreen({ locale, packId }: PackDetailScreenProps) {
             </div>
           </div>
 
+          <h1 className={styles.title}>{pack.productName}</h1>
+
+          <section className={`${styles.gallerySection} ${styles.heroGallery}`.trim()}>
+            <div className={styles.sectionHeader}>
+              <div className={styles.sectionHeading}>
+                <span className={styles.sectionLabel}>{copy.studio.detailGalleryTitle}</span>
+                <p className={styles.sectionText}>{copy.studio.detailGalleryText}</p>
+              </div>
+
+              <div className={styles.galleryControls}>
+                <button
+                  type="button"
+                  className={styles.galleryButton}
+                  aria-label={copy.studio.galleryPreviousLabel}
+                  onClick={() => goToImage("prev")}
+                >
+                  <span className={`${styles.galleryArrow} ${styles.galleryArrowLeft}`.trim()} aria-hidden="true" />
+                </button>
+
+                <span className={styles.galleryCounter}>
+                  {activeImage + 1} / {galleryImages.length}
+                </span>
+
+                <button
+                  type="button"
+                  className={styles.galleryButton}
+                  aria-label={copy.studio.galleryNextLabel}
+                  onClick={() => goToImage("next")}
+                >
+                  <span className={styles.galleryArrow} aria-hidden="true" />
+                </button>
+              </div>
+            </div>
+
+            {activeGalleryImage ? (
+              <>
+                <div className={styles.galleryStage}>
+                  <div className={styles.galleryStageTop}>
+                    <span className={styles.galleryBadge}>{copy.studio.detailLabel}</span>
+                    <span className={styles.galleryBadgeMuted}>{activeGalleryImage.label}</span>
+                  </div>
+
+                  <div className={styles.galleryFrame}>
+                    <img
+                      src={activeGalleryImage.src}
+                      alt={activeGalleryImage.alt}
+                      className={styles.galleryImage}
+                    />
+                  </div>
+
+                  <div className={styles.galleryCaption}>
+                    <div className={styles.galleryCaptionCopy}>
+                      <strong>{activeGalleryImage.label}</strong>
+                      <p>{getGalleryCaption(locale, pack.productName, activeImage)}</p>
+                    </div>
+                    <span className={styles.galleryCaptionChip}>{pack.productName}</span>
+                  </div>
+                </div>
+
+                <div className={styles.galleryThumbs}>
+                  {galleryImages.map((image, index) => (
+                    <button
+                      key={image.id}
+                      type="button"
+                      className={`${styles.galleryThumb} ${index === activeImage ? styles.galleryThumbActive : ""}`.trim()}
+                      onClick={() => setActiveImage(index)}
+                    >
+                      <img src={image.src} alt="" className={styles.galleryThumbImage} aria-hidden="true" />
+                      <span>{image.label}</span>
+                    </button>
+                  ))}
+                </div>
+              </>
+            ) : null}
+          </section>
+
           <div className={styles.heroContent}>
-            <h1 className={styles.title}>{pack.productName}</h1>
             <p className={styles.summary}>{pack.summary}</p>
             <p className={styles.text}>{copy.studio.detailText}</p>
           </div>
         </article>
-
-        <section className={styles.gallerySection}>
-          <div className={styles.sectionHeader}>
-            <div className={styles.sectionHeading}>
-              <span className={styles.sectionLabel}>{copy.studio.detailGalleryTitle}</span>
-              <p className={styles.sectionText}>{copy.studio.detailGalleryText}</p>
-            </div>
-
-            <div className={styles.galleryControls}>
-              <button
-                type="button"
-                className={styles.galleryButton}
-                aria-label={copy.studio.galleryPreviousLabel}
-                onClick={() => goToImage("prev")}
-              >
-                <span className={`${styles.galleryArrow} ${styles.galleryArrowLeft}`.trim()} aria-hidden="true" />
-              </button>
-
-              <span className={styles.galleryCounter}>
-                {activeImage + 1} / {galleryImages.length}
-              </span>
-
-              <button
-                type="button"
-                className={styles.galleryButton}
-                aria-label={copy.studio.galleryNextLabel}
-                onClick={() => goToImage("next")}
-              >
-                <span className={styles.galleryArrow} aria-hidden="true" />
-              </button>
-            </div>
-          </div>
-
-          {activeGalleryImage ? (
-            <>
-              <div className={styles.galleryStage}>
-                <div className={styles.galleryStageTop}>
-                  <span className={styles.galleryBadge}>{copy.studio.detailLabel}</span>
-                  <span className={styles.galleryBadgeMuted}>{activeGalleryImage.label}</span>
-                </div>
-
-                <div className={styles.galleryFrame}>
-                  <img
-                    src={activeGalleryImage.src}
-                    alt={activeGalleryImage.alt}
-                    className={styles.galleryImage}
-                  />
-                </div>
-
-                <div className={styles.galleryCaption}>
-                  <div className={styles.galleryCaptionCopy}>
-                    <strong>{activeGalleryImage.label}</strong>
-                    <p>{getGalleryCaption(locale, pack.productName, activeImage)}</p>
-                  </div>
-                  <span className={styles.galleryCaptionChip}>{pack.productName}</span>
-                </div>
-              </div>
-
-              <div className={styles.galleryThumbs}>
-                {galleryImages.map((image, index) => (
-                  <button
-                    key={image.id}
-                    type="button"
-                    className={`${styles.galleryThumb} ${index === activeImage ? styles.galleryThumbActive : ""}`.trim()}
-                    onClick={() => setActiveImage(index)}
-                  >
-                    <img src={image.src} alt="" className={styles.galleryThumbImage} aria-hidden="true" />
-                    <span>{image.label}</span>
-                  </button>
-                ))}
-              </div>
-            </>
-          ) : null}
-        </section>
 
         <section className={styles.primaryGroup}>
           <div className={styles.sectionHeading}>

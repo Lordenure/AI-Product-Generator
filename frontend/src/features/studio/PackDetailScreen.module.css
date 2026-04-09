@@ -88,6 +88,7 @@
   display: grid;
   gap: 16px;
   padding: 24px;
+  overflow: visible;
   background:
     radial-gradient(circle at 86% 18%, rgba(255, 171, 122, 0.15), transparent 24%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
@@ -104,6 +105,10 @@
   display: grid;
   gap: 10px;
   max-width: 48rem;
+}
+
+.heroGallery {
+  margin-top: 2px;
 }
 
 .kicker,
