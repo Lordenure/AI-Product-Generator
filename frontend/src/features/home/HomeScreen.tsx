@@ -98,20 +98,26 @@ export function HomeScreen({ locale }: HomeScreenProps) {
 
         <div className={styles.pricingGrid}>
           {plans.map((plan) => (
-            <article key={plan.name} className={styles.plan}>
+            <article key={plan.name} className={`${styles.plan} ${plan.featured ? styles.planFeatured : ""}`.trim()}>
               <div className={styles.planTop}>
                 <div className={styles.planNameWrap}>
                   <h3 className={styles.planName}>{plan.name}</h3>
                   <p className={styles.planLine}>{plan.line}</p>
                 </div>
+              </div>
+
+              <div className={styles.planPriceRow}>
                 <span className={styles.planPrice}>{plan.price}</span>
               </div>
 
-              <div className={styles.planDetails}>
-                <p className={styles.planDetailStrong}>{plan.credits}</p>
-                <p className={styles.planDetail}>{plan.storage}</p>
-                <p className={styles.planDetail}>{plan.model}</p>
-              </div>
+              <ul className={styles.planFeatures}>
+                {plan.features.map((feature, index) => (
+                  <li key={feature} className={index === 0 ? styles.planFeatureStrong : ""}>
+                    <span className={styles.planFeatureDot} aria-hidden="true" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
             </article>
           ))}
         </div>

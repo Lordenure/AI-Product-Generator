@@ -7,9 +7,8 @@ export type PlanCard = {
   name: string;
   price: string;
   line: string;
-  credits: string;
-  storage: string;
-  model: string;
+  featured?: boolean;
+  features: string[];
 };
 
 type PlanDefinition = {
@@ -18,13 +17,12 @@ type PlanDefinition = {
   price: string;
   monthlyCredits: number;
   storageLimit: number;
+  featured?: boolean;
   copy: Record<
     Locale,
     {
       line: string;
-      credits: string;
-      storage: string;
-      model: string;
+      features: string[];
     }
   >;
 };
@@ -41,15 +39,19 @@ const planDefinitions: PlanDefinition[] = [
     copy: {
       en: {
         line: "An easy place to start.",
-        credits: "100 credits / month",
-        storage: "Keep up to 13 packs at once.",
-        model: "basic AI model"
+        features: [
+          "100 credits / month",
+          "Up to 13 packs stored at the same time",
+          "basic AI model"
+        ]
       },
       ru: {
         line: "Лёгкий старт без спешки.",
-        credits: "100 кредитов в месяц",
-        storage: "До 13 паков одновременно",
-        model: "базовая AI модель"
+        features: [
+          "100 кредитов в месяц",
+          "До 13 паков одновременно",
+          "базовая AI модель"
+        ]
       }
     }
   },
@@ -59,18 +61,25 @@ const planDefinitions: PlanDefinition[] = [
     price: "$20",
     monthlyCredits: 900,
     storageLimit: 100,
+    featured: true,
     copy: {
       en: {
         line: "More room to create and save.",
-        credits: "900 credits / month",
-        storage: "Keep up to 100 packs.",
-        model: "smarter AI model"
+        features: [
+          "900 credits / month",
+          "Up to 100 packs stored",
+          "smarter AI model",
+          "Multiple images for one product"
+        ]
       },
       ru: {
         line: "Больше места, чтобы создавать и сохранять.",
-        credits: "900 кредитов в месяц",
-        storage: "До 100 паков",
-        model: "более умная AI модель"
+        features: [
+          "900 кредитов в месяц",
+          "До 100 паков",
+          "более умная AI модель",
+          "Несколько изображений для одного товара"
+        ]
       }
     }
   },
@@ -83,15 +92,21 @@ const planDefinitions: PlanDefinition[] = [
     copy: {
       en: {
         line: "The biggest plan for your best work.",
-        credits: "2700 credits / month",
-        storage: "Keep up to 350 packs.",
-        model: "maximum AI model"
+        features: [
+          "2700 credits / month",
+          "Up to 350 packs stored",
+          "maximum AI model",
+          "Multiple images for one product"
+        ]
       },
       ru: {
         line: "Самый большой план для лучшей работы.",
-        credits: "2700 кредитов в месяц",
-        storage: "До 350 паков",
-        model: "максимальная AI модель"
+        features: [
+          "2700 кредитов в месяц",
+          "До 350 паков",
+          "максимальная AI модель",
+          "Несколько изображений для одного товара"
+        ]
       }
     }
   }
@@ -107,9 +122,8 @@ export function getPlanCards(locale: Locale): PlanCard[] {
     name: plan.name,
     price: plan.price,
     line: plan.copy[locale].line,
-    credits: plan.copy[locale].credits,
-    storage: plan.copy[locale].storage,
-    model: plan.copy[locale].model
+    featured: plan.featured,
+    features: plan.copy[locale].features
   }));
 }
 

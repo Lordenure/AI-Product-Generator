@@ -76,6 +76,15 @@ type StudioCopy = {
   detailBack: string;
   detailLabel: string;
   detailText: string;
+  detailGalleryTitle: string;
+  detailGalleryText: string;
+  detailPrimaryTitle: string;
+  detailSecondaryTitle: string;
+  copyLabel: string;
+  copyAllLabel: string;
+  copiedLabel: string;
+  galleryPreviousLabel: string;
+  galleryNextLabel: string;
   creditsTitle: string;
   creditsLeftLabel: string;
   packsLeftLabel: string;
@@ -159,7 +168,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         "Banner ideas"
       ],
       plansTitle: "Plans",
-      plansText: "Pick the one that feels right and keep creating."
+      plansText: "Start simple, then step up when you want more room to create."
     },
     studio: {
       sidebarHomeLabel: "Home",
@@ -198,8 +207,17 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       deleteCancel: "Cancel",
       deleteConfirm: "Delete",
       detailBack: "Back to studio",
-      detailLabel: "Full pack",
-      detailText: "Everything for this product is ready here.",
+      detailLabel: "Generated pack",
+      detailText: "Ready to use, copy, and adapt.",
+      detailGalleryTitle: "Image gallery",
+      detailGalleryText: "A few polished visuals for this product pack.",
+      detailPrimaryTitle: "Main copy",
+      detailSecondaryTitle: "More outputs",
+      copyLabel: "Copy",
+      copyAllLabel: "Copy all",
+      copiedLabel: "Copied",
+      galleryPreviousLabel: "Previous image",
+      galleryNextLabel: "Next image",
       creditsTitle: "Credits",
       creditsLeftLabel: "credits",
       packsLeftLabel: "packs left",
@@ -284,7 +302,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         "Идеи для баннеров"
       ],
       plansTitle: "Тарифы",
-      plansText: "Выберите спокойный старт или больше места для новых паков."
+      plansText: "Начните просто, а потом переходите выше, когда захочется больше свободы для создания."
     },
     studio: {
       sidebarHomeLabel: "Главная",
@@ -323,8 +341,17 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       deleteCancel: "Отмена",
       deleteConfirm: "Удалить",
       detailBack: "Назад в студию",
-      detailLabel: "Полный пак",
-      detailText: "Все материалы по этому товару уже собраны здесь.",
+      detailLabel: "Собранный пак",
+      detailText: "Готово к использованию, копированию и доработке.",
+      detailGalleryTitle: "Галерея изображений",
+      detailGalleryText: "Несколько аккуратных визуалов для этого пака.",
+      detailPrimaryTitle: "Основной текст",
+      detailSecondaryTitle: "Ещё материалы",
+      copyLabel: "Копировать",
+      copyAllLabel: "Копировать всё",
+      copiedLabel: "Скопировано",
+      galleryPreviousLabel: "Предыдущее изображение",
+      galleryNextLabel: "Следующее изображение",
       creditsTitle: "Кредиты",
       creditsLeftLabel: "кредитов",
       packsLeftLabel: "паков осталось",
