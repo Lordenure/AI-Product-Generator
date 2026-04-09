@@ -122,7 +122,6 @@ export function PackDetailScreen({ locale, packId }: PackDetailScreenProps) {
 
         <article className={styles.resultHero}>
           <div className={styles.heroIntro}>
-            <span className={styles.kicker}>{copy.studio.detailLabel}</span>
             <div className={styles.meta}>
               <span>{pack.languageLabel}</span>
               <span>{pack.targetLabel}</span>
@@ -132,11 +131,7 @@ export function PackDetailScreen({ locale, packId }: PackDetailScreenProps) {
 
           <h1 className={styles.title}>{pack.productName}</h1>
 
-          <section className={`${styles.gallerySection} ${styles.heroGallery}`.trim()}>
-            <div className={styles.sectionHeader}>
-              <span className={styles.sectionLabel}>{copy.studio.detailGalleryTitle}</span>
-            </div>
-
+          <section className={`${styles.gallerySection} ${styles.heroGallery}`.trim()} aria-label={copy.studio.detailGalleryTitle}>
             {activeGalleryImage ? (
               <div className={styles.galleryShell}>
                 <div className={styles.galleryFrame}>
@@ -165,8 +160,10 @@ export function PackDetailScreen({ locale, packId }: PackDetailScreenProps) {
                       onClick={() => setActiveImage(index)}
                       aria-pressed={index === activeImage}
                     >
-                      <img src={image.src} alt="" className={styles.galleryThumbImage} aria-hidden="true" />
-                      <span>{image.label}</span>
+                      <span className={styles.galleryThumbPreview} aria-hidden="true">
+                        <img src={image.src} alt="" className={styles.galleryThumbImage} aria-hidden="true" />
+                      </span>
+                      <span className={styles.galleryThumbLabel}>{image.label}</span>
                     </button>
                   ))}
                 </div>
