@@ -53,17 +53,6 @@ export function RecentPacksRail({ locale, activePackId }: RecentPacksRailProps) 
               <h3 className={styles.emptyTitle}>{copy.studio.packsEmptyTitle}</h3>
               <p className={styles.emptyText}>{copy.studio.packsEmpty}</p>
             </div>
-            <button
-              type="button"
-              className={styles.emptyAction}
-              onClick={() => {
-                const input = document.getElementById("product-name") as HTMLInputElement | null;
-                input?.focus();
-                input?.scrollIntoView({ behavior: "smooth", block: "center" });
-              }}
-            >
-              {copy.studio.packsEmptyAction}
-            </button>
           </div>
         )}
       </div>

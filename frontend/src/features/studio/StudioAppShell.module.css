@@ -15,6 +15,10 @@
   align-items: stretch;
 }
 
+.shellNoRail {
+  grid-template-columns: 212px minmax(0, 1fr);
+}
+
 .shell > * {
   min-width: 0;
 }

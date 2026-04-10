@@ -46,9 +46,7 @@ type StudioCopy = {
   sidebarProfileName: string;
   createEyebrow: string;
   createTitle: string;
-  createText: string;
   createFirstTitle: string;
-  createFirstText: string;
   productNameLabel: string;
   productNamePlaceholder: string;
   descriptionLabel: string;
@@ -58,21 +56,29 @@ type StudioCopy = {
   benefitsHint: string;
   targetLanguageLabel: string;
   platformLabel: string;
+  visibilityLabel: string;
+  visibilityPrivate: string;
+  visibilityPublic: string;
   createButton: string;
   createFirstButton: string;
   createLoading: string;
   createReady: string;
-  createHint: string;
-  createFirstHint: string;
   createLoadingNote: string;
   createReadyNote: string;
   createNameError: string;
   createLimitError: string;
+  packsPageTitle: string;
+  packsTabLibrary: string;
+  packsTabCommunity: string;
   packsTitle: string;
   packsText: string;
   packsEmptyTitle: string;
   packsEmpty: string;
-  packsEmptyAction: string;
+  packsLibraryEmptyTitle: string;
+  packsLibraryEmptyText: string;
+  packsLibraryEmptyAction: string;
+  packsCommunityEmptyTitle: string;
+  packsCommunityEmptyText: string;
   openPack: string;
   deleteLabel: string;
   deleteTitle: string;
@@ -185,9 +191,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       sidebarProfileName: "Lordenure",
       createEyebrow: "Create",
       createTitle: "New full pack",
-      createText: "Add a product and click once.",
       createFirstTitle: "Start with one product",
-      createFirstText: "One run makes the full pack.",
       productNameLabel: "Product name",
       productNamePlaceholder: "Example: GlowCup",
       descriptionLabel: "Short description",
@@ -197,28 +201,36 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       benefitsHint: "Optional",
       targetLanguageLabel: "Language",
       platformLabel: "Use on",
+      visibilityLabel: "Visibility",
+      visibilityPrivate: "Private",
+      visibilityPublic: "Public",
       createButton: "✨ Create full pack",
       createFirstButton: "✨ Create first pack",
       createLoading: "Creating pack...",
       createReady: "Pack ready",
-      createHint: "One click for the full pack.",
-      createFirstHint: "Your first pack lands here in one go.",
       createLoadingNote: "Making the full pack.",
       createReadyNote: "Opening pack.",
       createNameError: "Add a product name first.",
       createLimitError: "Your pack list is full. Delete one or upgrade.",
+      packsPageTitle: "Packs",
+      packsTabLibrary: "Library",
+      packsTabCommunity: "Community",
       packsTitle: "Latest packs",
       packsText: "Open any pack.",
       packsEmptyTitle: "No packs yet",
       packsEmpty: "Your first one lands here.",
-      packsEmptyAction: "Create first pack",
+      packsLibraryEmptyTitle: "No packs yet",
+      packsLibraryEmptyText: "Create your first pack.",
+      packsLibraryEmptyAction: "Open create",
+      packsCommunityEmptyTitle: "Nothing public yet",
+      packsCommunityEmptyText: "Public packs will appear here.",
       openPack: "Open pack",
       deleteLabel: "Delete",
       deleteTitle: "Delete this pack?",
       deleteText: "This will remove it from your studio.",
       deleteCancel: "Cancel",
       deleteConfirm: "Delete",
-      detailBack: "Back to studio",
+      detailBack: "Back to packs",
       detailLabel: "Generated pack",
       detailText: "Ready to use, copy, and adapt.",
       detailGalleryTitle: "Image gallery",
@@ -325,9 +337,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       sidebarProfileName: "Lordenure",
       createEyebrow: "Создать",
       createTitle: "Новый полный пак",
-      createText: "Добавьте товар и нажмите один раз.",
-      createFirstTitle: "Начните с одного товара",
-      createFirstText: "Один запуск собирает весь пак.",
+      createFirstTitle: "Начните создавать",
       productNameLabel: "Название товара",
       productNamePlaceholder: "Пример: GlowCup",
       descriptionLabel: "Короткое описание",
@@ -337,28 +347,36 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       benefitsHint: "Необязательно",
       targetLanguageLabel: "Язык",
       platformLabel: "Где использовать",
-      createButton: "✨ Собрать полный пак",
-      createFirstButton: "✨ Собрать первый пак",
+      visibilityLabel: "Видимость",
+      visibilityPrivate: "Приватный",
+      visibilityPublic: "Публичный",
+      createButton: "✨ Создать",
+      createFirstButton: "✨ Создать",
       createLoading: "Собираем пак...",
       createReady: "Пак готов",
-      createHint: "Один клик на весь пак.",
-      createFirstHint: "Первый пак сразу появится здесь.",
       createLoadingNote: "Собираем полный пак.",
       createReadyNote: "Открываем пак.",
       createNameError: "Сначала добавьте название товара.",
       createLimitError: "Список паков заполнен. Удалите один или улучшите план.",
+      packsPageTitle: "Паки",
+      packsTabLibrary: "Библиотека",
+      packsTabCommunity: "Сообщество",
       packsTitle: "Последние паки",
       packsText: "Откройте любой пак.",
       packsEmptyTitle: "Паков пока нет",
       packsEmpty: "Первый появится здесь.",
-      packsEmptyAction: "Собрать первый пак",
+      packsLibraryEmptyTitle: "Паков пока нет",
+      packsLibraryEmptyText: "Соберите первый пак.",
+      packsLibraryEmptyAction: "Открыть создание",
+      packsCommunityEmptyTitle: "Публичных паков пока нет",
+      packsCommunityEmptyText: "Они появятся здесь позже.",
       openPack: "Открыть пак",
       deleteLabel: "Удалить",
       deleteTitle: "Удалить этот пак?",
       deleteText: "Он исчезнет из вашей студии.",
       deleteCancel: "Отмена",
       deleteConfirm: "Удалить",
-      detailBack: "Назад в студию",
+      detailBack: "Назад к пакам",
       detailLabel: "Собранный пак",
       detailText: "Готово к использованию, копированию и доработке.",
       detailGalleryTitle: "Галерея изображений",

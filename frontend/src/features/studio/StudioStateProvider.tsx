@@ -11,7 +11,13 @@ import {
 
 import { getCopy } from "@/content/copy";
 import { getPlanCredits, getPlanStorageLimit, type PlanId, defaultPlanId } from "@/content/plans";
-import { getPackLibrary, type PackRecord, type PackSection, type PackStatus } from "@/content/packs";
+import {
+  getPackLibrary,
+  type PackRecord,
+  type PackSection,
+  type PackStatus,
+  type PackVisibility
+} from "@/content/packs";
 import type { Locale } from "@/lib/i18n";
 
 type CreatedPack = {
@@ -24,6 +30,7 @@ type CreatedPack = {
   createdAt: number;
   artTone: PackRecord["artTone"];
   status: PackStatus;
+  visibility: PackVisibility;
 };
 
 type CreatePackInput = {
@@ -32,6 +39,7 @@ type CreatePackInput = {
   benefits: string;
   languageId: string;
   platformId: string;
+  visibility: PackVisibility;
 };
 
 type CreatePackResult =
@@ -94,7 +102,8 @@ export function StudioStateProvider({ children }: { children: ReactNode }) {
         platformId: input.platformId,
         createdAt,
         artTone: artTones[createdPacks.length % artTones.length],
-        status: "ready"
+        status: "ready",
+        visibility: input.visibility
       };
 
       setCreatedPacks((current) => [newPack, ...current]);
@@ -176,6 +185,8 @@ function localizeCreatedPack(locale: Locale, pack: CreatedPack): PackRecord {
     artTone: pack.artTone,
     status: pack.status,
     statusLabel: getStatusLabel(locale, pack.status),
+    visibility: pack.visibility,
+    visibilityLabel: getVisibilityLabel(locale, pack.visibility),
     languageLabel,
     targetLabel,
     updatedLabel: getRelativeLabel(locale, pack.createdAt),
@@ -265,6 +276,21 @@ function getRelativeLabel(locale: Locale, createdAt: number): string {
   }
 
   return locale === "ru" ? "Недавно" : "Recently";
+}
+
+function getVisibilityLabel(locale: Locale, visibility: PackVisibility): string {
+  const labels = {
+    en: {
+      private: "Private",
+      public: "Public"
+    },
+    ru: {
+      private: "Приватный",
+      public: "Публичный"
+    }
+  } as const;
+
+  return labels[locale][visibility];
 }
 
 function toSlug(value: string): string {

@@ -10,16 +10,23 @@ type StudioAppShellProps = {
   locale: Locale;
   activeNav: "create" | "packs";
   activePackId?: string;
+  showRail?: boolean;
   children: ReactNode;
 };
 
-export function StudioAppShell({ locale, activeNav, activePackId, children }: StudioAppShellProps) {
+export function StudioAppShell({
+  locale,
+  activeNav,
+  activePackId,
+  showRail = true,
+  children
+}: StudioAppShellProps) {
   return (
     <section className={styles.wrap}>
-      <div className={styles.shell}>
+      <div className={`${styles.shell} ${!showRail ? styles.shellNoRail : ""}`.trim()}>
         <StudioSidebar locale={locale} activeNav={activeNav} />
         <div className={styles.center}>{children}</div>
-        <RecentPacksRail locale={locale} activePackId={activePackId} />
+        {showRail ? <RecentPacksRail locale={locale} activePackId={activePackId} /> : null}
       </div>
     </section>
   );

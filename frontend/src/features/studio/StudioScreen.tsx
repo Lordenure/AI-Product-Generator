@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 import { getCopy } from "@/content/copy";
+import type { PackVisibility } from "@/content/packs";
 import { getLocalizedPath, type Locale } from "@/lib/i18n";
 
 import { StudioAppShell } from "./StudioAppShell";
@@ -25,6 +26,7 @@ export function StudioScreen({ locale }: StudioScreenProps) {
   const [benefits, setBenefits] = useState("");
   const [language, setLanguage] = useState(copy.studio.languages[0]?.id ?? "en");
   const [platform, setPlatform] = useState(copy.studio.platforms[0]?.id ?? "site");
+  const [visibility, setVisibility] = useState<PackVisibility>("private");
   const [status, setStatus] = useState<StudioStatus>("idle");
   const timeoutRef = useRef<number | null>(null);
   const isFirstRun = packs.length === 0;
@@ -37,9 +39,7 @@ export function StudioScreen({ locale }: StudioScreenProps) {
           ? copy.studio.createNameError
           : status === "limit-error"
             ? copy.studio.createLimitError
-        : isFirstRun
-          ? copy.studio.createFirstHint
-          : copy.studio.createHint;
+            : null;
 
   useEffect(() => {
     return () => {
@@ -86,7 +86,8 @@ export function StudioScreen({ locale }: StudioScreenProps) {
         description,
         benefits,
         languageId: language,
-        platformId: platform
+        platformId: platform,
+        visibility
       });
 
       if (!result.ok) {
@@ -105,9 +106,8 @@ export function StudioScreen({ locale }: StudioScreenProps) {
     <StudioAppShell locale={locale} activeNav="create">
       <section id="studio-create" className={`${styles.panel} ${isFirstRun ? styles.panelFirstRun : ""}`.trim()}>
         <div className={styles.panelIntro}>
-          <span className={styles.kicker}>{copy.studio.createEyebrow}</span>
+          {/* <span className={styles.kicker}>{copy.studio.createEyebrow}</span> */}
           <h1 className={styles.title}>{isFirstRun ? copy.studio.createFirstTitle : copy.studio.createTitle}</h1>
-          <p className={styles.text}>{isFirstRun ? copy.studio.createFirstText : copy.studio.createText}</p>
         </div>
 
         <div className={styles.form}>
@@ -214,6 +214,38 @@ export function StudioScreen({ locale }: StudioScreenProps) {
             </div>
           </div>
 
+          <div className={styles.field}>
+            <label className={styles.label}>{copy.studio.visibilityLabel}</label>
+            <div className={styles.visibilityControl} role="group" aria-label={copy.studio.visibilityLabel}>
+              <button
+                type="button"
+                className={`${styles.visibilityButton} ${
+                  visibility === "private" ? styles.visibilityButtonActive : ""
+                }`.trim()}
+                onClick={() => {
+                  resetReadyState();
+                  setVisibility("private");
+                }}
+                aria-pressed={visibility === "private"}
+              >
+                {copy.studio.visibilityPrivate}
+              </button>
+              <button
+                type="button"
+                className={`${styles.visibilityButton} ${
+                  visibility === "public" ? styles.visibilityButtonActive : ""
+                }`.trim()}
+                onClick={() => {
+                  resetReadyState();
+                  setVisibility("public");
+                }}
+                aria-pressed={visibility === "public"}
+              >
+                {copy.studio.visibilityPublic}
+              </button>
+            </div>
+          </div>
+
           <div className={styles.actionArea}>
             <button
               type="button"
@@ -232,19 +264,21 @@ export function StudioScreen({ locale }: StudioScreenProps) {
                     : copy.studio.createButton}
             </button>
 
-            <p
-              className={`${styles.createNote} ${
-                status === "loading"
-                  ? styles.createNoteLoading
-                  : status === "ready"
-                    ? styles.createNoteReady
-                    : status === "name-error" || status === "limit-error"
-                      ? styles.createNoteError
-                      : ""
-              }`.trim()}
-            >
-              {statusNote}
-            </p>
+            {statusNote ? (
+              <p
+                className={`${styles.createNote} ${
+                  status === "loading"
+                    ? styles.createNoteLoading
+                    : status === "ready"
+                      ? styles.createNoteReady
+                      : status === "name-error" || status === "limit-error"
+                        ? styles.createNoteError
+                        : ""
+                }`.trim()}
+              >
+                {statusNote}
+              </p>
+            ) : null}
           </div>
         </div>
       </section>

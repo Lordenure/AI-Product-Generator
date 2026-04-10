@@ -1,6 +1,7 @@
 import type { Locale } from "@/lib/i18n";
 
 export type PackStatus = "draft" | "ready" | "updated";
+export type PackVisibility = "private" | "public";
 
 export type PackSection = {
   title: string;
@@ -14,6 +15,8 @@ export type PackRecord = {
   artTone: "sun" | "mint" | "sky" | "rose";
   status: PackStatus;
   statusLabel: string;
+  visibility: PackVisibility;
+  visibilityLabel: string;
   languageLabel: string;
   targetLabel: string;
   updatedLabel: string;
@@ -30,6 +33,8 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       artTone: "sun",
       status: "updated",
       statusLabel: "Updated",
+      visibility: "public",
+      visibilityLabel: "Public",
       languageLabel: "English",
       targetLabel: "Website",
       updatedLabel: "Updated today",
@@ -54,6 +59,8 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       artTone: "mint",
       status: "ready",
       statusLabel: "Ready",
+      visibility: "public",
+      visibilityLabel: "Public",
       languageLabel: "Russian",
       targetLabel: "Wildberries",
       updatedLabel: "18 min ago",
@@ -78,6 +85,8 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       artTone: "sky",
       status: "draft",
       statusLabel: "Draft",
+      visibility: "public",
+      visibilityLabel: "Public",
       languageLabel: "English",
       targetLabel: "Amazon",
       updatedLabel: "1 hour ago",
@@ -102,6 +111,8 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       artTone: "rose",
       status: "ready",
       statusLabel: "Ready",
+      visibility: "public",
+      visibilityLabel: "Public",
       languageLabel: "German",
       targetLabel: "Website",
       updatedLabel: "Yesterday",
@@ -126,6 +137,8 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       artTone: "sky",
       status: "updated",
       statusLabel: "Updated",
+      visibility: "public",
+      visibilityLabel: "Public",
       languageLabel: "Spanish",
       targetLabel: "Instagram",
       updatedLabel: "2 hours ago",
@@ -150,6 +163,8 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       artTone: "mint",
       status: "ready",
       statusLabel: "Ready",
+      visibility: "public",
+      visibilityLabel: "Public",
       languageLabel: "English",
       targetLabel: "Ozon",
       updatedLabel: "3 hours ago",
@@ -176,6 +191,8 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       artTone: "sun",
       status: "updated",
       statusLabel: "Обновлён",
+      visibility: "public",
+      visibilityLabel: "Публичный",
       languageLabel: "Английский",
       targetLabel: "Сайт",
       updatedLabel: "Обновлено сегодня",
@@ -200,6 +217,8 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       artTone: "mint",
       status: "ready",
       statusLabel: "Готов",
+      visibility: "public",
+      visibilityLabel: "Публичный",
       languageLabel: "Русский",
       targetLabel: "Wildberries",
       updatedLabel: "18 минут назад",
@@ -224,6 +243,8 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       artTone: "sky",
       status: "draft",
       statusLabel: "Черновик",
+      visibility: "public",
+      visibilityLabel: "Публичный",
       languageLabel: "Английский",
       targetLabel: "Amazon",
       updatedLabel: "1 час назад",
@@ -248,6 +269,8 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       artTone: "rose",
       status: "ready",
       statusLabel: "Готов",
+      visibility: "public",
+      visibilityLabel: "Публичный",
       languageLabel: "Немецкий",
       targetLabel: "Сайт",
       updatedLabel: "Вчера",
@@ -272,6 +295,8 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       artTone: "sky",
       status: "updated",
       statusLabel: "Обновлён",
+      visibility: "public",
+      visibilityLabel: "Публичный",
       languageLabel: "Испанский",
       targetLabel: "Instagram",
       updatedLabel: "2 часа назад",
@@ -296,6 +321,8 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       artTone: "mint",
       status: "ready",
       statusLabel: "Готов",
+      visibility: "public",
+      visibilityLabel: "Публичный",
       languageLabel: "Английский",
       targetLabel: "Ozon",
       updatedLabel: "3 часа назад",

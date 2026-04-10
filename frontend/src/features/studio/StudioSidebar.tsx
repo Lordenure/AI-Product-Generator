@@ -21,7 +21,7 @@ export function StudioSidebar({ locale, activeNav }: StudioSidebarProps) {
   const copy = getCopy(locale);
   const plans = getPlanCards(locale);
   const { planId, setPlan, creditBalance } = useStudioState(locale);
-  const libraryHref = `${getLocalizedPath(locale, "/studio")}#packs`;
+  const libraryHref = getLocalizedPath(locale, "/packs");
   const [menuOpen, setMenuOpen] = useState(false);
   const planMenuRef = useRef<HTMLDivElement | null>(null);
 

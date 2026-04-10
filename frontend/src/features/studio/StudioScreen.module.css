@@ -2,11 +2,11 @@
   position: relative;
   overflow: hidden;
   display: grid;
-  gap: 16px;
+  gap: 8px;
   min-height: 0;
   height: 100%;
   min-width: 0;
-  padding: 18px;
+  padding: 16px;
   border: 1px solid var(--line);
   border-radius: var(--radius-xl);
   background:
@@ -41,13 +41,14 @@
 .form,
 .field,
 .labelRow,
-.actionArea {
+.actionArea,
+.visibilityControl {
   display: grid;
   min-width: 0;
 }
 
 .panelIntro {
-  gap: 5px;
+  gap: 2px;
 }
 
 .panelFirstRun .panelIntro {
@@ -79,7 +80,6 @@
 }
 
 .title,
-.text,
 .createNote,
 .optionalNote {
   margin: 0;
@@ -95,20 +95,10 @@
   overflow-wrap: break-word;
 }
 
-.text,
 .createNote,
 .optionalNote {
   color: var(--text-muted);
   line-height: 1.45;
-}
-
-.text {
-  max-width: 26rem;
-  font-size: 0.95rem;
-}
-
-.panelFirstRun .text {
-  max-width: 22rem;
 }
 
 .optionalNote {
@@ -136,7 +126,7 @@
 }
 
 .input {
-  min-height: 48px;
+  min-height: 2.15rem;
   padding: 0 15px;
 }
 
@@ -178,6 +168,48 @@
     6px 6px,
     100% 100%;
   background-repeat: no-repeat;
+}
+
+.visibilityControl {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  padding: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+    rgba(8, 13, 24, 0.52);
+}
+
+.visibilityButton {
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  background: transparent;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.visibilityButton:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.visibilityButtonActive {
+  color: var(--text);
+  border-color: rgba(145, 183, 255, 0.16);
+  background:
+    linear-gradient(180deg, rgba(145, 183, 255, 0.12), rgba(145, 183, 255, 0.04)),
+    rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 0 0 1px rgba(145, 183, 255, 0.08);
 }
 
 .actionArea {

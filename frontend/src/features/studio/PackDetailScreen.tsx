@@ -97,7 +97,7 @@ export function PackDetailScreen({ locale, packId }: PackDetailScreenProps) {
       <section className={styles.panel}>
         <article className={styles.resultHero}>
           <div className={`${styles.topRow} ${styles.heroTopRow}`.trim()}>
-            <Link href={getLocalizedPath(locale, "/studio")} className={styles.backLink}>
+            <Link href={getLocalizedPath(locale, "/packs")} className={styles.backLink}>
               {copy.studio.detailBack}
             </Link>
 
@@ -125,6 +125,9 @@ export function PackDetailScreen({ locale, packId }: PackDetailScreenProps) {
             <div className={styles.meta}>
               <span>{pack.languageLabel}</span>
               <span>{pack.targetLabel}</span>
+              <span className={`${styles.visibilityMeta} ${styles[`visibility${pack.visibility}`]}`.trim()}>
+                {pack.visibilityLabel}
+              </span>
               <span>{pack.updatedLabel}</span>
             </div>
           </div>

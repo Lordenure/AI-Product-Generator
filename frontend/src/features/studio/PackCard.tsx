@@ -13,10 +13,17 @@ type PackCardProps = {
   locale: Locale;
   pack: PackRecord;
   isActive?: boolean;
+  showVisibility?: boolean;
   onDelete: () => void;
 };
 
-export function PackCard({ locale, pack, isActive = false, onDelete }: PackCardProps) {
+export function PackCard({
+  locale,
+  pack,
+  isActive = false,
+  showVisibility = false,
+  onDelete
+}: PackCardProps) {
   const copy = getCopy(locale);
   const href = getLocalizedPath(locale, `/studio/packs/${pack.id}`);
   const initials = pack.productName
@@ -53,6 +60,13 @@ export function PackCard({ locale, pack, isActive = false, onDelete }: PackCardP
 
       <div className={styles.footer}>
         <div className={styles.tags}>
+          {showVisibility ? (
+            <span
+              className={`${styles.tag} ${styles.tagVisibility} ${styles[`tagVisibility${pack.visibility}`]}`.trim()}
+            >
+              {pack.visibilityLabel}
+            </span>
+          ) : null}
           {pack.tags.slice(0, 2).map((tag) => (
             <span key={tag} className={styles.tag}>
               {tag}

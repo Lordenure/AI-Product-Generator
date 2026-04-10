@@ -185,6 +185,24 @@
   line-height: 1.25;
 }
 
+.visibilityMeta {
+  min-height: 24px;
+  padding: 0 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.visibilityprivate {
+  color: var(--text);
+}
+
+.visibilitypublic {
+  color: var(--accent-sky);
+  border-color: rgba(145, 183, 255, 0.16);
+  background: rgba(145, 183, 255, 0.08);
+}
+
 .meta span + span::before {
   content: "";
   width: 3px;
@@ -192,6 +210,11 @@
   margin-right: 8px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.26);
+}
+
+.meta > .visibilityMeta::before {
+  display: none;
+  content: none;
 }
 
 .gallerySection,
