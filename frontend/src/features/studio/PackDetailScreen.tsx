@@ -135,13 +135,6 @@ export function PackDetailScreen({ locale, packId }: PackDetailScreenProps) {
             {activeGalleryImage ? (
               <div className={styles.galleryShell}>
                 <div className={styles.galleryFrame}>
-                  <div className={styles.galleryFrameTop}>
-                    <span className={styles.galleryBadgeMuted}>{activeGalleryImage.label}</span>
-                    <span className={styles.galleryCounter}>
-                      {activeImage + 1} / {galleryImages.length}
-                    </span>
-                  </div>
-
                   <div className={styles.galleryImageWrap}>
                     <img
                       src={activeGalleryImage.src}
@@ -158,12 +151,12 @@ export function PackDetailScreen({ locale, packId }: PackDetailScreenProps) {
                       type="button"
                       className={`${styles.galleryThumb} ${index === activeImage ? styles.galleryThumbActive : ""}`.trim()}
                       onClick={() => setActiveImage(index)}
+                      aria-label={image.label}
                       aria-pressed={index === activeImage}
                     >
                       <span className={styles.galleryThumbPreview} aria-hidden="true">
                         <img src={image.src} alt="" className={styles.galleryThumbImage} aria-hidden="true" />
                       </span>
-                      <span className={styles.galleryThumbLabel}>{image.label}</span>
                     </button>
                   ))}
                 </div>
