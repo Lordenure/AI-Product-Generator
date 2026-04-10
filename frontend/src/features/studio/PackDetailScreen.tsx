@@ -95,32 +95,32 @@ export function PackDetailScreen({ locale, packId }: PackDetailScreenProps) {
   return (
     <StudioAppShell locale={locale} activeNav="packs" activePackId={pack.id}>
       <section className={styles.panel}>
-        <div className={styles.topRow}>
-          <Link href={getLocalizedPath(locale, "/studio")} className={styles.backLink}>
-            {copy.studio.detailBack}
-          </Link>
-
-          <div className={styles.topActions}>
-            <button
-              type="button"
-              className={styles.utilityButton}
-              onClick={() => handleCopy("all", copyAllText)}
-            >
-              {copiedKey === "all" ? copy.studio.copiedLabel : copy.studio.copyAllLabel}
-            </button>
-            <PackDeleteControl
-              locale={locale}
-              variant="detail"
-              onDelete={() => {
-                deletePack(pack.id);
-                router.replace(getLocalizedPath(locale, "/studio"));
-              }}
-            />
-            <span className={`${styles.status} ${styles[`status${pack.status}`]}`.trim()}>{pack.statusLabel}</span>
-          </div>
-        </div>
-
         <article className={styles.resultHero}>
+          <div className={`${styles.topRow} ${styles.heroTopRow}`.trim()}>
+            <Link href={getLocalizedPath(locale, "/studio")} className={styles.backLink}>
+              {copy.studio.detailBack}
+            </Link>
+
+            <div className={styles.topActions}>
+              <button
+                type="button"
+                className={styles.utilityButton}
+                onClick={() => handleCopy("all", copyAllText)}
+              >
+                {copiedKey === "all" ? copy.studio.copiedLabel : copy.studio.copyAllLabel}
+              </button>
+              <PackDeleteControl
+                locale={locale}
+                variant="detail"
+                onDelete={() => {
+                  deletePack(pack.id);
+                  router.replace(getLocalizedPath(locale, "/studio"));
+                }}
+              />
+              <span className={`${styles.status} ${styles[`status${pack.status}`]}`.trim()}>{pack.statusLabel}</span>
+            </div>
+          </div>
+
           <div className={styles.heroIntro}>
             <div className={styles.meta}>
               <span>{pack.languageLabel}</span>
@@ -172,14 +172,14 @@ export function PackDetailScreen({ locale, packId }: PackDetailScreenProps) {
 
         <section className={styles.primaryGroup}>
           <div className={styles.sectionHeading}>
-            <span className={styles.sectionLabel}>{copy.studio.detailPrimaryTitle}</span>
+            <h2 className={styles.groupTitle}>{copy.studio.detailPrimaryTitle}</h2>
           </div>
 
           <div className={styles.primaryStack}>
             {primarySections.map((section, index) => (
               <article
                 key={section.title}
-                className={`${styles.primaryCard} ${index === 0 ? styles.primaryCardTitle : ""}`.trim()}
+                className={`${styles.primaryCard} ${getPrimaryCardClass(styles, index)}`.trim()}
               >
                 <div className={styles.primaryCardTop}>
                   <h2>{section.title}</h2>
@@ -210,7 +210,7 @@ export function PackDetailScreen({ locale, packId }: PackDetailScreenProps) {
 
         <section className={styles.secondaryGroup}>
           <div className={styles.sectionHeading}>
-            <span className={styles.sectionLabel}>{copy.studio.detailSecondaryTitle}</span>
+            <h2 className={styles.groupTitle}>{copy.studio.detailSecondaryTitle}</h2>
           </div>
 
           <div className={styles.secondaryStack}>
@@ -250,6 +250,29 @@ export function PackDetailScreen({ locale, packId }: PackDetailScreenProps) {
       </section>
     </StudioAppShell>
   );
+}
+
+function getPrimaryCardClass(
+  styles: Record<string, string>,
+  index: number
+): string {
+  if (index === 0) {
+    return styles.primaryCardTitle;
+  }
+
+  if (index === 1) {
+    return styles.primaryCardBenefits;
+  }
+
+  if (index === 2) {
+    return styles.primaryCardDescription;
+  }
+
+  if (index === 3) {
+    return styles.primaryCardSeo;
+  }
+
+  return "";
 }
 
 function splitBenefits(text: string): string[] {
