@@ -47,6 +47,8 @@ type StudioCopy = {
   createEyebrow: string;
   createTitle: string;
   createText: string;
+  createFirstTitle: string;
+  createFirstText: string;
   productNameLabel: string;
   productNamePlaceholder: string;
   descriptionLabel: string;
@@ -57,16 +59,20 @@ type StudioCopy = {
   targetLanguageLabel: string;
   platformLabel: string;
   createButton: string;
+  createFirstButton: string;
   createLoading: string;
   createReady: string;
   createHint: string;
+  createFirstHint: string;
   createLoadingNote: string;
   createReadyNote: string;
   createNameError: string;
   createLimitError: string;
   packsTitle: string;
   packsText: string;
+  packsEmptyTitle: string;
   packsEmpty: string;
+  packsEmptyAction: string;
   openPack: string;
   deleteLabel: string;
   deleteTitle: string;
@@ -180,6 +186,8 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       createEyebrow: "Create",
       createTitle: "New full pack",
       createText: "Add a product and click once.",
+      createFirstTitle: "Start with one product",
+      createFirstText: "One run makes the full pack.",
       productNameLabel: "Product name",
       productNamePlaceholder: "Example: GlowCup",
       descriptionLabel: "Short description",
@@ -190,16 +198,20 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       targetLanguageLabel: "Language",
       platformLabel: "Use on",
       createButton: "✨ Create full pack",
+      createFirstButton: "✨ Create first pack",
       createLoading: "Creating pack...",
       createReady: "Pack ready",
       createHint: "One click for the full pack.",
+      createFirstHint: "Your first pack lands here in one go.",
       createLoadingNote: "Making the full pack.",
-      createReadyNote: "Pack ready to open.",
+      createReadyNote: "Opening pack.",
       createNameError: "Add a product name first.",
       createLimitError: "Your pack list is full. Delete one or upgrade.",
       packsTitle: "Latest packs",
       packsText: "Open any pack.",
-      packsEmpty: "Your new packs land here.",
+      packsEmptyTitle: "No packs yet",
+      packsEmpty: "Your first one lands here.",
+      packsEmptyAction: "Create first pack",
       openPack: "Open pack",
       deleteLabel: "Delete",
       deleteTitle: "Delete this pack?",
@@ -314,6 +326,8 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       createEyebrow: "Создать",
       createTitle: "Новый полный пак",
       createText: "Добавьте товар и нажмите один раз.",
+      createFirstTitle: "Начните с одного товара",
+      createFirstText: "Один запуск собирает весь пак.",
       productNameLabel: "Название товара",
       productNamePlaceholder: "Пример: GlowCup",
       descriptionLabel: "Короткое описание",
@@ -324,16 +338,20 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       targetLanguageLabel: "Язык",
       platformLabel: "Где использовать",
       createButton: "✨ Собрать полный пак",
+      createFirstButton: "✨ Собрать первый пак",
       createLoading: "Собираем пак...",
       createReady: "Пак готов",
       createHint: "Один клик на весь пак.",
+      createFirstHint: "Первый пак сразу появится здесь.",
       createLoadingNote: "Собираем полный пак.",
-      createReadyNote: "Пак можно открыть.",
+      createReadyNote: "Открываем пак.",
       createNameError: "Сначала добавьте название товара.",
       createLimitError: "Список паков заполнен. Удалите один или улучшите план.",
       packsTitle: "Последние паки",
       packsText: "Откройте любой пак.",
-      packsEmpty: "Новые паки появятся здесь.",
+      packsEmptyTitle: "Паков пока нет",
+      packsEmpty: "Первый появится здесь.",
+      packsEmptyAction: "Собрать первый пак",
       openPack: "Открыть пак",
       deleteLabel: "Удалить",
       deleteTitle: "Удалить этот пак?",

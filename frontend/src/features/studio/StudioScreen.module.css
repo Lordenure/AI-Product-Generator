@@ -29,6 +29,14 @@
   pointer-events: none;
 }
 
+.panelFirstRun::before {
+  width: 220px;
+  height: 220px;
+  right: -32px;
+  bottom: -64px;
+  background: rgba(135, 230, 214, 0.08);
+}
+
 .panelIntro,
 .form,
 .field,
@@ -40,6 +48,10 @@
 
 .panelIntro {
   gap: 5px;
+}
+
+.panelFirstRun .panelIntro {
+  gap: 7px;
 }
 
 .form {
@@ -93,6 +105,10 @@
 .text {
   max-width: 26rem;
   font-size: 0.95rem;
+}
+
+.panelFirstRun .text {
+  max-width: 22rem;
 }
 
 .optionalNote {
@@ -167,6 +183,10 @@
 .actionArea {
   gap: 8px;
   padding-top: 0;
+}
+
+.panelFirstRun .actionArea {
+  padding-top: 4px;
 }
 
 .createButton {

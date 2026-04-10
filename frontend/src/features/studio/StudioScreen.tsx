@@ -1,9 +1,10 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 import { getCopy } from "@/content/copy";
-import type { Locale } from "@/lib/i18n";
+import { getLocalizedPath, type Locale } from "@/lib/i18n";
 
 import { StudioAppShell } from "./StudioAppShell";
 import { useStudioState } from "./StudioStateProvider";
@@ -17,7 +18,8 @@ type StudioStatus = "idle" | "loading" | "ready" | "name-error" | "limit-error";
 
 export function StudioScreen({ locale }: StudioScreenProps) {
   const copy = getCopy(locale);
-  const { createPack, isStorageFull } = useStudioState(locale);
+  const router = useRouter();
+  const { createPack, isStorageFull, packs } = useStudioState(locale);
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
   const [benefits, setBenefits] = useState("");
@@ -25,6 +27,7 @@ export function StudioScreen({ locale }: StudioScreenProps) {
   const [platform, setPlatform] = useState(copy.studio.platforms[0]?.id ?? "site");
   const [status, setStatus] = useState<StudioStatus>("idle");
   const timeoutRef = useRef<number | null>(null);
+  const isFirstRun = packs.length === 0;
   const statusNote =
     status === "loading"
       ? copy.studio.createLoadingNote
@@ -34,7 +37,9 @@ export function StudioScreen({ locale }: StudioScreenProps) {
           ? copy.studio.createNameError
           : status === "limit-error"
             ? copy.studio.createLimitError
-        : copy.studio.createHint;
+        : isFirstRun
+          ? copy.studio.createFirstHint
+          : copy.studio.createHint;
 
   useEffect(() => {
     return () => {
@@ -90,16 +95,19 @@ export function StudioScreen({ locale }: StudioScreenProps) {
       }
 
       setStatus("ready");
+      timeoutRef.current = window.setTimeout(() => {
+        router.push(getLocalizedPath(locale, `/studio/packs/${result.id}`));
+      }, 260);
     }, 900);
   }
 
   return (
     <StudioAppShell locale={locale} activeNav="create">
-      <section className={styles.panel}>
+      <section id="studio-create" className={`${styles.panel} ${isFirstRun ? styles.panelFirstRun : ""}`.trim()}>
         <div className={styles.panelIntro}>
           <span className={styles.kicker}>{copy.studio.createEyebrow}</span>
-          <h1 className={styles.title}>{copy.studio.createTitle}</h1>
-          <p className={styles.text}>{copy.studio.createText}</p>
+          <h1 className={styles.title}>{isFirstRun ? copy.studio.createFirstTitle : copy.studio.createTitle}</h1>
+          <p className={styles.text}>{isFirstRun ? copy.studio.createFirstText : copy.studio.createText}</p>
         </div>
 
         <div className={styles.form}>
@@ -219,7 +227,9 @@ export function StudioScreen({ locale }: StudioScreenProps) {
                 ? copy.studio.createLoading
                 : status === "ready"
                   ? copy.studio.createReady
-                  : copy.studio.createButton}
+                  : isFirstRun
+                    ? copy.studio.createFirstButton
+                    : copy.studio.createButton}
             </button>
 
             <p

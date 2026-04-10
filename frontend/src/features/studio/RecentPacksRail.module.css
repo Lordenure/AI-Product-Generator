@@ -56,14 +56,93 @@
 
 .empty {
   display: grid;
-  place-items: center;
-  min-height: 160px;
+  justify-items: start;
+  gap: 14px;
+  min-height: 200px;
   padding: 18px;
   border: 1px dashed rgba(255, 255, 255, 0.08);
   border-radius: 22px;
+  background:
+    radial-gradient(circle at 14% 16%, rgba(145, 183, 255, 0.08), transparent 26%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)),
+    rgba(8, 13, 24, 0.22);
+}
+
+.emptyVisual,
+.emptyCopy {
+  display: grid;
+}
+
+.emptyVisual {
+  position: relative;
+  width: 68px;
+  height: 54px;
+}
+
+.emptyShape {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.012)),
+    rgba(9, 14, 25, 0.58);
+}
+
+.emptyShapeMiddle {
+  transform: translate(8px, 6px);
+  opacity: 0.56;
+}
+
+.emptyShapeFront {
+  transform: translate(16px, 12px);
+  opacity: 0.92;
+  box-shadow: 0 10px 22px rgba(1, 6, 17, 0.18);
+}
+
+.emptyCopy {
+  gap: 5px;
+}
+
+.emptyTitle,
+.emptyText {
+  margin: 0;
+}
+
+.emptyTitle {
+  font-size: 0.96rem;
+  line-height: 1.25;
+}
+
+.emptyText {
   color: var(--text-muted);
-  text-align: center;
-  line-height: 1.55;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  max-width: 15rem;
+}
+
+.emptyAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  font-size: 0.84rem;
+  font-weight: 700;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.emptyAction:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.07);
+  transform: translateY(-1px);
 }
 
 .scrollArea::-webkit-scrollbar {

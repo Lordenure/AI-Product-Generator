@@ -66,7 +66,7 @@ const artTones: Array<PackRecord["artTone"]> = ["sun", "mint", "sky", "rose"];
 
 export function StudioStateProvider({ children }: { children: ReactNode }) {
   const [planId, setPlanId] = useState<PlanId>(defaultPlanId);
-  const [hiddenBasePackIds, setHiddenBasePackIds] = useState<string[]>([]);
+  const [hiddenBasePackIds, setHiddenBasePackIds] = useState<string[]>(() => Array.from(basePackIds));
   const [createdPacks, setCreatedPacks] = useState<CreatedPack[]>([]);
 
   const createPack = useCallback(
