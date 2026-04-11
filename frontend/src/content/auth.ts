@@ -1,19 +1,17 @@
 import type { Locale } from "@/lib/i18n";
 
 export type AuthMode = "sign-in" | "create-account";
-export type AuthProviderId = "google" | "apple" | "yandex" | "vk" | "email";
+export type AuthProviderId = "google" | "apple" | "facebook" | "yandex" | "vk" | "sber" | "email";
 
 export type AuthProviderOption = {
   id: AuthProviderId;
   actionLabel: string;
   shortLabel: string;
-  tone: "google" | "apple" | "yandex" | "vk" | "email";
+  tone: "google" | "apple" | "facebook" | "yandex" | "vk" | "sber" | "email";
 };
 
 type AuthLocaleConfig = {
   title: Record<AuthMode, string>;
-  continueWithEmail: string;
-  otherOptions: string;
   nameLabel: string;
   namePlaceholder: string;
   emailLabel: string;
@@ -21,8 +19,6 @@ type AuthLocaleConfig = {
   passwordLabel: string;
   passwordPlaceholder: string;
   submit: Record<AuthMode, string>;
-  switchPrompt: Record<AuthMode, string>;
-  switchAction: Record<AuthMode, string>;
   gateTitle: string;
   gateText: string;
   gateSignIn: string;
@@ -38,8 +34,6 @@ const authContent: Record<Locale, AuthLocaleConfig> = {
       "sign-in": "Sign in",
       "create-account": "Create account"
     },
-    continueWithEmail: "Continue with email",
-    otherOptions: "Other options",
     nameLabel: "Name",
     namePlaceholder: "Lordenure",
     emailLabel: "Email",
@@ -49,14 +43,6 @@ const authContent: Record<Locale, AuthLocaleConfig> = {
     submit: {
       "sign-in": "Sign in",
       "create-account": "Create account"
-    },
-    switchPrompt: {
-      "sign-in": "New here?",
-      "create-account": "Already have an account?"
-    },
-    switchAction: {
-      "sign-in": "Create account",
-      "create-account": "Sign in"
     },
     gateTitle: "Sign in to open your studio",
     gateText: "Packs, privacy, and credits stay in your account.",
@@ -78,6 +64,12 @@ const authContent: Record<Locale, AuthLocaleConfig> = {
         tone: "apple"
       },
       {
+        id: "facebook",
+        actionLabel: "Continue with Facebook",
+        shortLabel: "Facebook",
+        tone: "facebook"
+      },
+      {
         id: "email",
         actionLabel: "Continue with email",
         shortLabel: "Email",
@@ -90,8 +82,6 @@ const authContent: Record<Locale, AuthLocaleConfig> = {
       "sign-in": "Войти",
       "create-account": "Создать аккаунт"
     },
-    continueWithEmail: "Продолжить с почтой",
-    otherOptions: "Другие способы",
     nameLabel: "Имя",
     namePlaceholder: "Ника Воронова",
     emailLabel: "Почта",
@@ -101,14 +91,6 @@ const authContent: Record<Locale, AuthLocaleConfig> = {
     submit: {
       "sign-in": "Войти",
       "create-account": "Создать аккаунт"
-    },
-    switchPrompt: {
-      "sign-in": "Нет аккаунта?",
-      "create-account": "Уже есть аккаунт?"
-    },
-    switchAction: {
-      "sign-in": "Создать",
-      "create-account": "Войти"
     },
     gateTitle: "Войдите, чтобы открыть студию",
     gateText: "Паки, видимость и кредиты хранятся в аккаунте.",
@@ -128,6 +110,12 @@ const authContent: Record<Locale, AuthLocaleConfig> = {
         actionLabel: "Продолжить с VK ID",
         shortLabel: "VK ID",
         tone: "vk"
+      },
+      {
+        id: "sber",
+        actionLabel: "Продолжить с Sber ID",
+        shortLabel: "Sber ID",
+        tone: "sber"
       },
       {
         id: "email",

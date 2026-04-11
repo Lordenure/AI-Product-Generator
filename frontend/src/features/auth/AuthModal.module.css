@@ -10,10 +10,10 @@
 }
 
 .sheet {
-  width: min(100%, 420px);
+  width: min(100%, 432px);
   display: grid;
-  gap: 18px;
-  padding: 20px;
+  gap: 12px;
+  padding: 16px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 28px;
   background:
@@ -24,24 +24,26 @@
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.06),
     0 28px 60px rgba(1, 6, 17, 0.34);
+  max-height: min(720px, calc(100dvh - 48px));
+  overflow: auto;
 }
 
 .top {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  gap: 10px;
 }
 
 .brand {
   display: grid;
-  gap: 10px;
+  gap: 6px;
 }
 
 .mark {
-  width: 42px;
-  height: 42px;
-  border-radius: 16px;
+  width: 34px;
+  height: 34px;
+  border-radius: 13px;
   background:
     radial-gradient(circle at 28% 28%, rgba(255, 255, 255, 0.26), transparent 34%),
     linear-gradient(135deg, var(--accent-mint), var(--accent-sky) 52%, var(--accent-sun));
@@ -51,8 +53,8 @@
 .title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(1.7rem, 4vw, 2.15rem);
-  line-height: 0.96;
+  font-size: clamp(1.42rem, 3vw, 1.82rem);
+  line-height: 0.98;
   letter-spacing: -0.05em;
 }
 
@@ -61,8 +63,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   padding: 0;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 14px;
@@ -102,15 +104,16 @@
 }
 
 .providers,
-.form {
+.form,
+.fields,
+.field,
+.modeSwitch {
   display: grid;
-  gap: 10px;
 }
 
 .providerButton,
 .submitButton,
-.ghostButton,
-.switchButton {
+.modeButton {
   appearance: none;
   font: inherit;
   cursor: pointer;
@@ -122,91 +125,104 @@
     box-shadow 0.2s ease;
 }
 
-.providerButton,
-.ghostButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  min-height: 48px;
+.providers {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.providerButton {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 6px;
+  min-height: 74px;
   width: 100%;
-  padding: 0 16px;
+  padding: 10px 8px 9px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 18px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
-    rgba(255, 255, 255, 0.02);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.042), rgba(255, 255, 255, 0.015)),
+    rgba(255, 255, 255, 0.015);
   color: var(--text);
 }
 
-.providerButton:hover,
-.ghostButton:hover {
+.providerButton:hover {
   border-color: rgba(255, 255, 255, 0.14);
   background: rgba(255, 255, 255, 0.06);
   transform: translateY(-1px);
 }
 
-.providerButton[data-tone="google"] {
-  background:
-    radial-gradient(circle at 18% 18%, rgba(255, 171, 122, 0.14), transparent 24%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
-    rgba(255, 255, 255, 0.02);
-}
-
-.providerButton[data-tone="apple"] {
-  background:
-    radial-gradient(circle at 82% 18%, rgba(145, 183, 255, 0.14), transparent 24%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
-    rgba(255, 255, 255, 0.02);
-}
-
-.providerButton[data-tone="yandex"] {
-  background:
-    radial-gradient(circle at 18% 18%, rgba(255, 171, 122, 0.18), transparent 24%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
-    rgba(255, 255, 255, 0.02);
-}
-
-.providerButton[data-tone="vk"] {
-  background:
-    radial-gradient(circle at 82% 18%, rgba(145, 183, 255, 0.16), transparent 24%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
-    rgba(255, 255, 255, 0.02);
-}
-
-.providerMark {
-  width: 22px;
-  height: 22px;
+.providerIconWrap {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
   flex: 0 0 auto;
   border-radius: 10px;
-  background:
-    linear-gradient(135deg, rgba(135, 230, 214, 0.92), rgba(145, 183, 255, 0.92) 48%, rgba(255, 171, 122, 0.92));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
-.fields {
-  display: grid;
-  gap: 10px;
+.providerButton[data-tone="google"] .providerIconWrap,
+.providerButton[data-tone="yandex"] .providerIconWrap {
+  background: rgba(255, 255, 255, 0.94);
 }
 
-.field {
-  display: grid;
-  gap: 7px;
+.providerButton[data-tone="apple"] .providerIconWrap {
+  background: rgba(6, 9, 16, 0.96);
+  color: #ffffff;
+}
+
+.providerButton[data-tone="facebook"] .providerIconWrap {
+  background: rgba(24, 119, 242, 0.14);
+}
+
+.providerButton[data-tone="vk"] .providerIconWrap {
+  background: rgba(39, 135, 245, 0.18);
+}
+
+.providerButton[data-tone="sber"] .providerIconWrap {
+  background: rgba(33, 160, 56, 0.16);
+}
+
+.providerIcon {
+  width: 17px;
+  height: 17px;
+}
+
+.providerLabel {
+  min-width: 0;
+  text-align: center;
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1.16;
 }
 
 .label {
   color: var(--text-soft);
-  font-size: 0.76rem;
+  font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
+.form {
+  gap: 10px;
+}
+
+.fields {
+  gap: 8px;
+}
+
+.field {
+  gap: 5px;
+}
+
 .input {
   width: 100%;
-  min-height: 48px;
-  padding: 0 14px;
+  min-height: 42px;
+  padding: 0 13px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
+  border-radius: 16px;
   outline: none;
   color: var(--text);
   background:
@@ -225,7 +241,7 @@
 .submitButton {
   position: relative;
   overflow: hidden;
-  min-height: 50px;
+  min-height: 44px;
   width: 100%;
   padding: 0 18px;
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -245,41 +261,124 @@
     0 22px 36px rgba(135, 230, 214, 0.24);
 }
 
-.ghostButton {
-  min-height: 42px;
-  color: var(--text-soft);
+.modeSwitch {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+  padding: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015)),
+    rgba(8, 13, 24, 0.44);
 }
 
-.switchRow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  color: var(--text-soft);
-  font-size: 0.9rem;
-}
-
-.switchButton {
-  padding: 0;
-  border: 0;
+.modeButton {
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid transparent;
+  border-radius: 12px;
   background: transparent;
-  color: var(--text);
+  color: var(--text-soft);
+  font-size: 0.84rem;
   font-weight: 700;
 }
 
-.switchButton:hover {
-  color: var(--accent-sky);
+.modeButton:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.modeButtonActive {
+  color: var(--text);
+  border-color: rgba(145, 183, 255, 0.16);
+  background:
+    linear-gradient(180deg, rgba(145, 183, 255, 0.12), rgba(145, 183, 255, 0.04)),
+    rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 0 0 1px rgba(145, 183, 255, 0.08);
+}
+
+@media (max-width: 900px) {
+  .backdrop {
+    padding: 18px;
+  }
+
+  .sheet {
+    width: min(100%, 408px);
+    gap: 11px;
+    padding: 15px;
+    max-height: calc(100dvh - 36px);
+  }
+
+  .providerButton {
+    min-height: 70px;
+    padding: 9px 7px 8px;
+  }
 }
 
 @media (max-width: 720px) {
   .backdrop {
     align-items: end;
-    padding: 12px;
+    padding: 10px;
   }
 
   .sheet {
     width: 100%;
-    border-radius: 28px 28px 20px 20px;
+    gap: 10px;
+    padding: 14px;
+    max-height: calc(100dvh - 10px);
+    border-radius: 26px 26px 18px 18px;
+  }
+
+  .title {
+    font-size: clamp(1.34rem, 7vw, 1.7rem);
+  }
+
+  .providers {
+    gap: 6px;
+  }
+
+  .providerButton {
+    min-height: 66px;
+    padding: 8px 6px;
+    border-radius: 16px;
+  }
+
+  .providerIconWrap {
+    width: 26px;
+    height: 26px;
+  }
+
+  .providerIcon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .providerLabel {
+    font-size: 0.72rem;
+  }
+
+  .input {
+    min-height: 40px;
+    border-radius: 15px;
+  }
+
+  .submitButton {
+    min-height: 42px;
+  }
+
+  .modeButton {
+    min-height: 32px;
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .backdrop {
+    padding: 8px;
+  }
+
+  .sheet {
+    padding: 13px;
+    max-height: calc(100dvh - 8px);
   }
 }

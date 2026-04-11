@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { getAuthConfig, type AuthMode, type AuthProviderId } from "@/content/auth";
 import type { Locale } from "@/lib/i18n";
 
+import { AuthProviderIcon } from "./AuthProviderIcon";
 import styles from "./AuthModal.module.css";
 
 type AuthModalProps = {
@@ -33,7 +34,6 @@ export function AuthModal({
   onEmailAuth
 }: AuthModalProps) {
   const auth = getAuthConfig(locale);
-  const [useEmail, setUseEmail] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,7 +43,6 @@ export function AuthModal({
       return;
     }
 
-    setUseEmail(false);
     setName("");
     setEmail("");
     setPassword("");
@@ -108,84 +107,86 @@ export function AuthModal({
           </button>
         </div>
 
-        {!useEmail ? (
-          <div className={styles.providers}>
-            {providerOptions.map((provider) => (
-              <button
-                key={provider.id}
-                type="button"
-                className={styles.providerButton}
-                data-tone={provider.tone}
-                onClick={() => onProviderAuth(provider.id, locale)}
-              >
-                <span className={styles.providerMark} aria-hidden="true" />
-                <span>{provider.actionLabel}</span>
-              </button>
-            ))}
-
-            <button type="button" className={styles.ghostButton} onClick={() => setUseEmail(true)}>
-              {auth.continueWithEmail}
+        <div className={styles.providers}>
+          {providerOptions.map((provider) => (
+            <button
+              key={provider.id}
+              type="button"
+              className={styles.providerButton}
+              data-tone={provider.tone}
+              aria-label={provider.actionLabel}
+              title={provider.actionLabel}
+              onClick={() => onProviderAuth(provider.id, locale)}
+            >
+              <span className={styles.providerIconWrap} aria-hidden="true">
+                <AuthProviderIcon providerId={provider.id} className={styles.providerIcon} />
+              </span>
+              <span className={styles.providerLabel}>{provider.shortLabel}</span>
             </button>
+          ))}
+        </div>
+
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles.fields}>
+            {mode === "create-account" ? (
+              <label className={styles.field}>
+                <span className={styles.label}>{auth.nameLabel}</span>
+                <input
+                  className={styles.input}
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
+                  placeholder={auth.namePlaceholder}
+                  autoComplete="name"
+                />
+              </label>
+            ) : null}
+
+            <label className={styles.field}>
+              <span className={styles.label}>{auth.emailLabel}</span>
+              <input
+                className={styles.input}
+                type="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                placeholder={auth.emailPlaceholder}
+                autoComplete="email"
+              />
+            </label>
+
+            <label className={styles.field}>
+              <span className={styles.label}>{auth.passwordLabel}</span>
+              <input
+                className={styles.input}
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                placeholder={auth.passwordPlaceholder}
+                autoComplete={mode === "sign-in" ? "current-password" : "new-password"}
+              />
+            </label>
           </div>
-        ) : (
-          <form className={styles.form} onSubmit={handleSubmit}>
-            <div className={styles.fields}>
-              {mode === "create-account" ? (
-                <label className={styles.field}>
-                  <span className={styles.label}>{auth.nameLabel}</span>
-                  <input
-                    className={styles.input}
-                    value={name}
-                    onChange={(event) => setName(event.target.value)}
-                    placeholder={auth.namePlaceholder}
-                    autoComplete="name"
-                  />
-                </label>
-              ) : null}
 
-              <label className={styles.field}>
-                <span className={styles.label}>{auth.emailLabel}</span>
-                <input
-                  className={styles.input}
-                  type="email"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  placeholder={auth.emailPlaceholder}
-                  autoComplete="email"
-                />
-              </label>
+          <button type="submit" className={styles.submitButton}>
+            {auth.submit[mode]}
+          </button>
+        </form>
 
-              <label className={styles.field}>
-                <span className={styles.label}>{auth.passwordLabel}</span>
-                <input
-                  className={styles.input}
-                  type="password"
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                  placeholder={auth.passwordPlaceholder}
-                  autoComplete={mode === "sign-in" ? "current-password" : "new-password"}
-                />
-              </label>
-            </div>
-
-            <button type="submit" className={styles.submitButton}>
-              {auth.submit[mode]}
-            </button>
-
-            <button type="button" className={styles.ghostButton} onClick={() => setUseEmail(false)}>
-              {auth.otherOptions}
-            </button>
-          </form>
-        )}
-
-        <div className={styles.switchRow}>
-          <span>{auth.switchPrompt[mode]}</span>
+        <div className={styles.modeSwitch} role="group" aria-label={auth.title[mode]}>
           <button
             type="button"
-            className={styles.switchButton}
-            onClick={() => onModeChange(mode === "sign-in" ? "create-account" : "sign-in")}
+            className={`${styles.modeButton} ${mode === "sign-in" ? styles.modeButtonActive : ""}`.trim()}
+            onClick={() => onModeChange("sign-in")}
+            aria-pressed={mode === "sign-in"}
           >
-            {auth.switchAction[mode]}
+            {auth.title["sign-in"]}
+          </button>
+          <button
+            type="button"
+            className={`${styles.modeButton} ${mode === "create-account" ? styles.modeButtonActive : ""}`.trim()}
+            onClick={() => onModeChange("create-account")}
+            aria-pressed={mode === "create-account"}
+          >
+            {auth.title["create-account"]}
           </button>
         </div>
       </section>
