@@ -28,6 +28,107 @@
   min-height: 0;
 }
 
+.accessShell {
+  display: grid;
+  place-items: center;
+  min-height: calc(100vh - 24px);
+}
+
+.accessCard,
+.accessCopy {
+  display: grid;
+}
+
+.accessCard {
+  gap: 20px;
+  width: min(100%, 540px);
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at 82% 18%, rgba(255, 171, 122, 0.14), transparent 28%),
+    radial-gradient(circle at 18% 14%, rgba(145, 183, 255, 0.14), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+    rgba(10, 16, 28, 0.82);
+  box-shadow: var(--shadow-lg);
+}
+
+.accessCopy {
+  gap: 10px;
+}
+
+.accessEyebrow {
+  color: var(--text-soft);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.accessTitle,
+.accessText {
+  margin: 0;
+}
+
+.accessTitle {
+  max-width: 14ch;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  line-height: 0.96;
+  letter-spacing: -0.05em;
+}
+
+.accessText {
+  max-width: 34ch;
+  color: var(--text-muted);
+  line-height: 1.58;
+}
+
+.accessActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.accessPrimary,
+.accessSecondary {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 18px;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    color 0.2s ease;
+}
+
+.accessPrimary {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(135deg, var(--accent-mint), var(--accent-sky) 48%, var(--accent-sun));
+  color: #09111d;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.34),
+    0 18px 32px rgba(135, 230, 214, 0.22);
+}
+
+.accessPrimary:hover,
+.accessSecondary:hover {
+  transform: translateY(-1px);
+}
+
+.accessSecondary {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+}
+
 @media (max-width: 1180px) {
   .wrap {
     width: min(calc(100% - 24px), 1180px);
@@ -48,5 +149,25 @@
 
   .shell {
     grid-template-columns: 1fr;
+  }
+
+  .accessShell {
+    min-height: auto;
+    padding-top: 8px;
+  }
+
+  .accessCard {
+    width: 100%;
+    padding: 22px;
+    border-radius: 26px;
+  }
+
+  .accessTitle {
+    max-width: 100%;
+  }
+
+  .accessPrimary,
+  .accessSecondary {
+    width: 100%;
   }
 }

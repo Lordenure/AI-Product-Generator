@@ -1,0 +1,285 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(4, 8, 17, 0.6);
+  backdrop-filter: blur(20px);
+}
+
+.sheet {
+  width: min(100%, 420px);
+  display: grid;
+  gap: 18px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 84% 18%, rgba(255, 171, 122, 0.14), transparent 28%),
+    radial-gradient(circle at 18% 16%, rgba(145, 183, 255, 0.14), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025)),
+    rgba(10, 16, 28, 0.96);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 28px 60px rgba(1, 6, 17, 0.34);
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.brand {
+  display: grid;
+  gap: 10px;
+}
+
+.mark {
+  width: 42px;
+  height: 42px;
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at 28% 28%, rgba(255, 255, 255, 0.26), transparent 34%),
+    linear-gradient(135deg, var(--accent-mint), var(--accent-sky) 52%, var(--accent-sun));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4vw, 2.15rem);
+  line-height: 0.96;
+  letter-spacing: -0.05em;
+}
+
+.close {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-soft);
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.close:hover {
+  color: var(--text);
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-1px);
+}
+
+.closeLine,
+.closeLine::before {
+  display: block;
+  width: 14px;
+  height: 1.5px;
+  border-radius: 999px;
+  background: currentColor;
+  content: "";
+}
+
+.closeLine {
+  transform: rotate(45deg);
+}
+
+.closeLine::before {
+  transform: rotate(90deg);
+}
+
+.providers,
+.form {
+  display: grid;
+  gap: 10px;
+}
+
+.providerButton,
+.submitButton,
+.ghostButton,
+.switchButton {
+  appearance: none;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.providerButton,
+.ghostButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  width: 100%;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+    rgba(255, 255, 255, 0.02);
+  color: var(--text);
+}
+
+.providerButton:hover,
+.ghostButton:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-1px);
+}
+
+.providerButton[data-tone="google"] {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255, 171, 122, 0.14), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+    rgba(255, 255, 255, 0.02);
+}
+
+.providerButton[data-tone="apple"] {
+  background:
+    radial-gradient(circle at 82% 18%, rgba(145, 183, 255, 0.14), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+    rgba(255, 255, 255, 0.02);
+}
+
+.providerButton[data-tone="yandex"] {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255, 171, 122, 0.18), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+    rgba(255, 255, 255, 0.02);
+}
+
+.providerButton[data-tone="vk"] {
+  background:
+    radial-gradient(circle at 82% 18%, rgba(145, 183, 255, 0.16), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+    rgba(255, 255, 255, 0.02);
+}
+
+.providerMark {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  border-radius: 10px;
+  background:
+    linear-gradient(135deg, rgba(135, 230, 214, 0.92), rgba(145, 183, 255, 0.92) 48%, rgba(255, 171, 122, 0.92));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.fields {
+  display: grid;
+  gap: 10px;
+}
+
+.field {
+  display: grid;
+  gap: 7px;
+}
+
+.label {
+  color: var(--text-soft);
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  outline: none;
+  color: var(--text);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.03)),
+    rgba(8, 13, 24, 0.76);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.input:focus {
+  border-color: rgba(145, 183, 255, 0.38);
+  box-shadow: 0 0 0 4px rgba(145, 183, 255, 0.1);
+}
+
+.submitButton {
+  position: relative;
+  overflow: hidden;
+  min-height: 50px;
+  width: 100%;
+  padding: 0 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent-mint), var(--accent-sky) 48%, var(--accent-sun));
+  color: #09111d;
+  font-weight: 800;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.34),
+    0 18px 32px rgba(135, 230, 214, 0.22);
+}
+
+.submitButton:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.34),
+    0 22px 36px rgba(135, 230, 214, 0.24);
+}
+
+.ghostButton {
+  min-height: 42px;
+  color: var(--text-soft);
+}
+
+.switchRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+}
+
+.switchButton {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.switchButton:hover {
+  color: var(--accent-sky);
+}
+
+@media (max-width: 720px) {
+  .backdrop {
+    align-items: end;
+    padding: 12px;
+  }
+
+  .sheet {
+    width: 100%;
+    border-radius: 28px 28px 20px 20px;
+  }
+}

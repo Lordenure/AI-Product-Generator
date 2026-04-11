@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Brand } from "@/components/Brand";
 import { getCopy } from "@/content/copy";
 import { getPlanCards } from "@/content/plans";
+import { useAuth } from "@/features/auth/AuthProvider";
 import { getLocalizedPath, type Locale } from "@/lib/i18n";
 
 import { SidebarLanguageSwitcher } from "./SidebarLanguageSwitcher";
@@ -21,6 +22,7 @@ export function StudioSidebar({ locale, activeNav }: StudioSidebarProps) {
   const copy = getCopy(locale);
   const plans = getPlanCards(locale);
   const { planId, setPlan, creditBalance } = useStudioState(locale);
+  const { user } = useAuth();
   const libraryHref = getLocalizedPath(locale, "/packs");
   const [menuOpen, setMenuOpen] = useState(false);
   const planMenuRef = useRef<HTMLDivElement | null>(null);
@@ -40,6 +42,13 @@ export function StudioSidebar({ locale, activeNav }: StudioSidebarProps) {
   }, []);
 
   const currentPlan = useMemo(() => plans.find((plan) => plan.id === planId) ?? plans[0], [planId, plans]);
+  const profileName = user?.name ?? copy.studio.sidebarProfileName;
+  const profileLabel = user?.secondaryLabel ?? copy.studio.sidebarProfileRole;
+  const initials = profileName
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? "")
+    .join("");
 
   return (
     <aside className={styles.sidebar}>
@@ -112,11 +121,11 @@ export function StudioSidebar({ locale, activeNav }: StudioSidebarProps) {
 
       <div className={styles.profile}>
         <div className={styles.avatar} aria-hidden="true">
-          <span>M</span>
+          <span>{initials || "T"}</span>
         </div>
         <div className={styles.profileCopy}>
-          <strong>{copy.studio.sidebarProfileName}</strong>
-          <span>{copy.studio.sidebarProfileRole}</span>
+          <strong>{profileName}</strong>
+          <span>{profileLabel}</span>
         </div>
       </div>
     </aside>

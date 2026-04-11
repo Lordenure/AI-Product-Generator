@@ -1,6 +1,5 @@
-import Link from "next/link";
-
 import { creditBalance, fullPackCost, getCopy } from "@/content/copy";
+import { AuthEntryButton } from "@/features/auth/AuthEntryButton";
 import { getLocalizedPath, type Locale } from "@/lib/i18n";
 
 import { Brand } from "./Brand";
@@ -26,9 +25,9 @@ export function Header({ locale, page }: HeaderProps) {
           <Brand locale={locale} href={brandHref} />
           <div className={styles.actions}>
             {page === "home" ? (
-              <Link href={actionHref} className={styles.link}>
+              <AuthEntryButton locale={locale} href={actionHref} className={styles.link}>
                 {actionLabel}
-              </Link>
+              </AuthEntryButton>
             ) : (
               <div className={styles.creditPill} aria-label={copy.studio.creditsTitle}>
                 <span className={styles.creditIcon} aria-hidden="true" />

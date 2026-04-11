@@ -62,7 +62,7 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       visibility: "public",
       visibilityLabel: "Public",
       languageLabel: "Russian",
-      targetLabel: "Wildberries",
+      targetLabel: "Shopify",
       updatedLabel: "18 min ago",
       tags: ["Replies", "Description", "Banner"],
       sections: [
@@ -166,7 +166,7 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       visibility: "public",
       visibilityLabel: "Public",
       languageLabel: "English",
-      targetLabel: "Ozon",
+      targetLabel: "Shopify",
       updatedLabel: "3 hours ago",
       tags: ["Description", "FAQ", "Banner"],
       sections: [
@@ -246,7 +246,7 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       visibility: "public",
       visibilityLabel: "Публичный",
       languageLabel: "Английский",
-      targetLabel: "Amazon",
+      targetLabel: "Ozon",
       updatedLabel: "1 час назад",
       tags: ["Заголовок", "Преимущества", "FAQ"],
       sections: [
@@ -255,7 +255,7 @@ const packLibrary: Record<Locale, PackRecord[]> = {
         { title: "Описание", body: "Диффузор для спокойных комнат, мягкого света и лёгкого ежедневного ухода." },
         { title: "SEO", body: "Тихий аромадиффузор с подсветкой и простой системой долива воды." },
         { title: "Переводы", body: "Английская база готова для следующего перевода." },
-        { title: "Версии для площадок", body: "Есть короткие буллеты под Amazon и компактные мобильные версии." },
+        { title: "Версии для площадок", body: "Есть короткие буллеты под Ozon и компактные мобильные версии." },
         { title: "Ответы на отзывы", body: "Заготовлены ответы про шум, силу пара и уход." },
         { title: "FAQ", body: "Есть ответы про объём воды, автоотключение, масла и режимы света." },
         { title: "Объявления", body: "Короткие тексты вокруг спокойного вечера и мягкого сна." },
@@ -298,7 +298,7 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       visibility: "public",
       visibilityLabel: "Публичный",
       languageLabel: "Испанский",
-      targetLabel: "Instagram",
+      targetLabel: "VK",
       updatedLabel: "2 часа назад",
       tags: ["Объявления", "SEO", "Ответы"],
       sections: [
@@ -324,7 +324,7 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       visibility: "public",
       visibilityLabel: "Публичный",
       languageLabel: "Английский",
-      targetLabel: "Ozon",
+      targetLabel: "Telegram",
       updatedLabel: "3 часа назад",
       tags: ["Описание", "FAQ", "Баннер"],
       sections: [

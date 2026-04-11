@@ -1,8 +1,7 @@
-import Link from "next/link";
-
 import { getCopy } from "@/content/copy";
 import { getPlanCards } from "@/content/plans";
 import { SiteFrame } from "@/components/SiteFrame";
+import { AuthEntryButton } from "@/features/auth/AuthEntryButton";
 import { getLocalizedPath, type Locale } from "@/lib/i18n";
 
 import styles from "./HomeScreen.module.css";
@@ -25,9 +24,9 @@ export function HomeScreen({ locale }: HomeScreenProps) {
           <h1 className="section-title">{copy.home.title}</h1>
           <p className="section-copy">{copy.home.subtitle}</p>
           <div className={styles.heroActions}>
-            <Link href={studioHref} className={styles.cta}>
+            <AuthEntryButton locale={locale} href={studioHref} className={styles.cta}>
               {copy.home.cta}
-            </Link>
+            </AuthEntryButton>
           </div>
           <div className={styles.heroStats}>
             {copy.home.heroStats.map((stat) => (

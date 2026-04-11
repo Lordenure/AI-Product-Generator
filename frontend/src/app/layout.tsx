@@ -9,7 +9,7 @@ import "@fontsource/manrope/600.css";
 import "@fontsource/manrope/700.css";
 
 import "./globals.css";
-import { StudioStateProvider } from "@/features/studio/StudioStateProvider";
+import { AppProviders } from "./providers";
 
 export const metadata: Metadata = {
   title: "TradeAI",
@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <StudioStateProvider>{children}</StudioStateProvider>
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   );

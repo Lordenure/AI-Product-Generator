@@ -255,9 +255,9 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       platforms: [
         { id: "site", label: "Website" },
         { id: "amazon", label: "Amazon" },
-        { id: "wildberries", label: "Wildberries" },
-        { id: "ozon", label: "Ozon" },
-        { id: "instagram", label: "Instagram" }
+        { id: "shopify", label: "Shopify" },
+        { id: "instagram", label: "Instagram" },
+        { id: "tiktok", label: "TikTok" }
       ]
     }
   },
@@ -400,10 +400,10 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       ],
       platforms: [
         { id: "site", label: "Сайт" },
-        { id: "amazon", label: "Amazon" },
         { id: "wildberries", label: "Wildberries" },
         { id: "ozon", label: "Ozon" },
-        { id: "instagram", label: "Instagram" }
+        { id: "telegram", label: "Telegram" },
+        { id: "vk", label: "VK" }
       ]
     }
   }
