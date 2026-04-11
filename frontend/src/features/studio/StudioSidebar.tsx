@@ -39,6 +39,7 @@ export function StudioSidebar({ locale, activeNav }: StudioSidebarProps) {
   const profileName = user?.name ?? copy.studio.sidebarProfileName;
   const profileLabel = user?.secondaryLabel ?? copy.studio.sidebarProfileRole;
   const avatarTone = user?.avatarTone ?? "mint";
+  const avatarImage = user?.avatarImage ?? null;
   const homeHref = getLocalizedPath(locale, "/");
 
   return (
@@ -99,7 +100,7 @@ export function StudioSidebar({ locale, activeNav }: StudioSidebarProps) {
           onClick={() => setPopoverOpen((open) => !open)}
           aria-expanded={popoverOpen}
         >
-          <AccountAvatar name={profileName} tone={avatarTone} size="sidebar" />
+          <AccountAvatar name={profileName} tone={avatarTone} imageSrc={avatarImage} size="sidebar" />
           <div className={styles.profileCopy}>
             <strong>{profileName}</strong>
             <span>{profileLabel}</span>
@@ -171,6 +172,7 @@ export function StudioSidebar({ locale, activeNav }: StudioSidebarProps) {
         name={profileName}
         secondaryLabel={profileLabel}
         avatarTone={avatarTone}
+        avatarImage={avatarImage}
         onClose={() => setActiveSurface(null)}
         onSave={(input) => {
           updateProfile(input);

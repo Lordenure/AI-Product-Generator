@@ -26,6 +26,24 @@
     0 28px 60px rgba(1, 6, 17, 0.34);
   max-height: min(760px, calc(100dvh - 48px));
   overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.14) transparent;
+}
+
+.sheet::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sheet::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sheet::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  background-clip: padding-box;
 }
 
 .wide {

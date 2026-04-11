@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { getCopy } from "@/content/copy";
 import type { Locale } from "@/lib/i18n";
 
 import { AccountAvatar } from "./AccountAvatar";
 import { AccountModalShell } from "./AccountModalShell";
-import { avatarTones, type AvatarTone } from "./avatar";
+import type { AvatarTone } from "./avatar";
 import styles from "./AccountSettingsModal.module.css";
 
 type AccountSettingsModalProps = {
@@ -16,8 +16,9 @@ type AccountSettingsModalProps = {
   name: string;
   secondaryLabel: string;
   avatarTone: AvatarTone;
+  avatarImage: string | null;
   onClose: () => void;
-  onSave: (input: { name: string; avatarTone: AvatarTone }) => void;
+  onSave: (input: { name: string; avatarImage: string | null }) => void;
 };
 
 export function AccountSettingsModal({
@@ -26,12 +27,14 @@ export function AccountSettingsModal({
   name,
   secondaryLabel,
   avatarTone,
+  avatarImage,
   onClose,
   onSave
 }: AccountSettingsModalProps) {
   const copy = getCopy(locale);
   const [draftName, setDraftName] = useState(name);
-  const [draftTone, setDraftTone] = useState<AvatarTone>(avatarTone);
+  const [draftAvatarImage, setDraftAvatarImage] = useState<string | null>(avatarImage);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (!isOpen) {
@@ -39,17 +42,58 @@ export function AccountSettingsModal({
     }
 
     setDraftName(name);
-    setDraftTone(avatarTone);
-  }, [avatarTone, isOpen, name]);
+    setDraftAvatarImage(avatarImage);
+  }, [avatarImage, isOpen, name]);
 
   return (
     <AccountModalShell isOpen={isOpen} title={copy.studio.accountSettingsTitle} onClose={onClose}>
       <div className={styles.stack}>
         <div className={styles.preview}>
-          <AccountAvatar name={draftName || name} tone={draftTone} size="settings" />
-          <div className={styles.previewCopy}>
-            <strong>{draftName || name}</strong>
-            <span>{secondaryLabel}</span>
+          <AccountAvatar
+            name={draftName || name}
+            tone={avatarTone}
+            imageSrc={draftAvatarImage}
+            size="settings"
+          />
+
+          <div className={styles.previewBody}>
+            <div className={styles.previewCopy}>
+              <strong>{draftName || name}</strong>
+              <span>{secondaryLabel}</span>
+            </div>
+
+            <div className={styles.uploadRow}>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                className={styles.fileInput}
+                onChange={async (event) => {
+                  const file = event.target.files?.[0];
+
+                  if (!file) {
+                    return;
+                  }
+
+                  setDraftAvatarImage(await readImageAsDataUrl(file));
+                  event.target.value = "";
+                }}
+              />
+
+              <button
+                type="button"
+                className={styles.uploadButton}
+                onClick={() => fileInputRef.current?.click()}
+              >
+                {draftAvatarImage ? copy.studio.accountImageChangeLabel : copy.studio.accountImageChooseLabel}
+              </button>
+
+              {draftAvatarImage ? (
+                <button type="button" className={styles.removeButton} onClick={() => setDraftAvatarImage(null)}>
+                  {copy.studio.accountImageRemoveLabel}
+                </button>
+              ) : null}
+            </div>
           </div>
         </div>
 
@@ -63,23 +107,6 @@ export function AccountSettingsModal({
           />
         </label>
 
-        <div className={styles.avatarGroup}>
-          <span className={styles.label}>{copy.studio.accountAvatarLabel}</span>
-          <div className={styles.avatarChoices}>
-            {avatarTones.map((tone) => (
-              <button
-                key={tone}
-                type="button"
-                className={`${styles.avatarOption} ${draftTone === tone ? styles.avatarOptionActive : ""}`.trim()}
-                onClick={() => setDraftTone(tone)}
-                aria-pressed={draftTone === tone}
-              >
-                <AccountAvatar name={draftName || name} tone={tone} size="option" />
-              </button>
-            ))}
-          </div>
-        </div>
-
         <div className={styles.actions}>
           <button type="button" className={styles.secondary} onClick={onClose}>
             {copy.studio.accountCancelLabel}
@@ -90,7 +117,7 @@ export function AccountSettingsModal({
             onClick={() => {
               onSave({
                 name: draftName.trim() || name,
-                avatarTone: draftTone
+                avatarImage: draftAvatarImage
               });
             }}
           >
@@ -100,4 +127,14 @@ export function AccountSettingsModal({
       </div>
     </AccountModalShell>
   );
+}
+
+function readImageAsDataUrl(file: File) {
+  return new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onload = () => resolve(typeof reader.result === "string" ? reader.result : "");
+    reader.onerror = () => reject(new Error("Failed to read image."));
+    reader.readAsDataURL(file);
+  });
 }

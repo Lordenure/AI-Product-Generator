@@ -24,6 +24,7 @@ export type AuthUser = {
   providerId: AuthProviderId;
   contour: Locale;
   avatarTone: AvatarTone;
+  avatarImage: string | null;
 };
 
 type OpenAuthOptions = {
@@ -39,7 +40,7 @@ type AuthContextValue = {
   openAuth: (options: OpenAuthOptions) => void;
   closeAuth: () => void;
   setMode: (mode: AuthMode) => void;
-  updateProfile: (input: { name: string; avatarTone: AvatarTone }) => void;
+  updateProfile: (input: { name: string; avatarImage: string | null }) => void;
   signOut: () => void;
 };
 
@@ -79,7 +80,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             secondaryLabel: parsed.secondaryLabel,
             providerId: parsed.providerId,
             contour: parsed.contour,
-            avatarTone: parsed.avatarTone ?? getDefaultAvatarTone(parsed.id)
+            avatarTone: parsed.avatarTone ?? getDefaultAvatarTone(parsed.id),
+            avatarImage: parsed.avatarImage ?? null
           });
         } else {
           setUser(null);
@@ -145,7 +147,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           secondaryLabel: provider?.shortLabel ?? "Account",
           providerId,
           contour: locale,
-          avatarTone: getDefaultAvatarTone(`${providerId}-${locale}`)
+          avatarTone: getDefaultAvatarTone(`${providerId}-${locale}`),
+          avatarImage: null
         },
         locale
       );
@@ -177,7 +180,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           secondaryLabel: normalizedEmail,
           providerId: "email",
           contour: locale,
-          avatarTone: getDefaultAvatarTone(normalizedEmail)
+          avatarTone: getDefaultAvatarTone(normalizedEmail),
+          avatarImage: null
         },
         locale
       );
@@ -185,7 +189,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     [finishAuth]
   );
 
-  const updateProfile = useCallback((input: { name: string; avatarTone: AvatarTone }) => {
+  const updateProfile = useCallback((input: { name: string; avatarImage: string | null }) => {
     setUser((current) => {
       if (!current) {
         return current;
@@ -194,7 +198,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return {
         ...current,
         name: input.name.trim() || current.name,
-        avatarTone: input.avatarTone
+        avatarImage: input.avatarImage
       };
     });
   }, []);

@@ -18,11 +18,20 @@ type PlansModalProps = {
 export function PlansModal({ isOpen, locale, currentPlanId, onClose, onSelectPlan }: PlansModalProps) {
   const copy = getCopy(locale);
   const plans = getPlanCards(locale);
+  const visiblePlans =
+    currentPlanId === "free"
+      ? plans
+      : currentPlanId === "plus"
+        ? plans.filter((plan) => plan.id !== "free")
+        : plans.filter((plan) => plan.id === "pro");
+  const gridClass =
+    visiblePlans.length === 1 ? styles.gridSingle : visiblePlans.length === 2 ? styles.gridTwo : styles.gridThree;
+  const modalWidth = visiblePlans.length === 1 ? "default" : "wide";
 
   return (
-    <AccountModalShell isOpen={isOpen} title={copy.studio.plansModalTitle} onClose={onClose} width="wide">
-      <div className={styles.grid}>
-        {plans.map((plan) => {
+    <AccountModalShell isOpen={isOpen} title={copy.studio.plansModalTitle} onClose={onClose} width={modalWidth}>
+      <div className={`${styles.grid} ${gridClass}`.trim()}>
+        {visiblePlans.map((plan) => {
           const isCurrent = plan.id === currentPlanId;
 
           return (
@@ -55,6 +64,7 @@ export function PlansModal({ isOpen, locale, currentPlanId, onClose, onSelectPla
               <button
                 type="button"
                 className={`${styles.action} ${isCurrent ? styles.actionCurrent : styles.actionChoose}`.trim()}
+                disabled={isCurrent}
                 onClick={() => {
                   if (isCurrent) {
                     return;

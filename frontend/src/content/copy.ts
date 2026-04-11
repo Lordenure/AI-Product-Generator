@@ -111,6 +111,9 @@ type StudioCopy = {
   accountSettingsTitle: string;
   accountNameLabel: string;
   accountAvatarLabel: string;
+  accountImageChooseLabel: string;
+  accountImageChangeLabel: string;
+  accountImageRemoveLabel: string;
   accountSaveLabel: string;
   accountCancelLabel: string;
   logoutTitle: string;
@@ -272,6 +275,9 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       accountSettingsTitle: "Account",
       accountNameLabel: "Nickname",
       accountAvatarLabel: "Avatar",
+      accountImageChooseLabel: "Choose image",
+      accountImageChangeLabel: "Change image",
+      accountImageRemoveLabel: "Remove",
       accountSaveLabel: "Save",
       accountCancelLabel: "Cancel",
       logoutTitle: "Log out?",
@@ -434,6 +440,9 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       accountSettingsTitle: "Аккаунт",
       accountNameLabel: "Никнейм",
       accountAvatarLabel: "Аватар",
+      accountImageChooseLabel: "Выбрать фото",
+      accountImageChangeLabel: "Сменить фото",
+      accountImageRemoveLabel: "Убрать",
       accountSaveLabel: "Сохранить",
       accountCancelLabel: "Отмена",
       logoutTitle: "Выйти?",

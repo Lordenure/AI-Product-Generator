@@ -4,6 +4,7 @@ import styles from "./AccountAvatar.module.css";
 type AccountAvatarProps = {
   name: string;
   tone: AvatarTone;
+  imageSrc?: string | null;
   size?: "sidebar" | "popover" | "settings" | "option";
   className?: string;
 };
@@ -11,12 +12,13 @@ type AccountAvatarProps = {
 export function AccountAvatar({
   name,
   tone,
+  imageSrc,
   size = "sidebar",
   className
 }: AccountAvatarProps) {
   return (
     <div className={`${styles.avatar} ${styles[`tone${capitalize(tone)}`]} ${styles[size]} ${className ?? ""}`.trim()}>
-      <span>{getAvatarInitials(name)}</span>
+      {imageSrc ? <img src={imageSrc} alt="" className={styles.image} /> : <span>{getAvatarInitials(name)}</span>}
     </div>
   );
 }

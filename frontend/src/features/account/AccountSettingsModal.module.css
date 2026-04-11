@@ -1,45 +1,66 @@
 .stack,
-.preview,
 .field,
-.avatarGroup,
-.avatarChoices,
-.actions {
+.actions,
+.previewBody,
+.previewCopy,
+.uploadRow {
   display: grid;
 }
 
 .stack {
-  gap: 14px;
+  gap: 12px;
 }
 
 .preview {
-  gap: 10px;
-  justify-items: start;
-  padding: 18px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  padding: 14px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 22px;
+  border-radius: 20px;
   background:
-    radial-gradient(circle at 84% 18%, rgba(255, 171, 122, 0.12), transparent 28%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+    radial-gradient(circle at 84% 18%, rgba(255, 171, 122, 0.1), transparent 26%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02)),
     rgba(255, 255, 255, 0.02);
 }
 
+.previewBody {
+  gap: 10px;
+  min-width: 0;
+}
+
 .previewCopy {
-  display: grid;
-  gap: 4px;
+  gap: 3px;
+  min-width: 0;
 }
 
 .previewCopy strong,
 .previewCopy span {
   margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.previewCopy strong {
+  font-size: 0.98rem;
 }
 
 .previewCopy span {
   color: var(--text-soft);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
 }
 
-.field,
-.avatarGroup {
+.uploadRow {
+  grid-auto-flow: column;
+  justify-content: start;
+  align-items: center;
+  gap: 8px;
+}
+
+.field {
   gap: 8px;
 }
 
@@ -52,10 +73,10 @@
 
 .input {
   width: 100%;
-  min-height: 42px;
+  min-height: 40px;
   padding: 0 14px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
+  border-radius: 15px;
   outline: none;
   color: var(--text);
   background:
@@ -68,56 +89,19 @@
   box-shadow: 0 0 0 4px rgba(145, 183, 255, 0.1);
 }
 
-.avatarChoices {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
+.fileInput {
+  display: none;
 }
 
-.avatarOption {
-  appearance: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 64px;
-  padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
-    rgba(255, 255, 255, 0.02);
-  cursor: pointer;
-  transition:
-    border-color 0.2s ease,
-    background 0.2s ease,
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.avatarOption:hover {
-  transform: translateY(-1px);
-  border-color: rgba(255, 255, 255, 0.14);
-}
-
-.avatarOptionActive {
-  border-color: rgba(145, 183, 255, 0.18);
-  background:
-    linear-gradient(180deg, rgba(145, 183, 255, 0.12), rgba(145, 183, 255, 0.04)),
-    rgba(255, 255, 255, 0.04);
-  box-shadow: inset 0 0 0 1px rgba(145, 183, 255, 0.08);
-}
-
-.actions {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-
+.uploadButton,
+.removeButton,
 .secondary,
 .primary {
   appearance: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 42px;
+  min-height: 38px;
   padding: 0 14px;
   border-radius: 999px;
   font: inherit;
@@ -131,10 +115,19 @@
     color 0.2s ease;
 }
 
+.uploadButton,
 .secondary {
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.04);
   color: var(--text);
+}
+
+.removeButton {
+  min-height: 34px;
+  padding: 0 10px;
+  border: 1px solid rgba(255, 171, 122, 0.1);
+  background: rgba(255, 171, 122, 0.06);
+  color: var(--accent-sun);
 }
 
 .primary {
@@ -143,20 +136,40 @@
   color: #09111d;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.34),
-    0 18px 32px rgba(135, 230, 214, 0.18);
+    0 14px 28px rgba(135, 230, 214, 0.16);
 }
 
+.uploadButton:hover,
+.removeButton:hover,
 .secondary:hover,
 .primary:hover {
   transform: translateY(-1px);
 }
 
+.actions {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 2px;
+}
+
 @media (max-width: 720px) {
-  .avatarChoices {
-    gap: 8px;
+  .preview {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    gap: 12px;
   }
 
-  .avatarOption {
-    min-height: 60px;
+  .previewCopy strong,
+  .previewCopy span {
+    white-space: normal;
+  }
+
+  .uploadRow {
+    grid-auto-flow: row;
+    justify-items: start;
+  }
+
+  .actions {
+    grid-template-columns: 1fr;
   }
 }
