@@ -262,7 +262,7 @@
   }
 
   .identityRow {
-    align-items: start;
+    align-items: end;
     padding: 0 16px 16px;
   }
 
@@ -277,8 +277,8 @@
   }
 
   .identityRow {
-    flex-direction: column;
-    align-items: start;
+    flex-direction: row;
+    align-items: end;
     gap: 10px;
     margin-top: -24px;
   }
