@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { getCopy } from "@/content/copy";
 import type { PackVisibility } from "@/content/packs";
+import { useAuth } from "@/features/auth/AuthProvider";
 import { getLocalizedPath, type Locale } from "@/lib/i18n";
 
 import { StudioAppShell } from "./StudioAppShell";
@@ -20,6 +21,7 @@ type StudioStatus = "idle" | "loading" | "ready" | "name-error" | "limit-error";
 export function StudioScreen({ locale }: StudioScreenProps) {
   const copy = getCopy(locale);
   const router = useRouter();
+  const { user } = useAuth();
   const { createPack, isStorageFull, packs } = useStudioState(locale);
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
@@ -87,7 +89,8 @@ export function StudioScreen({ locale }: StudioScreenProps) {
         benefits,
         languageId: language,
         platformId: platform,
-        visibility
+        visibility,
+        authorName: user?.name ?? copy.studio.sidebarProfileName
       });
 
       if (!result.ok) {

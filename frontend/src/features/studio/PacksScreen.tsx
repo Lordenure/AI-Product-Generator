@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { getCopy } from "@/content/copy";
 import { getLocalizedPath, type Locale } from "@/lib/i18n";
@@ -21,6 +21,8 @@ export function PacksScreen({ locale }: PacksScreenProps) {
   const copy = getCopy(locale);
   const { packs, deletePack } = useStudioState(locale);
   const [tab, setTab] = useState<PacksTab>("library");
+  const libraryPacks = packs;
+  const communityPacks = useMemo(() => packs.filter((pack) => pack.visibility === "public"), [packs]);
 
   return (
     <StudioAppShell locale={locale} activeNav="packs" showRail={false}>
@@ -49,9 +51,9 @@ export function PacksScreen({ locale }: PacksScreenProps) {
         </div>
 
         {tab === "library" ? (
-          packs.length > 0 ? (
+          libraryPacks.length > 0 ? (
             <div className={styles.grid}>
-              {packs.map((pack) => (
+              {libraryPacks.map((pack) => (
                 <PackCard
                   key={pack.id}
                   locale={locale}
@@ -77,15 +79,30 @@ export function PacksScreen({ locale }: PacksScreenProps) {
             </div>
           )
         ) : (
-          <div className={`${styles.empty} ${styles.communityEmpty}`.trim()}>
-            <div className={styles.emptyVisual} aria-hidden="true">
-              <span className={styles.emptyShape} />
+          communityPacks.length > 0 ? (
+            <div className={styles.grid}>
+              {communityPacks.map((pack) => (
+                <PackCard
+                  key={pack.id}
+                  locale={locale}
+                  pack={pack}
+                  showAuthor
+                  showDelete={false}
+                  onDelete={() => undefined}
+                />
+              ))}
             </div>
-            <div className={styles.emptyCopy}>
-              <h2 className={styles.emptyTitle}>{copy.studio.packsCommunityEmptyTitle}</h2>
-              <p className={styles.emptyText}>{copy.studio.packsCommunityEmptyText}</p>
+          ) : (
+            <div className={`${styles.empty} ${styles.communityEmpty}`.trim()}>
+              <div className={styles.emptyVisual} aria-hidden="true">
+                <span className={styles.emptyShape} />
+              </div>
+              <div className={styles.emptyCopy}>
+                <h2 className={styles.emptyTitle}>{copy.studio.packsCommunityEmptyTitle}</h2>
+                <p className={styles.emptyText}>{copy.studio.packsCommunityEmptyText}</p>
+              </div>
             </div>
-          </div>
+          )
         )}
       </section>
     </StudioAppShell>

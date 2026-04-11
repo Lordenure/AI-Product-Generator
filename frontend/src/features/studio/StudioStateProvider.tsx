@@ -27,6 +27,7 @@ type CreatedPack = {
   benefits: string;
   languageId: string;
   platformId: string;
+  authorName: string;
   createdAt: number;
   artTone: PackRecord["artTone"];
   status: PackStatus;
@@ -39,6 +40,7 @@ type CreatePackInput = {
   benefits: string;
   languageId: string;
   platformId: string;
+  authorName: string;
   visibility: PackVisibility;
 };
 
@@ -100,6 +102,7 @@ export function StudioStateProvider({ children }: { children: ReactNode }) {
         benefits: input.benefits.trim(),
         languageId: input.languageId,
         platformId: input.platformId,
+        authorName: input.authorName.trim() || (input.visibility === "public" ? "TradeAI" : ""),
         createdAt,
         artTone: artTones[createdPacks.length % artTones.length],
         status: "ready",
@@ -147,7 +150,12 @@ export function useStudioState(locale: Locale): LocalizedStudioState {
   const storageLimit = getPlanStorageLimit(context.planId);
   const storedCount = basePackIds.size - context.hiddenBasePackIds.length + context.createdPacks.length;
   const packs = useMemo(() => {
-    const basePacks = getPackLibrary(locale).filter((pack) => !context.hiddenBasePackIds.includes(pack.id));
+    const basePacks = getPackLibrary(locale)
+      .filter((pack) => !context.hiddenBasePackIds.includes(pack.id))
+      .map((pack) => ({
+        ...pack,
+        updatedLabel: formatPackTime(locale, pack.createdAt)
+      }));
     const createdPacks = context.createdPacks.map((pack) => localizeCreatedPack(locale, pack));
 
     return [...createdPacks, ...basePacks];
@@ -187,9 +195,11 @@ function localizeCreatedPack(locale: Locale, pack: CreatedPack): PackRecord {
     statusLabel: getStatusLabel(locale, pack.status),
     visibility: pack.visibility,
     visibilityLabel: getVisibilityLabel(locale, pack.visibility),
+    authorName: pack.authorName,
+    createdAt: pack.createdAt,
     languageLabel,
     targetLabel,
-    updatedLabel: getRelativeLabel(locale, pack.createdAt),
+    updatedLabel: formatPackTime(locale, pack.createdAt),
     tags: locale === "ru" ? ["SEO", "FAQ", "Объявления"] : ["SEO", "FAQ", "Ads"],
     sections: buildSections(locale, pack, languageLabel, targetLabel)
   };
@@ -258,24 +268,29 @@ function getStatusLabel(locale: Locale, status: PackStatus): string {
   return labels[locale][status];
 }
 
-function getRelativeLabel(locale: Locale, createdAt: number): string {
-  const minutes = Math.max(0, Math.floor((Date.now() - createdAt) / 60000));
+function formatPackTime(locale: Locale, createdAt: number): string {
+  const elapsedMs = Math.max(0, Date.now() - createdAt);
+  const minutes = Math.floor(elapsedMs / 60000);
 
   if (minutes < 1) {
     return locale === "ru" ? "Только что" : "Just now";
   }
 
   if (minutes < 60) {
-    return locale === "ru" ? `${minutes} мин назад` : `${minutes} min ago`;
+    return locale === "ru" ? formatRussianRelative(minutes, "minute") : formatEnglishRelative(minutes, "minute");
   }
 
   const hours = Math.floor(minutes / 60);
 
   if (hours < 24) {
-    return locale === "ru" ? `${hours} ч назад` : `${hours} hr ago`;
+    return locale === "ru" ? formatRussianRelative(hours, "hour") : formatEnglishRelative(hours, "hour");
   }
 
-  return locale === "ru" ? "Недавно" : "Recently";
+  if (hours < 48) {
+    return locale === "ru" ? "1 день назад" : "1 day ago";
+  }
+
+  return formatAbsoluteDateTime(locale, createdAt);
 }
 
 function getVisibilityLabel(locale: Locale, visibility: PackVisibility): string {
@@ -291,6 +306,55 @@ function getVisibilityLabel(locale: Locale, visibility: PackVisibility): string 
   } as const;
 
   return labels[locale][visibility];
+}
+
+function formatAbsoluteDateTime(locale: Locale, createdAt: number): string {
+  const date = new Date(createdAt);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+
+  return locale === "ru"
+    ? `${day}.${month}.${year} ${hours}:${minutes}`
+    : `${year}-${month}-${day} ${hours}:${minutes}`;
+}
+
+function formatEnglishRelative(value: number, unit: "minute" | "hour"): string {
+  const suffix = value === 1 ? unit : `${unit}s`;
+  return `${value} ${suffix} ago`;
+}
+
+function formatRussianRelative(value: number, unit: "minute" | "hour"): string {
+  const forms =
+    unit === "minute"
+      ? (["минуту", "минуты", "минут"] as const)
+      : (["час", "часа", "часов"] as const);
+
+  return `${value} ${getRussianPlural(value, forms)} назад`;
+}
+
+function getRussianPlural(
+  value: number,
+  forms: readonly [string, string, string]
+) {
+  const abs = Math.abs(value) % 100;
+  const last = abs % 10;
+
+  if (abs > 10 && abs < 20) {
+    return forms[2];
+  }
+
+  if (last === 1) {
+    return forms[0];
+  }
+
+  if (last >= 2 && last <= 4) {
+    return forms[1];
+  }
+
+  return forms[2];
 }
 
 function toSlug(value: string): string {

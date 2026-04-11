@@ -14,6 +14,8 @@ type PackCardProps = {
   pack: PackRecord;
   isActive?: boolean;
   showVisibility?: boolean;
+  showAuthor?: boolean;
+  showDelete?: boolean;
   onDelete: () => void;
 };
 
@@ -22,6 +24,8 @@ export function PackCard({
   pack,
   isActive = false,
   showVisibility = false,
+  showAuthor = false,
+  showDelete = true,
   onDelete
 }: PackCardProps) {
   const copy = getCopy(locale);
@@ -49,8 +53,10 @@ export function PackCard({
           </div>
         </div>
 
-        <PackDeleteControl locale={locale} onDelete={onDelete} />
+        {showDelete ? <PackDeleteControl locale={locale} onDelete={onDelete} /> : null}
       </div>
+
+      {showAuthor ? <p className={styles.author}>{pack.authorName}</p> : null}
 
       <div className={styles.meta}>
         <span>{pack.languageLabel}</span>

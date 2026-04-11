@@ -17,12 +17,18 @@ export type PackRecord = {
   statusLabel: string;
   visibility: PackVisibility;
   visibilityLabel: string;
+  authorName: string;
+  createdAt: number;
   languageLabel: string;
   targetLabel: string;
   updatedLabel: string;
   tags: string[];
   sections: PackSection[];
 };
+
+function toTimestamp(value: string) {
+  return new Date(value).getTime();
+}
 
 const packLibrary: Record<Locale, PackRecord[]> = {
   en: [
@@ -35,9 +41,11 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Updated",
       visibility: "public",
       visibilityLabel: "Public",
+      authorName: "Mila Rowan",
+      createdAt: toTimestamp("2026-04-11T18:45:00"),
       languageLabel: "English",
       targetLabel: "Website",
-      updatedLabel: "Updated today",
+      updatedLabel: "",
       tags: ["SEO", "FAQ", "Ads"],
       sections: [
         { title: "Title", body: "GlowCup Tea Bottle" },
@@ -61,9 +69,11 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Ready",
       visibility: "public",
       visibilityLabel: "Public",
+      authorName: "Theo March",
+      createdAt: toTimestamp("2026-04-11T12:20:00"),
       languageLabel: "Russian",
       targetLabel: "Shopify",
-      updatedLabel: "18 min ago",
+      updatedLabel: "",
       tags: ["Replies", "Description", "Banner"],
       sections: [
         { title: "Title", body: "Luma Pet Brush for Cats and Dogs" },
@@ -87,9 +97,11 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Draft",
       visibility: "public",
       visibilityLabel: "Public",
+      authorName: "Ada Soren",
+      createdAt: toTimestamp("2026-04-10T22:40:00"),
       languageLabel: "English",
       targetLabel: "Amazon",
-      updatedLabel: "1 hour ago",
+      updatedLabel: "",
       tags: ["Title", "Benefits", "FAQ"],
       sections: [
         { title: "Title", body: "MistLoop Quiet Aroma Diffuser" },
@@ -113,9 +125,11 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Ready",
       visibility: "public",
       visibilityLabel: "Public",
+      authorName: "Lina North",
+      createdAt: toTimestamp("2026-04-09T16:10:00"),
       languageLabel: "German",
       targetLabel: "Website",
-      updatedLabel: "Yesterday",
+      updatedLabel: "",
       tags: ["Translations", "FAQ", "Ads"],
       sections: [
         { title: "Title", body: "SoftNest Baby Wrap" },
@@ -139,9 +153,11 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Updated",
       visibility: "public",
       visibilityLabel: "Public",
+      authorName: "Keira Vale",
+      createdAt: toTimestamp("2026-04-07T19:25:00"),
       languageLabel: "Spanish",
       targetLabel: "Instagram",
-      updatedLabel: "2 hours ago",
+      updatedLabel: "",
       tags: ["Ads", "SEO", "Replies"],
       sections: [
         { title: "Title", body: "Nori Lamp with Warm Dimming Glow" },
@@ -165,9 +181,11 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Ready",
       visibility: "public",
       visibilityLabel: "Public",
+      authorName: "Noah Hale",
+      createdAt: toTimestamp("2026-04-05T13:15:00"),
       languageLabel: "English",
       targetLabel: "Shopify",
-      updatedLabel: "3 hours ago",
+      updatedLabel: "",
       tags: ["Description", "FAQ", "Banner"],
       sections: [
         { title: "Title", body: "Pebble Lunch Kit" },
@@ -193,9 +211,11 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Обновлён",
       visibility: "public",
       visibilityLabel: "Публичный",
+      authorName: "Мила Роуэн",
+      createdAt: toTimestamp("2026-04-11T18:45:00"),
       languageLabel: "Английский",
       targetLabel: "Сайт",
-      updatedLabel: "Обновлено сегодня",
+      updatedLabel: "",
       tags: ["SEO", "FAQ", "Объявления"],
       sections: [
         { title: "Заголовок", body: "GlowCup для чая" },
@@ -219,9 +239,11 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Готов",
       visibility: "public",
       visibilityLabel: "Публичный",
+      authorName: "Артём Лебедев",
+      createdAt: toTimestamp("2026-04-11T12:20:00"),
       languageLabel: "Русский",
       targetLabel: "Wildberries",
-      updatedLabel: "18 минут назад",
+      updatedLabel: "",
       tags: ["Ответы", "Описание", "Баннер"],
       sections: [
         { title: "Заголовок", body: "Luma Pet Brush для кошек и собак" },
@@ -245,9 +267,11 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Черновик",
       visibility: "public",
       visibilityLabel: "Публичный",
+      authorName: "Ника Воронова",
+      createdAt: toTimestamp("2026-04-10T22:40:00"),
       languageLabel: "Английский",
       targetLabel: "Ozon",
-      updatedLabel: "1 час назад",
+      updatedLabel: "",
       tags: ["Заголовок", "Преимущества", "FAQ"],
       sections: [
         { title: "Заголовок", body: "MistLoop Quiet Diffuser" },
@@ -271,9 +295,11 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Готов",
       visibility: "public",
       visibilityLabel: "Публичный",
+      authorName: "Ева Север",
+      createdAt: toTimestamp("2026-04-09T16:10:00"),
       languageLabel: "Немецкий",
       targetLabel: "Сайт",
-      updatedLabel: "Вчера",
+      updatedLabel: "",
       tags: ["Переводы", "FAQ", "Объявления"],
       sections: [
         { title: "Заголовок", body: "SoftNest Baby Wrap" },
@@ -297,9 +323,11 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Обновлён",
       visibility: "public",
       visibilityLabel: "Публичный",
+      authorName: "Лев Миронов",
+      createdAt: toTimestamp("2026-04-07T19:25:00"),
       languageLabel: "Испанский",
       targetLabel: "VK",
-      updatedLabel: "2 часа назад",
+      updatedLabel: "",
       tags: ["Объявления", "SEO", "Ответы"],
       sections: [
         { title: "Заголовок", body: "Nori Lamp с мягкой регулировкой света" },
@@ -323,9 +351,11 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Готов",
       visibility: "public",
       visibilityLabel: "Публичный",
+      authorName: "Яна Белова",
+      createdAt: toTimestamp("2026-04-05T13:15:00"),
       languageLabel: "Английский",
       targetLabel: "Telegram",
-      updatedLabel: "3 часа назад",
+      updatedLabel: "",
       tags: ["Описание", "FAQ", "Баннер"],
       sections: [
         { title: "Заголовок", body: "Pebble Lunch Kit" },
