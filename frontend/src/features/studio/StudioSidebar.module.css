@@ -20,7 +20,6 @@
 .nav,
 .creditsCard,
 .utilityRow,
-.planMenu,
 .profileCopy,
 .upgradeButton {
   display: grid;
@@ -102,10 +101,6 @@
   align-items: center;
 }
 
-.planMenu {
-  position: relative;
-}
-
 .upgradeButton {
   display: inline-flex;
   align-items: center;
@@ -134,88 +129,143 @@
     0 18px 32px rgba(1, 6, 17, 0.22);
 }
 
-.planMenuCard {
-  position: absolute;
-  top: calc(100% + 10px);
-  left: 0;
-  right: 0;
-  z-index: 25;
-  display: grid;
-  gap: 8px;
-  padding: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
-  background: rgba(10, 16, 28, 0.96);
-  box-shadow: var(--shadow-md);
-  backdrop-filter: blur(16px);
-}
-
-.planOption {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  min-height: 36px;
-  padding: 0 12px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.03);
-  color: var(--text-muted);
-  font-size: 0.84rem;
-  transition:
-    border-color 0.2s ease,
-    background 0.2s ease,
-    color 0.2s ease;
-}
-
-.planOption:hover {
-  color: var(--text);
-  border-color: rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.planOptionActive {
-  color: var(--text);
-  border-color: rgba(145, 183, 255, 0.18);
-  background:
-    linear-gradient(180deg, rgba(145, 183, 255, 0.12), rgba(145, 183, 255, 0.04)),
-    rgba(255, 255, 255, 0.04);
-}
-
-.profile {
+.profileTrigger {
+  appearance: none;
   display: flex;
   align-items: center;
   gap: 12px;
   margin-top: auto;
+  width: 100%;
   padding: 12px;
+  text-align: left;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.035);
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
-.avatar {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, rgba(135, 230, 214, 0.92), rgba(145, 183, 255, 0.92) 48%, rgba(255, 171, 122, 0.92));
-  color: rgba(8, 12, 22, 0.84);
-  font-size: 0.92rem;
-  font-weight: 800;
+.profileTrigger:hover,
+.profileTrigger[aria-expanded="true"] {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-1px);
 }
 
 .profileCopy {
   gap: 2px;
+  min-width: 0;
+  text-align: left;
 }
 
 .profileCopy strong {
+  overflow: hidden;
   font-size: 0.96rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .profileCopy span {
   color: var(--text-soft);
   font-size: 0.84rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.accountMenu {
+  width: min(260px, calc(100vw - 24px));
+  display: grid;
+  gap: 6px;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 84% 18%, rgba(255, 171, 122, 0.1), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+    rgba(10, 16, 28, 0.96);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(16px);
+}
+
+.accountPlan,
+.accountMenuItem {
+  appearance: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+.accountPlan:hover,
+.accountMenuItem:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-1px);
+}
+
+.accountPlan {
+  min-height: 52px;
+  background:
+    linear-gradient(180deg, rgba(145, 183, 255, 0.12), rgba(145, 183, 255, 0.04)),
+    rgba(255, 255, 255, 0.04);
+}
+
+.accountPlanCopy {
+  display: grid;
+  gap: 2px;
+}
+
+.accountPlanCopy span {
+  color: var(--text-soft);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.accountPlanCopy strong {
+  font-size: 0.92rem;
+}
+
+.accountMenuIcon {
+  width: 11px;
+  height: 11px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent-mint), var(--accent-sky));
+  box-shadow: 0 0 14px rgba(145, 183, 255, 0.24);
+}
+
+.accountMenuItem span:last-child {
+  font-size: 0.9rem;
+}
+
+.accountMenuItemDanger {
+  color: var(--accent-sun);
+  border-color: rgba(255, 171, 122, 0.1);
+  background: rgba(255, 171, 122, 0.05);
+}
+
+.accountMenuItemDanger .accountMenuIcon {
+  background: linear-gradient(135deg, var(--accent-sun), var(--accent-rose));
+  box-shadow: 0 0 14px rgba(255, 171, 122, 0.24);
 }
 
 @media (max-width: 1180px) {
@@ -229,5 +279,9 @@
   .sidebar {
     padding: 16px;
     border-radius: 26px;
+  }
+
+  .accountMenu {
+    width: min(260px, calc(100vw - 20px));
   }
 }

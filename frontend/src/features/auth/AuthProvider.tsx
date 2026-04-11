@@ -13,15 +13,17 @@ import { useRouter } from "next/navigation";
 
 import { getAuthConfig, type AuthMode, type AuthProviderId } from "@/content/auth";
 import { getLocalizedPath, type Locale } from "@/lib/i18n";
+import { getDefaultAvatarTone, type AvatarTone } from "@/features/account/avatar";
 
 import { AuthModal } from "./AuthModal";
 
-type AuthUser = {
+export type AuthUser = {
   id: string;
   name: string;
   secondaryLabel: string;
   providerId: AuthProviderId;
   contour: Locale;
+  avatarTone: AvatarTone;
 };
 
 type OpenAuthOptions = {
@@ -37,6 +39,7 @@ type AuthContextValue = {
   openAuth: (options: OpenAuthOptions) => void;
   closeAuth: () => void;
   setMode: (mode: AuthMode) => void;
+  updateProfile: (input: { name: string; avatarTone: AvatarTone }) => void;
   signOut: () => void;
 };
 
@@ -67,7 +70,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const raw = window.localStorage.getItem(STORAGE_KEY);
 
       if (raw) {
-        setUser(JSON.parse(raw) as AuthUser);
+        const parsed = JSON.parse(raw) as Partial<AuthUser>;
+
+        if (parsed?.id && parsed.name && parsed.secondaryLabel && parsed.providerId && parsed.contour) {
+          setUser({
+            id: parsed.id,
+            name: parsed.name,
+            secondaryLabel: parsed.secondaryLabel,
+            providerId: parsed.providerId,
+            contour: parsed.contour,
+            avatarTone: parsed.avatarTone ?? getDefaultAvatarTone(parsed.id)
+          });
+        } else {
+          setUser(null);
+        }
       }
     } catch {
       setUser(null);
@@ -128,7 +144,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           name: auth.defaultProfileName,
           secondaryLabel: provider?.shortLabel ?? "Account",
           providerId,
-          contour: locale
+          contour: locale,
+          avatarTone: getDefaultAvatarTone(`${providerId}-${locale}`)
         },
         locale
       );
@@ -159,13 +176,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           name: nextName,
           secondaryLabel: normalizedEmail,
           providerId: "email",
-          contour: locale
+          contour: locale,
+          avatarTone: getDefaultAvatarTone(normalizedEmail)
         },
         locale
       );
     },
     [finishAuth]
   );
+
+  const updateProfile = useCallback((input: { name: string; avatarTone: AvatarTone }) => {
+    setUser((current) => {
+      if (!current) {
+        return current;
+      }
+
+      return {
+        ...current,
+        name: input.name.trim() || current.name,
+        avatarTone: input.avatarTone
+      };
+    });
+  }, []);
 
   const signOut = useCallback(() => {
     setUser(null);
@@ -179,9 +211,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       openAuth,
       closeAuth,
       setMode,
+      updateProfile,
       signOut
     }),
-    [closeAuth, isReady, openAuth, setMode, signOut, user]
+    [closeAuth, isReady, openAuth, setMode, signOut, updateProfile, user]
   );
 
   return (

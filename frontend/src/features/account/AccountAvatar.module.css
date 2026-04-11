@@ -1,0 +1,52 @@
+.avatar {
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  color: rgba(8, 12, 22, 0.84);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.toneMint {
+  background: linear-gradient(135deg, rgba(135, 230, 214, 0.94), rgba(145, 183, 255, 0.9));
+}
+
+.toneSky {
+  background: linear-gradient(135deg, rgba(145, 183, 255, 0.94), rgba(255, 171, 122, 0.9));
+}
+
+.toneSun {
+  background: linear-gradient(135deg, rgba(255, 171, 122, 0.96), rgba(255, 234, 176, 0.92));
+}
+
+.toneRose {
+  background: linear-gradient(135deg, rgba(255, 157, 198, 0.94), rgba(145, 183, 255, 0.88));
+}
+
+.sidebar {
+  width: 44px;
+  height: 44px;
+  font-size: 0.92rem;
+}
+
+.popover {
+  width: 38px;
+  height: 38px;
+  font-size: 0.82rem;
+  border-radius: 14px;
+}
+
+.settings {
+  width: 72px;
+  height: 72px;
+  font-size: 1.3rem;
+  border-radius: 24px;
+}
+
+.option {
+  width: 52px;
+  height: 52px;
+  font-size: 1rem;
+  border-radius: 18px;
+}

@@ -97,7 +97,7 @@ const authContent: Record<Locale, AuthLocaleConfig> = {
     gateSignIn: "Войти",
     gateCreate: "Создать аккаунт",
     closeLabel: "Закрыть",
-    defaultProfileName: "Ника Воронова",
+    defaultProfileName: "Lordenure",
     providers: [
       {
         id: "yandex",

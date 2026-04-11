@@ -101,6 +101,22 @@ type StudioCopy = {
   creditsLeftLabel: string;
   packsLeftLabel: string;
   fullPackCostValue: string;
+  plansModalTitle: string;
+  planCurrentLabel: string;
+  planCurrentAction: string;
+  planChooseAction: string;
+  accountMenuPlanLabel: string;
+  accountMenuAccount: string;
+  accountMenuLogout: string;
+  accountSettingsTitle: string;
+  accountNameLabel: string;
+  accountAvatarLabel: string;
+  accountSaveLabel: string;
+  accountCancelLabel: string;
+  logoutTitle: string;
+  logoutText: string;
+  logoutCancel: string;
+  logoutConfirm: string;
   languages: StudioOption[];
   platforms: StudioOption[];
 };
@@ -246,6 +262,22 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       creditsLeftLabel: "credits",
       packsLeftLabel: "packs left",
       fullPackCostValue: "12 per pack",
+      plansModalTitle: "Plans",
+      planCurrentLabel: "Current",
+      planCurrentAction: "Current plan",
+      planChooseAction: "Choose",
+      accountMenuPlanLabel: "Plan",
+      accountMenuAccount: "Account",
+      accountMenuLogout: "Log out",
+      accountSettingsTitle: "Account",
+      accountNameLabel: "Nickname",
+      accountAvatarLabel: "Avatar",
+      accountSaveLabel: "Save",
+      accountCancelLabel: "Cancel",
+      logoutTitle: "Log out?",
+      logoutText: "You’ll leave the studio for now.",
+      logoutCancel: "Cancel",
+      logoutConfirm: "Log out",
       languages: [
         { id: "en", label: "English" },
         { id: "ru", label: "Russian" },
@@ -392,6 +424,22 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       creditsLeftLabel: "кредитов",
       packsLeftLabel: "паков осталось",
       fullPackCostValue: "12 за пак",
+      plansModalTitle: "Тарифы",
+      planCurrentLabel: "Текущий",
+      planCurrentAction: "Текущий план",
+      planChooseAction: "Выбрать",
+      accountMenuPlanLabel: "Тариф",
+      accountMenuAccount: "Аккаунт",
+      accountMenuLogout: "Выйти",
+      accountSettingsTitle: "Аккаунт",
+      accountNameLabel: "Никнейм",
+      accountAvatarLabel: "Аватар",
+      accountSaveLabel: "Сохранить",
+      accountCancelLabel: "Отмена",
+      logoutTitle: "Выйти?",
+      logoutText: "Студия закроется для этого аккаунта.",
+      logoutCancel: "Отмена",
+      logoutConfirm: "Выйти",
       languages: [
         { id: "en", label: "Английский" },
         { id: "ru", label: "Русский" },
