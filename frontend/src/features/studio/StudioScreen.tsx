@@ -89,6 +89,7 @@ export function StudioScreen({ locale }: StudioScreenProps) {
         benefits,
         languageId: language,
         platformId: platform,
+        authorId: user?.id ?? "tradeai-user",
         visibility,
         authorName: user?.name ?? copy.studio.sidebarProfileName
       });

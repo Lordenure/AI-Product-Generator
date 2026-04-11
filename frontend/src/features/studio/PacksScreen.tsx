@@ -87,6 +87,7 @@ export function PacksScreen({ locale }: PacksScreenProps) {
                   locale={locale}
                   pack={pack}
                   showAuthor
+                  authorHref={getLocalizedPath(locale, `/profile/${pack.authorId}`)}
                   showDelete={false}
                   onDelete={() => undefined}
                 />

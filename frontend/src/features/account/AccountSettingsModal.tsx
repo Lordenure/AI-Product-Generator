@@ -17,8 +17,9 @@ type AccountSettingsModalProps = {
   secondaryLabel: string;
   avatarTone: AvatarTone;
   avatarImage: string | null;
+  coverImage: string | null;
   onClose: () => void;
-  onSave: (input: { name: string; avatarImage: string | null }) => void;
+  onSave: (input: { name: string; avatarImage: string | null; coverImage: string | null }) => void;
 };
 
 export function AccountSettingsModal({
@@ -28,13 +29,16 @@ export function AccountSettingsModal({
   secondaryLabel,
   avatarTone,
   avatarImage,
+  coverImage,
   onClose,
   onSave
 }: AccountSettingsModalProps) {
   const copy = getCopy(locale);
   const [draftName, setDraftName] = useState(name);
   const [draftAvatarImage, setDraftAvatarImage] = useState<string | null>(avatarImage);
+  const [draftCoverImage, setDraftCoverImage] = useState<string | null>(coverImage);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const coverInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (!isOpen) {
@@ -43,7 +47,8 @@ export function AccountSettingsModal({
 
     setDraftName(name);
     setDraftAvatarImage(avatarImage);
-  }, [avatarImage, isOpen, name]);
+    setDraftCoverImage(coverImage);
+  }, [avatarImage, coverImage, isOpen, name]);
 
   return (
     <AccountModalShell isOpen={isOpen} title={copy.studio.accountSettingsTitle} onClose={onClose}>
@@ -97,6 +102,50 @@ export function AccountSettingsModal({
           </div>
         </div>
 
+        <div className={styles.coverSection}>
+          <span className={styles.label}>{copy.studio.accountCoverLabel}</span>
+
+          <div className={styles.coverRow}>
+            <div
+              className={`${styles.coverPreview} ${styles[`cover${capitalizeTone(avatarTone)}`]}`.trim()}
+              style={draftCoverImage ? { backgroundImage: `url(${draftCoverImage})` } : undefined}
+            />
+
+            <div className={styles.coverActions}>
+              <input
+                ref={coverInputRef}
+                type="file"
+                accept="image/*"
+                className={styles.fileInput}
+                onChange={async (event) => {
+                  const file = event.target.files?.[0];
+
+                  if (!file) {
+                    return;
+                  }
+
+                  setDraftCoverImage(await readImageAsDataUrl(file));
+                  event.target.value = "";
+                }}
+              />
+
+              <button
+                type="button"
+                className={styles.uploadButton}
+                onClick={() => coverInputRef.current?.click()}
+              >
+                {draftCoverImage ? copy.studio.accountCoverChangeLabel : copy.studio.accountCoverChooseLabel}
+              </button>
+
+              {draftCoverImage ? (
+                <button type="button" className={styles.removeButton} onClick={() => setDraftCoverImage(null)}>
+                  {copy.studio.accountCoverRemoveLabel}
+                </button>
+              ) : null}
+            </div>
+          </div>
+        </div>
+
         <label className={styles.field}>
           <span className={styles.label}>{copy.studio.accountNameLabel}</span>
           <input
@@ -117,7 +166,8 @@ export function AccountSettingsModal({
             onClick={() => {
               onSave({
                 name: draftName.trim() || name,
-                avatarImage: draftAvatarImage
+                avatarImage: draftAvatarImage,
+                coverImage: draftCoverImage
               });
             }}
           >
@@ -127,6 +177,10 @@ export function AccountSettingsModal({
       </div>
     </AccountModalShell>
   );
+}
+
+function capitalizeTone(value: string) {
+  return value[0].toUpperCase() + value.slice(1);
 }
 
 function readImageAsDataUrl(file: File) {

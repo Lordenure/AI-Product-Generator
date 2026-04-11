@@ -40,7 +40,9 @@ export function StudioSidebar({ locale, activeNav }: StudioSidebarProps) {
   const profileLabel = user?.secondaryLabel ?? copy.studio.sidebarProfileRole;
   const avatarTone = user?.avatarTone ?? "mint";
   const avatarImage = user?.avatarImage ?? null;
+  const coverImage = user?.coverImage ?? null;
   const homeHref = getLocalizedPath(locale, "/");
+  const profileHref = user ? getLocalizedPath(locale, `/profile/${user.id}`) : homeHref;
 
   return (
     <>
@@ -135,6 +137,18 @@ export function StudioSidebar({ locale, activeNav }: StudioSidebarProps) {
           className={styles.accountMenuItem}
           onClick={() => {
             setPopoverOpen(false);
+            router.push(profileHref);
+          }}
+        >
+          <span className={styles.accountMenuIcon} aria-hidden="true" />
+          <span>{copy.studio.accountMenuProfile}</span>
+        </button>
+
+        <button
+          type="button"
+          className={styles.accountMenuItem}
+          onClick={() => {
+            setPopoverOpen(false);
             setActiveSurface("account");
           }}
         >
@@ -173,6 +187,7 @@ export function StudioSidebar({ locale, activeNav }: StudioSidebarProps) {
         secondaryLabel={profileLabel}
         avatarTone={avatarTone}
         avatarImage={avatarImage}
+        coverImage={coverImage}
         onClose={() => setActiveSurface(null)}
         onSave={(input) => {
           updateProfile(input);

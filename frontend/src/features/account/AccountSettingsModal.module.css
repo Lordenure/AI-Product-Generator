@@ -3,7 +3,9 @@
 .actions,
 .previewBody,
 .previewCopy,
-.uploadRow {
+.uploadRow,
+.coverSection,
+.coverActions {
   display: grid;
 }
 
@@ -61,6 +63,59 @@
 }
 
 .field {
+  gap: 8px;
+}
+
+.coverSection {
+  gap: 8px;
+}
+
+.coverRow {
+  display: grid;
+  gap: 10px;
+}
+
+.coverPreview {
+  min-height: 90px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.coverMint {
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(187, 255, 240, 0.16), transparent 24%),
+    linear-gradient(135deg, rgba(135, 230, 214, 0.4), rgba(145, 183, 255, 0.26)),
+    rgba(9, 16, 28, 0.76);
+}
+
+.coverSky {
+  background-image:
+    radial-gradient(circle at 82% 18%, rgba(255, 171, 122, 0.16), transparent 24%),
+    linear-gradient(135deg, rgba(145, 183, 255, 0.38), rgba(255, 171, 122, 0.22)),
+    rgba(9, 16, 28, 0.76);
+}
+
+.coverSun {
+  background-image:
+    radial-gradient(circle at 18% 16%, rgba(255, 234, 176, 0.16), transparent 24%),
+    linear-gradient(135deg, rgba(255, 171, 122, 0.36), rgba(255, 234, 176, 0.18)),
+    rgba(9, 16, 28, 0.76);
+}
+
+.coverRose {
+  background-image:
+    radial-gradient(circle at 80% 18%, rgba(255, 157, 198, 0.16), transparent 24%),
+    linear-gradient(135deg, rgba(255, 157, 198, 0.28), rgba(145, 183, 255, 0.24)),
+    rgba(9, 16, 28, 0.76);
+}
+
+.coverActions {
+  grid-auto-flow: column;
+  justify-content: start;
+  align-items: center;
   gap: 8px;
 }
 
@@ -165,6 +220,11 @@
   }
 
   .uploadRow {
+    grid-auto-flow: row;
+    justify-items: start;
+  }
+
+  .coverActions {
     grid-auto-flow: row;
     justify-items: start;
   }

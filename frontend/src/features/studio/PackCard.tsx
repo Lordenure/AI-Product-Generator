@@ -15,6 +15,7 @@ type PackCardProps = {
   isActive?: boolean;
   showVisibility?: boolean;
   showAuthor?: boolean;
+  authorHref?: string;
   showDelete?: boolean;
   onDelete: () => void;
 };
@@ -25,6 +26,7 @@ export function PackCard({
   isActive = false,
   showVisibility = false,
   showAuthor = false,
+  authorHref,
   showDelete = true,
   onDelete
 }: PackCardProps) {
@@ -56,7 +58,15 @@ export function PackCard({
         {showDelete ? <PackDeleteControl locale={locale} onDelete={onDelete} /> : null}
       </div>
 
-      {showAuthor ? <p className={styles.author}>{pack.authorName}</p> : null}
+      {showAuthor ? (
+        authorHref ? (
+          <Link href={authorHref} className={styles.authorLink}>
+            {pack.authorName}
+          </Link>
+        ) : (
+          <p className={styles.author}>{pack.authorName}</p>
+        )
+      ) : null}
 
       <div className={styles.meta}>
         <span>{pack.languageLabel}</span>

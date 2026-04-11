@@ -25,6 +25,7 @@ export type AuthUser = {
   contour: Locale;
   avatarTone: AvatarTone;
   avatarImage: string | null;
+  coverImage: string | null;
 };
 
 type OpenAuthOptions = {
@@ -40,7 +41,7 @@ type AuthContextValue = {
   openAuth: (options: OpenAuthOptions) => void;
   closeAuth: () => void;
   setMode: (mode: AuthMode) => void;
-  updateProfile: (input: { name: string; avatarImage: string | null }) => void;
+  updateProfile: (input: { name: string; avatarImage: string | null; coverImage: string | null }) => void;
   signOut: () => void;
 };
 
@@ -81,7 +82,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             providerId: parsed.providerId,
             contour: parsed.contour,
             avatarTone: parsed.avatarTone ?? getDefaultAvatarTone(parsed.id),
-            avatarImage: parsed.avatarImage ?? null
+            avatarImage: parsed.avatarImage ?? null,
+            coverImage: parsed.coverImage ?? null
           });
         } else {
           setUser(null);
@@ -148,7 +150,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           providerId,
           contour: locale,
           avatarTone: getDefaultAvatarTone(`${providerId}-${locale}`),
-          avatarImage: null
+          avatarImage: null,
+          coverImage: null
         },
         locale
       );
@@ -181,7 +184,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           providerId: "email",
           contour: locale,
           avatarTone: getDefaultAvatarTone(normalizedEmail),
-          avatarImage: null
+          avatarImage: null,
+          coverImage: null
         },
         locale
       );
@@ -189,7 +193,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     [finishAuth]
   );
 
-  const updateProfile = useCallback((input: { name: string; avatarImage: string | null }) => {
+  const updateProfile = useCallback((input: { name: string; avatarImage: string | null; coverImage: string | null }) => {
     setUser((current) => {
       if (!current) {
         return current;
@@ -198,7 +202,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return {
         ...current,
         name: input.name.trim() || current.name,
-        avatarImage: input.avatarImage
+        avatarImage: input.avatarImage,
+        coverImage: input.coverImage
       };
     });
   }, []);

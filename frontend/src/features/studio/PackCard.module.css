@@ -123,6 +123,7 @@
 
 .title,
 .author,
+.authorLink,
 .summary {
   margin: 0;
 }
@@ -150,6 +151,18 @@
   color: var(--text-soft);
   font-size: 0.78rem;
   line-height: 1.28;
+}
+
+.authorLink {
+  width: fit-content;
+  color: var(--text-soft);
+  font-size: 0.78rem;
+  line-height: 1.28;
+  transition: color 0.2s ease;
+}
+
+.authorLink:hover {
+  color: var(--text);
 }
 
 .status {

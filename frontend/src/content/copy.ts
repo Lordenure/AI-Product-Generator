@@ -106,6 +106,7 @@ type StudioCopy = {
   planCurrentAction: string;
   planChooseAction: string;
   accountMenuPlanLabel: string;
+  accountMenuProfile: string;
   accountMenuAccount: string;
   accountMenuLogout: string;
   accountSettingsTitle: string;
@@ -114,12 +115,20 @@ type StudioCopy = {
   accountImageChooseLabel: string;
   accountImageChangeLabel: string;
   accountImageRemoveLabel: string;
+  accountCoverLabel: string;
+  accountCoverChooseLabel: string;
+  accountCoverChangeLabel: string;
+  accountCoverRemoveLabel: string;
   accountSaveLabel: string;
   accountCancelLabel: string;
   logoutTitle: string;
   logoutText: string;
   logoutCancel: string;
   logoutConfirm: string;
+  profilePacksTitle: string;
+  profileEmptyTitle: string;
+  profileEmptyText: string;
+  profileSettingsLabel: string;
   languages: StudioOption[];
   platforms: StudioOption[];
 };
@@ -270,6 +279,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       planCurrentAction: "Current plan",
       planChooseAction: "Choose",
       accountMenuPlanLabel: "Plan",
+      accountMenuProfile: "Profile",
       accountMenuAccount: "Account",
       accountMenuLogout: "Log out",
       accountSettingsTitle: "Account",
@@ -278,12 +288,20 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       accountImageChooseLabel: "Choose image",
       accountImageChangeLabel: "Change image",
       accountImageRemoveLabel: "Remove",
+      accountCoverLabel: "Cover",
+      accountCoverChooseLabel: "Choose cover",
+      accountCoverChangeLabel: "Change cover",
+      accountCoverRemoveLabel: "Remove",
       accountSaveLabel: "Save",
       accountCancelLabel: "Cancel",
       logoutTitle: "Log out?",
       logoutText: "You’ll leave the studio for now.",
       logoutCancel: "Cancel",
       logoutConfirm: "Log out",
+      profilePacksTitle: "Public packs",
+      profileEmptyTitle: "No public packs yet",
+      profileEmptyText: "Public packs will appear here.",
+      profileSettingsLabel: "Edit profile",
       languages: [
         { id: "en", label: "English" },
         { id: "ru", label: "Russian" },
@@ -435,6 +453,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       planCurrentAction: "Текущий план",
       planChooseAction: "Выбрать",
       accountMenuPlanLabel: "Тариф",
+      accountMenuProfile: "Профиль",
       accountMenuAccount: "Аккаунт",
       accountMenuLogout: "Выйти",
       accountSettingsTitle: "Аккаунт",
@@ -443,12 +462,20 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       accountImageChooseLabel: "Выбрать фото",
       accountImageChangeLabel: "Сменить фото",
       accountImageRemoveLabel: "Убрать",
+      accountCoverLabel: "Обложка",
+      accountCoverChooseLabel: "Выбрать обложку",
+      accountCoverChangeLabel: "Сменить обложку",
+      accountCoverRemoveLabel: "Убрать",
       accountSaveLabel: "Сохранить",
       accountCancelLabel: "Отмена",
       logoutTitle: "Выйти?",
       logoutText: "Студия закроется для этого аккаунта.",
       logoutCancel: "Отмена",
       logoutConfirm: "Выйти",
+      profilePacksTitle: "Публичные паки",
+      profileEmptyTitle: "Публичных паков пока нет",
+      profileEmptyText: "Они появятся здесь.",
+      profileSettingsLabel: "Настроить профиль",
       languages: [
         { id: "en", label: "Английский" },
         { id: "ru", label: "Русский" },

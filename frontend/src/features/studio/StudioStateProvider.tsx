@@ -18,6 +18,7 @@ import {
   type PackStatus,
   type PackVisibility
 } from "@/content/packs";
+import { useAuth } from "@/features/auth/AuthProvider";
 import type { Locale } from "@/lib/i18n";
 
 type CreatedPack = {
@@ -27,6 +28,7 @@ type CreatedPack = {
   benefits: string;
   languageId: string;
   platformId: string;
+  authorId: string;
   authorName: string;
   createdAt: number;
   artTone: PackRecord["artTone"];
@@ -40,6 +42,7 @@ type CreatePackInput = {
   benefits: string;
   languageId: string;
   platformId: string;
+  authorId: string;
   authorName: string;
   visibility: PackVisibility;
 };
@@ -102,6 +105,7 @@ export function StudioStateProvider({ children }: { children: ReactNode }) {
         benefits: input.benefits.trim(),
         languageId: input.languageId,
         platformId: input.platformId,
+        authorId: input.authorId,
         authorName: input.authorName.trim() || (input.visibility === "public" ? "TradeAI" : ""),
         createdAt,
         artTone: artTones[createdPacks.length % artTones.length],
@@ -142,6 +146,7 @@ export function StudioStateProvider({ children }: { children: ReactNode }) {
 
 export function useStudioState(locale: Locale): LocalizedStudioState {
   const context = useContext(StudioStateContext);
+  const { user } = useAuth();
 
   if (!context) {
     throw new Error("useStudioState must be used within StudioStateProvider.");
@@ -156,10 +161,12 @@ export function useStudioState(locale: Locale): LocalizedStudioState {
         ...pack,
         updatedLabel: formatPackTime(locale, pack.createdAt)
       }));
-    const createdPacks = context.createdPacks.map((pack) => localizeCreatedPack(locale, pack));
+    const createdPacks = context.createdPacks.map((pack) =>
+      localizeCreatedPack(locale, pack, pack.authorId === user?.id ? user.name : pack.authorName)
+    );
 
     return [...createdPacks, ...basePacks];
-  }, [context.createdPacks, context.hiddenBasePackIds, locale]);
+  }, [context.createdPacks, context.hiddenBasePackIds, locale, user?.id, user?.name]);
 
   const packMap = useMemo(() => new Map(packs.map((pack) => [pack.id, pack])), [packs]);
 
@@ -177,7 +184,7 @@ export function useStudioState(locale: Locale): LocalizedStudioState {
   };
 }
 
-function localizeCreatedPack(locale: Locale, pack: CreatedPack): PackRecord {
+function localizeCreatedPack(locale: Locale, pack: CreatedPack, authorName: string): PackRecord {
   const copy = getCopy(locale);
   const languageLabel = copy.studio.languages.find((option) => option.id === pack.languageId)?.label ?? pack.languageId;
   const targetLabel = copy.studio.platforms.find((option) => option.id === pack.platformId)?.label ?? pack.platformId;
@@ -195,7 +202,8 @@ function localizeCreatedPack(locale: Locale, pack: CreatedPack): PackRecord {
     statusLabel: getStatusLabel(locale, pack.status),
     visibility: pack.visibility,
     visibilityLabel: getVisibilityLabel(locale, pack.visibility),
-    authorName: pack.authorName,
+    authorId: pack.authorId,
+    authorName,
     createdAt: pack.createdAt,
     languageLabel,
     targetLabel,

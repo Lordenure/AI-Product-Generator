@@ -17,6 +17,7 @@ export type PackRecord = {
   statusLabel: string;
   visibility: PackVisibility;
   visibilityLabel: string;
+  authorId: string;
   authorName: string;
   createdAt: number;
   languageLabel: string;
@@ -41,6 +42,7 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Updated",
       visibility: "public",
       visibilityLabel: "Public",
+      authorId: "mila-rowan",
       authorName: "Mila Rowan",
       createdAt: toTimestamp("2026-04-11T18:45:00"),
       languageLabel: "English",
@@ -69,6 +71,7 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Ready",
       visibility: "public",
       visibilityLabel: "Public",
+      authorId: "theo-march",
       authorName: "Theo March",
       createdAt: toTimestamp("2026-04-11T12:20:00"),
       languageLabel: "Russian",
@@ -97,6 +100,7 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Draft",
       visibility: "public",
       visibilityLabel: "Public",
+      authorId: "ada-soren",
       authorName: "Ada Soren",
       createdAt: toTimestamp("2026-04-10T22:40:00"),
       languageLabel: "English",
@@ -125,6 +129,7 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Ready",
       visibility: "public",
       visibilityLabel: "Public",
+      authorId: "lina-north",
       authorName: "Lina North",
       createdAt: toTimestamp("2026-04-09T16:10:00"),
       languageLabel: "German",
@@ -153,6 +158,7 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Updated",
       visibility: "public",
       visibilityLabel: "Public",
+      authorId: "keira-vale",
       authorName: "Keira Vale",
       createdAt: toTimestamp("2026-04-07T19:25:00"),
       languageLabel: "Spanish",
@@ -181,6 +187,7 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Ready",
       visibility: "public",
       visibilityLabel: "Public",
+      authorId: "noah-hale",
       authorName: "Noah Hale",
       createdAt: toTimestamp("2026-04-05T13:15:00"),
       languageLabel: "English",
@@ -211,6 +218,7 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Обновлён",
       visibility: "public",
       visibilityLabel: "Публичный",
+      authorId: "mila-rowan",
       authorName: "Мила Роуэн",
       createdAt: toTimestamp("2026-04-11T18:45:00"),
       languageLabel: "Английский",
@@ -239,6 +247,7 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Готов",
       visibility: "public",
       visibilityLabel: "Публичный",
+      authorId: "theo-march",
       authorName: "Артём Лебедев",
       createdAt: toTimestamp("2026-04-11T12:20:00"),
       languageLabel: "Русский",
@@ -267,6 +276,7 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Черновик",
       visibility: "public",
       visibilityLabel: "Публичный",
+      authorId: "ada-soren",
       authorName: "Ника Воронова",
       createdAt: toTimestamp("2026-04-10T22:40:00"),
       languageLabel: "Английский",
@@ -295,6 +305,7 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Готов",
       visibility: "public",
       visibilityLabel: "Публичный",
+      authorId: "lina-north",
       authorName: "Ева Север",
       createdAt: toTimestamp("2026-04-09T16:10:00"),
       languageLabel: "Немецкий",
@@ -323,6 +334,7 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Обновлён",
       visibility: "public",
       visibilityLabel: "Публичный",
+      authorId: "keira-vale",
       authorName: "Лев Миронов",
       createdAt: toTimestamp("2026-04-07T19:25:00"),
       languageLabel: "Испанский",
@@ -351,6 +363,7 @@ const packLibrary: Record<Locale, PackRecord[]> = {
       statusLabel: "Готов",
       visibility: "public",
       visibilityLabel: "Публичный",
+      authorId: "noah-hale",
       authorName: "Яна Белова",
       createdAt: toTimestamp("2026-04-05T13:15:00"),
       languageLabel: "Английский",
