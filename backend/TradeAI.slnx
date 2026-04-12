@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/TradeAI.Api/TradeAI.Api.csproj" />
+    <Project Path="src/TradeAI.Application/TradeAI.Application.csproj" />
+    <Project Path="src/TradeAI.Domain/TradeAI.Domain.csproj" />
+    <Project Path="src/TradeAI.Infrastructure/TradeAI.Infrastructure.csproj" />
+  </Folder>
+</Solution>

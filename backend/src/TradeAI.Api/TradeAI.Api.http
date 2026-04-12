@@ -1,0 +1,11 @@
+@Host = http://localhost:5272
+@ContentType = application/json
+
+POST {{Host}}/api/auth/register
+Content-Type: {{ContentType}}
+
+{
+  "email": "hello@tradeai.app",
+  "password": "TradeAI123!",
+  "displayName": "TradeAI Demo"
+}
