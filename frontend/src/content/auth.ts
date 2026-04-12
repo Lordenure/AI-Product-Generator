@@ -19,11 +19,18 @@ type AuthLocaleConfig = {
   passwordLabel: string;
   passwordPlaceholder: string;
   submit: Record<AuthMode, string>;
+  submitPending: Record<AuthMode, string>;
   gateTitle: string;
   gateText: string;
   gateSignIn: string;
   gateCreate: string;
   closeLabel: string;
+  emailOnlyNote: string;
+  providerSoonLabel: string;
+  invalidCredentialsError: string;
+  emailTakenError: string;
+  genericError: string;
+  backendUnavailableError: string;
   defaultProfileName: string;
   providers: AuthProviderOption[];
 };
@@ -44,11 +51,21 @@ const authContent: Record<Locale, AuthLocaleConfig> = {
       "sign-in": "Sign in",
       "create-account": "Create account"
     },
+    submitPending: {
+      "sign-in": "Signing in...",
+      "create-account": "Creating account..."
+    },
     gateTitle: "Sign in to open your studio",
     gateText: "Packs, privacy, and credits stay in your account.",
     gateSignIn: "Sign in",
     gateCreate: "Create account",
     closeLabel: "Close",
+    emailOnlyNote: "Email auth is live. Social sign-in is coming soon.",
+    providerSoonLabel: "Soon",
+    invalidCredentialsError: "Use the email and password from a real TradeAI account.",
+    emailTakenError: "An account with this email already exists.",
+    genericError: "Sign-in could not be completed. Please try again.",
+    backendUnavailableError: "TradeAI could not reach the auth server. Check that the backend is running.",
     defaultProfileName: "Lordenure",
     providers: [
       {
@@ -92,11 +109,21 @@ const authContent: Record<Locale, AuthLocaleConfig> = {
       "sign-in": "Войти",
       "create-account": "Создать аккаунт"
     },
+    submitPending: {
+      "sign-in": "Входим...",
+      "create-account": "Создаём аккаунт..."
+    },
     gateTitle: "Войдите, чтобы открыть студию",
     gateText: "Паки, видимость и кредиты хранятся в аккаунте.",
     gateSignIn: "Войти",
     gateCreate: "Создать аккаунт",
     closeLabel: "Закрыть",
+    emailOnlyNote: "Вход по почте уже работает. Социальные входы появятся позже.",
+    providerSoonLabel: "Скоро",
+    invalidCredentialsError: "Используйте почту и пароль от настоящего аккаунта TradeAI.",
+    emailTakenError: "Аккаунт с такой почтой уже существует.",
+    genericError: "Не удалось завершить вход. Попробуйте ещё раз.",
+    backendUnavailableError: "TradeAI не смог подключиться к серверу авторизации. Проверьте, что backend запущен.",
     defaultProfileName: "Lordenure",
     providers: [
       {

@@ -133,10 +133,7 @@ export function ProfileScreen({ locale, profileId }: ProfileScreenProps) {
           avatarImage={user.avatarImage}
           coverImage={user.coverImage}
           onClose={() => setSettingsOpen(false)}
-          onSave={(input) => {
-            updateProfile(input);
-            setSettingsOpen(false);
-          }}
+          onSave={updateProfile}
         />
       ) : null}
     </StudioAppShell>

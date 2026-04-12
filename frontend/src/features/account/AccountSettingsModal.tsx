@@ -19,7 +19,13 @@ type AccountSettingsModalProps = {
   avatarImage: string | null;
   coverImage: string | null;
   onClose: () => void;
-  onSave: (input: { name: string; avatarImage: string | null; coverImage: string | null }) => void;
+  onSave: (input: {
+    name: string;
+    avatarFile: File | null;
+    removeAvatar: boolean;
+    coverFile: File | null;
+    removeCover: boolean;
+  }) => Promise<void>;
 };
 
 export function AccountSettingsModal({
@@ -35,20 +41,48 @@ export function AccountSettingsModal({
 }: AccountSettingsModalProps) {
   const copy = getCopy(locale);
   const [draftName, setDraftName] = useState(name);
-  const [draftAvatarImage, setDraftAvatarImage] = useState<string | null>(avatarImage);
-  const [draftCoverImage, setDraftCoverImage] = useState<string | null>(coverImage);
+  const [draftAvatarPreviewUrl, setDraftAvatarPreviewUrl] = useState<string | null>(avatarImage);
+  const [draftCoverPreviewUrl, setDraftCoverPreviewUrl] = useState<string | null>(coverImage);
+  const [draftAvatarFile, setDraftAvatarFile] = useState<File | null>(null);
+  const [draftCoverFile, setDraftCoverFile] = useState<File | null>(null);
+  const [removeAvatar, setRemoveAvatar] = useState(false);
+  const [removeCover, setRemoveCover] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const coverInputRef = useRef<HTMLInputElement | null>(null);
+  const avatarObjectUrlRef = useRef<string | null>(null);
+  const coverObjectUrlRef = useRef<string | null>(null);
 
   useEffect(() => {
     if (!isOpen) {
+      setIsSaving(false);
+      setSaveError(null);
       return;
     }
 
+    revokeObjectUrl(avatarObjectUrlRef.current);
+    revokeObjectUrl(coverObjectUrlRef.current);
+    avatarObjectUrlRef.current = null;
+    coverObjectUrlRef.current = null;
+
     setDraftName(name);
-    setDraftAvatarImage(avatarImage);
-    setDraftCoverImage(coverImage);
+    setDraftAvatarPreviewUrl(avatarImage);
+    setDraftCoverPreviewUrl(coverImage);
+    setDraftAvatarFile(null);
+    setDraftCoverFile(null);
+    setRemoveAvatar(false);
+    setRemoveCover(false);
+    setSaveError(null);
+    setIsSaving(false);
   }, [avatarImage, coverImage, isOpen, name]);
+
+  useEffect(() => {
+    return () => {
+      revokeObjectUrl(avatarObjectUrlRef.current);
+      revokeObjectUrl(coverObjectUrlRef.current);
+    };
+  }, []);
 
   return (
     <AccountModalShell isOpen={isOpen} title={copy.studio.accountSettingsTitle} onClose={onClose}>
@@ -57,7 +91,7 @@ export function AccountSettingsModal({
           <AccountAvatar
             name={draftName || name}
             tone={avatarTone}
-            imageSrc={draftAvatarImage}
+            imageSrc={draftAvatarPreviewUrl}
             size="settings"
           />
 
@@ -71,16 +105,23 @@ export function AccountSettingsModal({
               <input
                 ref={fileInputRef}
                 type="file"
-                accept="image/*"
+                accept="image/png,image/jpeg,image/webp,image/gif"
                 className={styles.fileInput}
-                onChange={async (event) => {
+                onChange={(event) => {
                   const file = event.target.files?.[0];
 
                   if (!file) {
                     return;
                   }
 
-                  setDraftAvatarImage(await readImageAsDataUrl(file));
+                  const previewUrl = URL.createObjectURL(file);
+
+                  revokeObjectUrl(avatarObjectUrlRef.current);
+                  avatarObjectUrlRef.current = previewUrl;
+
+                  setDraftAvatarFile(file);
+                  setDraftAvatarPreviewUrl(previewUrl);
+                  setRemoveAvatar(false);
                   event.target.value = "";
                 }}
               />
@@ -88,13 +129,25 @@ export function AccountSettingsModal({
               <button
                 type="button"
                 className={styles.uploadButton}
+                disabled={isSaving}
                 onClick={() => fileInputRef.current?.click()}
               >
-                {draftAvatarImage ? copy.studio.accountImageChangeLabel : copy.studio.accountImageChooseLabel}
+                {draftAvatarPreviewUrl ? copy.studio.accountImageChangeLabel : copy.studio.accountImageChooseLabel}
               </button>
 
-              {draftAvatarImage ? (
-                <button type="button" className={styles.removeButton} onClick={() => setDraftAvatarImage(null)}>
+              {draftAvatarPreviewUrl ? (
+                <button
+                  type="button"
+                  className={styles.removeButton}
+                  disabled={isSaving}
+                  onClick={() => {
+                    revokeObjectUrl(avatarObjectUrlRef.current);
+                    avatarObjectUrlRef.current = null;
+                    setDraftAvatarFile(null);
+                    setDraftAvatarPreviewUrl(null);
+                    setRemoveAvatar(Boolean(avatarImage));
+                  }}
+                >
                   {copy.studio.accountImageRemoveLabel}
                 </button>
               ) : null}
@@ -108,23 +161,30 @@ export function AccountSettingsModal({
           <div className={styles.coverRow}>
             <div
               className={`${styles.coverPreview} ${styles[`cover${capitalizeTone(avatarTone)}`]}`.trim()}
-              style={draftCoverImage ? { backgroundImage: `url(${draftCoverImage})` } : undefined}
+              style={draftCoverPreviewUrl ? { backgroundImage: `url(${draftCoverPreviewUrl})` } : undefined}
             />
 
             <div className={styles.coverActions}>
               <input
                 ref={coverInputRef}
                 type="file"
-                accept="image/*"
+                accept="image/png,image/jpeg,image/webp,image/gif"
                 className={styles.fileInput}
-                onChange={async (event) => {
+                onChange={(event) => {
                   const file = event.target.files?.[0];
 
                   if (!file) {
                     return;
                   }
 
-                  setDraftCoverImage(await readImageAsDataUrl(file));
+                  const previewUrl = URL.createObjectURL(file);
+
+                  revokeObjectUrl(coverObjectUrlRef.current);
+                  coverObjectUrlRef.current = previewUrl;
+
+                  setDraftCoverFile(file);
+                  setDraftCoverPreviewUrl(previewUrl);
+                  setRemoveCover(false);
                   event.target.value = "";
                 }}
               />
@@ -132,13 +192,25 @@ export function AccountSettingsModal({
               <button
                 type="button"
                 className={styles.uploadButton}
+                disabled={isSaving}
                 onClick={() => coverInputRef.current?.click()}
               >
-                {draftCoverImage ? copy.studio.accountCoverChangeLabel : copy.studio.accountCoverChooseLabel}
+                {draftCoverPreviewUrl ? copy.studio.accountCoverChangeLabel : copy.studio.accountCoverChooseLabel}
               </button>
 
-              {draftCoverImage ? (
-                <button type="button" className={styles.removeButton} onClick={() => setDraftCoverImage(null)}>
+              {draftCoverPreviewUrl ? (
+                <button
+                  type="button"
+                  className={styles.removeButton}
+                  disabled={isSaving}
+                  onClick={() => {
+                    revokeObjectUrl(coverObjectUrlRef.current);
+                    coverObjectUrlRef.current = null;
+                    setDraftCoverFile(null);
+                    setDraftCoverPreviewUrl(null);
+                    setRemoveCover(Boolean(coverImage));
+                  }}
+                >
                   {copy.studio.accountCoverRemoveLabel}
                 </button>
               ) : null}
@@ -153,25 +225,46 @@ export function AccountSettingsModal({
             value={draftName}
             onChange={(event) => setDraftName(event.target.value)}
             placeholder={name}
+            disabled={isSaving}
           />
         </label>
 
+        {saveError ? <p className={styles.message}>{saveError}</p> : null}
+
         <div className={styles.actions}>
-          <button type="button" className={styles.secondary} onClick={onClose}>
+          <button type="button" className={styles.secondary} onClick={onClose} disabled={isSaving}>
             {copy.studio.accountCancelLabel}
           </button>
           <button
             type="button"
             className={styles.primary}
-            onClick={() => {
-              onSave({
-                name: draftName.trim() || name,
-                avatarImage: draftAvatarImage,
-                coverImage: draftCoverImage
-              });
+            disabled={isSaving}
+            onClick={async () => {
+              if (isSaving) {
+                return;
+              }
+
+              setIsSaving(true);
+              setSaveError(null);
+
+              try {
+                await onSave({
+                  name: draftName.trim() || name,
+                  avatarFile: draftAvatarFile,
+                  removeAvatar,
+                  coverFile: draftCoverFile,
+                  removeCover
+                });
+
+                onClose();
+              } catch (error) {
+                setSaveError(error instanceof Error ? error.message : copy.studio.accountSaveErrorLabel);
+              } finally {
+                setIsSaving(false);
+              }
             }}
           >
-            {copy.studio.accountSaveLabel}
+            {isSaving ? copy.studio.accountSavePendingLabel : copy.studio.accountSaveLabel}
           </button>
         </div>
       </div>
@@ -183,12 +276,8 @@ function capitalizeTone(value: string) {
   return value[0].toUpperCase() + value.slice(1);
 }
 
-function readImageAsDataUrl(file: File) {
-  return new Promise<string>((resolve, reject) => {
-    const reader = new FileReader();
-
-    reader.onload = () => resolve(typeof reader.result === "string" ? reader.result : "");
-    reader.onerror = () => reject(new Error("Failed to read image."));
-    reader.readAsDataURL(file);
-  });
+function revokeObjectUrl(value: string | null) {
+  if (value?.startsWith("blob:")) {
+    URL.revokeObjectURL(value);
+  }
 }

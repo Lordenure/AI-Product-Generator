@@ -27,6 +27,12 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
             .HasMaxLength(80)
             .IsRequired();
 
+        builder.Property(x => x.AvatarUrl)
+            .HasMaxLength(512);
+
+        builder.Property(x => x.CoverImageUrl)
+            .HasMaxLength(512);
+
         builder.Property(x => x.CreatedAtUtc)
             .HasColumnType("timestamp with time zone");
 

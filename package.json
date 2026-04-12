@@ -1,0 +1,10 @@
+{
+  "name": "tradeai",
+  "private": true,
+  "scripts": {
+    "setup": "node scripts/setup.mjs",
+    "dev": "node scripts/dev.mjs",
+    "dev:backend": "node scripts/dev-backend.mjs",
+    "dev:frontend": "node scripts/dev-frontend.mjs"
+  }
+}

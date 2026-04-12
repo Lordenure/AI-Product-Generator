@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TradeAI.Infrastructure.Persistence;
@@ -11,9 +12,11 @@ using TradeAI.Infrastructure.Persistence;
 namespace TradeAI.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(TradeAIDbContext))]
-    partial class TradeAIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260412201139_AddUserProfileMedia")]
+    partial class AddUserProfileMedia
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

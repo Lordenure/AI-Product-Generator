@@ -13,8 +13,20 @@ namespace TradeAI.Api.Extensions;
 
 public static class ServiceCollectionExtensions
 {
+    public const string LocalFrontendCorsPolicy = "LocalFrontend";
+
     public static IServiceCollection AddApiServices(this IServiceCollection services)
     {
+        services.AddCors(options =>
+        {
+            options.AddPolicy(LocalFrontendCorsPolicy, policy =>
+            {
+                policy.WithOrigins("http://localhost:3000", "http://127.0.0.1:3000")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+        });
+
         services.AddExceptionHandler<GlobalExceptionHandler>();
         services.AddProblemDetails();
         services.AddControllers()

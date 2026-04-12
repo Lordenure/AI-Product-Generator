@@ -3,10 +3,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TradeAI.Application.Abstractions.Authentication;
 using TradeAI.Application.Abstractions.Persistence;
+using TradeAI.Application.Abstractions.Storage;
 using TradeAI.Application.Abstractions.Time;
 using TradeAI.Infrastructure.Authentication;
 using TradeAI.Infrastructure.Persistence;
 using TradeAI.Infrastructure.Persistence.Repositories;
+using TradeAI.Infrastructure.ProfileMedia;
 using TradeAI.Infrastructure.Time;
 
 namespace TradeAI.Infrastructure;
@@ -41,6 +43,11 @@ public static class DependencyInjection
         services.AddSingleton<IRefreshTokenHasher, Sha256RefreshTokenHasher>();
         services.AddScoped<IRefreshTokenGenerator, RefreshTokenGenerator>();
         services.AddSingleton<IDateTimeProvider, SystemDateTimeProvider>();
+        services.AddSingleton<IProfileMediaStorage>(serviceProvider =>
+        {
+            var options = serviceProvider.GetRequiredService<Microsoft.Extensions.Options.IOptions<ProfileMediaOptions>>().Value;
+            return new FileSystemProfileMediaStorage(options);
+        });
 
         return services;
     }

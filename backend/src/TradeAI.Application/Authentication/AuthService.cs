@@ -132,6 +132,8 @@ public sealed class AuthService(
                 user.Id,
                 user.Email,
                 user.DisplayName,
+                user.AvatarUrl,
+                user.CoverImageUrl,
                 user.AuthProvider,
                 user.CreatedAtUtc,
                 user.LastLoginAtUtc,

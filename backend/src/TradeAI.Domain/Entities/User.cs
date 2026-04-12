@@ -18,6 +18,10 @@ public sealed class User
 
     public string DisplayName { get; private set; } = string.Empty;
 
+    public string? AvatarUrl { get; private set; }
+
+    public string? CoverImageUrl { get; private set; }
+
     public DateTime CreatedAtUtc { get; private set; }
 
     public DateTime UpdatedAtUtc { get; private set; }
@@ -65,6 +69,14 @@ public sealed class User
     public void SetDisplayName(string displayName, DateTime utcNow)
     {
         DisplayName = displayName;
+        UpdatedAtUtc = utcNow;
+    }
+
+    public void UpdateProfile(string displayName, string? avatarUrl, string? coverImageUrl, DateTime utcNow)
+    {
+        DisplayName = displayName;
+        AvatarUrl = avatarUrl;
+        CoverImageUrl = coverImageUrl;
         UpdatedAtUtc = utcNow;
     }
 

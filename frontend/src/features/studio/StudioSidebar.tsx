@@ -189,19 +189,16 @@ export function StudioSidebar({ locale, activeNav }: StudioSidebarProps) {
         avatarImage={avatarImage}
         coverImage={coverImage}
         onClose={() => setActiveSurface(null)}
-        onSave={(input) => {
-          updateProfile(input);
-          setActiveSurface(null);
-        }}
+        onSave={updateProfile}
       />
 
       <LogoutModal
         isOpen={activeSurface === "logout"}
         locale={locale}
         onClose={() => setActiveSurface(null)}
-        onConfirm={() => {
+        onConfirm={async () => {
           setActiveSurface(null);
-          signOut();
+          await signOut();
           router.replace(homeHref);
         }}
       />

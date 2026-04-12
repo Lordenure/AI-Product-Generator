@@ -126,6 +126,15 @@
   text-transform: uppercase;
 }
 
+.message {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 171, 122, 0.16);
+  border-radius: 16px;
+  color: var(--accent-sun);
+  background: rgba(255, 171, 122, 0.08);
+}
+
 .input {
   width: 100%;
   min-height: 40px;
@@ -199,6 +208,15 @@
 .secondary:hover,
 .primary:hover {
   transform: translateY(-1px);
+}
+
+.uploadButton:disabled,
+.removeButton:disabled,
+.secondary:disabled,
+.primary:disabled {
+  cursor: wait;
+  opacity: 0.72;
+  transform: none;
 }
 
 .actions {

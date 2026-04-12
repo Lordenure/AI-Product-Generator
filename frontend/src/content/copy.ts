@@ -120,6 +120,9 @@ type StudioCopy = {
   accountCoverChangeLabel: string;
   accountCoverRemoveLabel: string;
   accountSaveLabel: string;
+  accountSavePendingLabel: string;
+  accountSaveErrorLabel: string;
+  accountSaveUnavailableLabel: string;
   accountCancelLabel: string;
   logoutTitle: string;
   logoutText: string;
@@ -293,6 +296,9 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       accountCoverChangeLabel: "Change cover",
       accountCoverRemoveLabel: "Remove",
       accountSaveLabel: "Save",
+      accountSavePendingLabel: "Saving...",
+      accountSaveErrorLabel: "Could not save your profile right now.",
+      accountSaveUnavailableLabel: "TradeAI could not reach the profile service.",
       accountCancelLabel: "Cancel",
       logoutTitle: "Log out?",
       logoutText: "You’ll leave the studio for now.",
@@ -467,6 +473,9 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       accountCoverChangeLabel: "Сменить обложку",
       accountCoverRemoveLabel: "Убрать",
       accountSaveLabel: "Сохранить",
+      accountSavePendingLabel: "Сохраняем...",
+      accountSaveErrorLabel: "Не получилось сохранить профиль прямо сейчас.",
+      accountSaveUnavailableLabel: "TradeAI не может связаться с сервисом профиля.",
       accountCancelLabel: "Отмена",
       logoutTitle: "Выйти?",
       logoutText: "Студия закроется для этого аккаунта.",

@@ -14,7 +14,8 @@ type AuthModalProps = {
   mode: AuthMode;
   onClose: () => void;
   onModeChange: (mode: AuthMode) => void;
-  onProviderAuth: (providerId: Exclude<AuthProviderId, "email">, locale: Locale) => void;
+  errorMessage: string | null;
+  isSubmitting: boolean;
   onEmailAuth: (input: {
     locale: Locale;
     mode: AuthMode;
@@ -30,7 +31,8 @@ export function AuthModal({
   mode,
   onClose,
   onModeChange,
-  onProviderAuth,
+  errorMessage,
+  isSubmitting,
   onEmailAuth
 }: AuthModalProps) {
   const auth = getAuthConfig(locale);
@@ -116,15 +118,18 @@ export function AuthModal({
               data-tone={provider.tone}
               aria-label={provider.actionLabel}
               title={provider.actionLabel}
-              onClick={() => onProviderAuth(provider.id, locale)}
+              disabled
             >
               <span className={styles.providerIconWrap} aria-hidden="true">
                 <AuthProviderIcon providerId={provider.id} className={styles.providerIcon} />
               </span>
               <span className={styles.providerLabel}>{provider.shortLabel}</span>
+              <span className={styles.providerStatus}>{auth.providerSoonLabel}</span>
             </button>
           ))}
         </div>
+
+        <p className={`${styles.message} ${styles.messageNote}`.trim()}>{auth.emailOnlyNote}</p>
 
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.fields}>
@@ -166,8 +171,10 @@ export function AuthModal({
             </label>
           </div>
 
-          <button type="submit" className={styles.submitButton}>
-            {auth.submit[mode]}
+          {errorMessage ? <p className={`${styles.message} ${styles.messageError}`.trim()}>{errorMessage}</p> : null}
+
+          <button type="submit" className={styles.submitButton} disabled={isSubmitting}>
+            {isSubmitting ? auth.submitPending[mode] : auth.submit[mode]}
           </button>
         </form>
 
